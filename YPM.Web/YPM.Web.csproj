@@ -18,4 +18,9 @@
     <ProjectReference Include="..\YPM.Veri\YPM.Veri.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Area\" />
+    <Folder Include="wwwroot\lib\tema-paket\" />
+  </ItemGroup>
+
 </Project>

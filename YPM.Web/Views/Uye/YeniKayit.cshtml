@@ -1,0 +1,85 @@
+﻿@model YPM.Web.Models.Basic.Uye.KisiKayitModel
+
+@{
+    ViewData["Title"] = "YeniKayit";
+    Layout = "~/Views/Shared/_BosCerceve.cshtml";
+}
+
+<h2>YeniKayit</h2>
+
+<h4>KisiKayitModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="YeniKayit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="surname" class="control-label"></label>
+                <input asp-for="surname" class="form-control" />
+                <span asp-validation-for="surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="passwordre" class="control-label"></label>
+                <input asp-for="passwordre" class="form-control" />
+                <span asp-validation-for="passwordre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="sonay" /> @Html.DisplayNameFor(model => model.sonay)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="remember" /> @Html.DisplayNameFor(model => model.remember)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="IpAdr" class="control-label"></label>
+                <input asp-for="IpAdr" class="form-control" />
+                <span asp-validation-for="IpAdr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MacAdr" class="control-label"></label>
+                <input asp-for="MacAdr" class="form-control" />
+                <span asp-validation-for="MacAdr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KayitTarihi" class="control-label"></label>
+                <input asp-for="KayitTarihi" class="form-control" />
+                <span asp-validation-for="KayitTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

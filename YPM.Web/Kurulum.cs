@@ -15,7 +15,7 @@ namespace YPM.Web
         {
             using (IKurulumIsleri kur = new KurulumIsleri())
             {
-                if (kur.KuruluMu()) kur.KurulumYap();
+               // if (kur.KuruluMu()) kur.KurulumYap();
             }
         }
     }
