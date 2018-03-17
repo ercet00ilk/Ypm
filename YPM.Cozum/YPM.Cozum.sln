@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YPM.Web", "..\YPM.Web\YPM.Web.csproj", "{7418F315-7528-4A2F-9ABA-6E0B3D1F7B03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YPM.Veri", "..\YPM.Veri\YPM.Veri.csproj", "{B4040671-6A2D-489F-B55D-B3B8FC8B3113}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YPM.GercekVarlik", "..\YPM.GercekVarlik\YPM.GercekVarlik.csproj", "{69F36A57-7DEB-4253-8355-30F4BD94022D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YPM.SuretVarlik", "..\YPM.SuretVarlik\YPM.SuretVarlik.csproj", "{82054D59-E689-4005-8770-27E848C839C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YPM.Birim", "..\YPM.Birim\YPM.Birim.csproj", "{293326C8-5989-4749-989E-BDAB9963F032}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YPM.Yonetim", "..\YPM.Yonetim\YPM.Yonetim.csproj", "{5D44E23E-0582-4FBD-B6BF-5FBC323EE68D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7418F315-7528-4A2F-9ABA-6E0B3D1F7B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7418F315-7528-4A2F-9ABA-6E0B3D1F7B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7418F315-7528-4A2F-9ABA-6E0B3D1F7B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7418F315-7528-4A2F-9ABA-6E0B3D1F7B03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4040671-6A2D-489F-B55D-B3B8FC8B3113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4040671-6A2D-489F-B55D-B3B8FC8B3113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4040671-6A2D-489F-B55D-B3B8FC8B3113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4040671-6A2D-489F-B55D-B3B8FC8B3113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69F36A57-7DEB-4253-8355-30F4BD94022D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69F36A57-7DEB-4253-8355-30F4BD94022D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69F36A57-7DEB-4253-8355-30F4BD94022D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69F36A57-7DEB-4253-8355-30F4BD94022D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82054D59-E689-4005-8770-27E848C839C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82054D59-E689-4005-8770-27E848C839C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82054D59-E689-4005-8770-27E848C839C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82054D59-E689-4005-8770-27E848C839C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{293326C8-5989-4749-989E-BDAB9963F032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293326C8-5989-4749-989E-BDAB9963F032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293326C8-5989-4749-989E-BDAB9963F032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293326C8-5989-4749-989E-BDAB9963F032}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D44E23E-0582-4FBD-B6BF-5FBC323EE68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D44E23E-0582-4FBD-B6BF-5FBC323EE68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D44E23E-0582-4FBD-B6BF-5FBC323EE68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D44E23E-0582-4FBD-B6BF-5FBC323EE68D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85BD1693-0052-48FC-BBEC-6EA0A54886A8}
+	EndGlobalSection
+EndGlobal
