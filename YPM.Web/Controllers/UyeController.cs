@@ -1,15 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using YPM.Web.Models.Basic.Uye;
+using YPM.Depo.Genel.Kisi;
+using YPM.SuretVarlik.Mulk.Model.Istisna;
+using YPM.SuretVarlik.Mulk.Model.Kisi;
 
 namespace YPM.Web.Controllers
 {
     public class UyeController
         : OrtakController
     {
+        private readonly IKisiDeposu _kisi;
+
+        public UyeController(IKisiDeposu kisi)
+        {
+            _kisi = kisi;
+        }
+
         public IActionResult YeniKayit()
         {
             return View();
@@ -17,11 +24,11 @@ namespace YPM.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult YeniKayit(KisiKayitModel kkm)
+        public async Task<IActionResult> YeniKayit(KisiKayitModel kkm)
         {
             if (ModelState.IsValid)
             {
-
+                await _kisi.Ekle(kkm);
             }
 
             return View(kkm);
@@ -43,6 +50,12 @@ namespace YPM.Web.Controllers
             }
 
             return View(kgm);
+        }
+
+
+        public IActionResult Error()
+        {
+            return View(new IstisnaViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

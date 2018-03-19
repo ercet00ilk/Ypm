@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using YPM.Web.Models.Istisna;
+using YPM.SuretVarlik.Mulk.Model.Istisna;
 
 namespace YPM.Web.Controllers
 {

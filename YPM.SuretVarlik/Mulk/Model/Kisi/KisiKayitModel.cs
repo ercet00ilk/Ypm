@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using YPM.Web.Models.Nitelik;
+using System.Text;
+using YPM.SuretVarlik.Mulk.Nitelik.Kisi;
 
-namespace YPM.Web.Models.Basic.Uye
+namespace YPM.SuretVarlik.Mulk.Model.Kisi
 {
     public class KisiKayitModel
-     : IDisposable
+      : IDisposable
     {
         public int Id { get; set; }
 

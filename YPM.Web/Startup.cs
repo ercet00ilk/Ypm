@@ -1,9 +1,8 @@
-﻿using Birim.Genel.Birim.Kisi;
-using Birim.Genel.Birim.Sistem;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using YPM.Depo.Genel.Kisi;
 
 namespace YPM.Web
 {
@@ -12,7 +11,7 @@ namespace YPM.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Kurulum.Islem.Kur();
+            Kurulum.Islem.Kur().Wait();
         }
 
         public IConfiguration Configuration { get; }
@@ -22,8 +21,7 @@ namespace YPM.Web
         {
             services.AddMvc();
 
-            services.AddSingleton<IKisiIsleri, KisiIsleri>();
-            services.AddSingleton<ISistemIsleri, SistemIsleri>();
+            services.AddScoped<IKisiDeposu, KisiDeposu>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace YPM.Web.Models.Basic.Uye
+namespace YPM.SuretVarlik.Mulk.Model.Kisi
 {
     public class KisiGirisModel
-        : IDisposable
+       : IDisposable
     {
         [Required(ErrorMessage = "Lütfen e-posta adresinizi giriniz.")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Lütfen e-posta adresinizi geçerli bir formatta giriniz.")]

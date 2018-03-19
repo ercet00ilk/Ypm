@@ -1,5 +1,6 @@
 ﻿using System;
-using YPM.Birim.Genel.Birim.Kurulum;
+using System.Threading.Tasks;
+using YPM.Depo.Genel.Kurulum;
 
 namespace YPM.Web
 {
@@ -11,11 +12,17 @@ namespace YPM.Web
         {
         }
 
-        internal void Kur()
+        internal async Task Kur()
         {
-            using (IKurulumIsleri kur = new KurulumIsleri())
+            IKurulumDeposu kur = new KurulumDeposu();
+
+            try
             {
-               // if (kur.KuruluMu()) kur.KurulumYap();
+                if (await kur.KuruluMu()) await kur.KurulumYap();
+            }
+            finally
+            {
+                ((IDisposable)kur).Dispose();
             }
         }
     }

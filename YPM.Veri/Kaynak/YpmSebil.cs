@@ -10,6 +10,7 @@ namespace YPM.Veri.Kaynak
         public YpmSebil(DbContextOptions<YpmSebil> options)
             : base(options)
         {
+
         }
 
         public YpmSebil()
