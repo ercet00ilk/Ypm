@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace YPM.Depo.Genel.Kurulum
 {
     public interface IKurulumDeposu
+        : IDisposable
     {
         Task<bool> KuruluMu();
         Task KurulumYap();

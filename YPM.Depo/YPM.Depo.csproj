@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\YPM.Birim\YPM.Birim.csproj" />
     <ProjectReference Include="..\YPM.SuretVarlik\YPM.SuretVarlik.csproj" />
-    <ProjectReference Include="..\YPM.Veri\YPM.Veri.csproj" />
   </ItemGroup>
 
 </Project>

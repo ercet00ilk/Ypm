@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\YPM.Depo\YPM.Depo.csproj" />
-    <ProjectReference Include="..\YPM.SuretVarlik\YPM.SuretVarlik.csproj" />
   </ItemGroup>
 
 </Project>

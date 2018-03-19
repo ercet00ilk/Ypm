@@ -10,16 +10,50 @@ namespace YPM.Depo.Genel.Kurulum
         : IKurulumDeposu
     {
         private readonly IKurulumBirim _kurulum = KurulumBirim.OrnekVer();
+        private bool Disposed { get; set; }
+
+        ~KurulumDeposu()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (!Disposed)
+            {
+                if (Disposing)
+                {
+
+                }
+                Disposed = true;
+            }
+        }
 
         public Task<bool> KuruluMu()
         {
             throw new NotImplementedException();
         }
 
-        public async Task KurulumYap()
+        public Task KurulumYap()
         {
-            await _kurulum.AtesleProsedurOlustur();
-            return;
+            throw new NotImplementedException();
         }
+
+        //public Task<bool> KuruluMu()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public async Task KurulumYap()
+        //{
+        //    await _kurulum.AtesleProsedurOlustur();
+        //    return;
+        //}
     }
 }

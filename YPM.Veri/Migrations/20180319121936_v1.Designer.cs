@@ -11,7 +11,7 @@ using YPM.Veri.Kaynak;
 namespace YPM.Veri.Migrations
 {
     [DbContext(typeof(YpmSebil))]
-    [Migration("20180317073614_v1")]
+    [Migration("20180319121936_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

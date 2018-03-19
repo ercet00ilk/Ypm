@@ -13,10 +13,35 @@ namespace YPM.Depo.Genel.Kisi
         : IKisiDeposu
     {
         private readonly IKisiBirim _kisi = KisiBirim.OrnekVer();
+        private bool Disposed { get; set; }
 
         public KisiDeposu(IKisiBirim kisi)
         {
             _kisi = kisi;
+        }
+
+
+        ~KisiDeposu()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (!Disposed)
+            {
+                if (Disposing)
+                {
+                    if (_kisi != null) _kisi.Dispose();
+                }
+                Disposed = true;
+            }
         }
 
         public async Task Ekle(KisiKayitModel kkm)

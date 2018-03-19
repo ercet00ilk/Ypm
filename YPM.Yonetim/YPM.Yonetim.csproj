@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\YPM.SuretVarlik\YPM.SuretVarlik.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Genel\Kisi\" />
   </ItemGroup>
 
