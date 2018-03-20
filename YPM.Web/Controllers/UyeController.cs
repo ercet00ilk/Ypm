@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using YPM.Depo.Genel.Kisi;
+using YPM.Depo.Veri.Kisi;
 using YPM.SuretVarlik.Mulk.Model.Istisna;
 using YPM.SuretVarlik.Mulk.Model.Kisi;
 

@@ -7,7 +7,7 @@ using YPM.Birim.Genel.Birim.Kisi;
 using YPM.SuretVarlik.Mulk.Model.Kisi;
 using YPM.Veri.Kaynak;
 
-namespace YPM.Depo.Genel.Kisi
+namespace YPM.Depo.Veri.Kisi
 {
     public class KisiDeposu
         : IKisiDeposu

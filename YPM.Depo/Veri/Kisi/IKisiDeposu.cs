@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YPM.SuretVarlik.Mulk.Model.Kisi;
 
-namespace YPM.Depo.Genel.Kisi
+namespace YPM.Depo.Veri.Kisi
 {
     public interface IKisiDeposu
         : IDisposable

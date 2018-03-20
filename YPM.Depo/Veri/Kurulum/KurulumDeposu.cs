@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using YPM.Birim.Genel.Birim.Generic;
 using YPM.Birim.Genel.Birim.Kurulum;
 
-namespace YPM.Depo.Genel.Kurulum
+namespace YPM.Depo.Veri.Kurulum
 {
     public class KurulumDeposu
         : IKurulumDeposu
     {
-        private readonly IKurulumBirim _kurulum = KurulumBirim.OrnekVer();
         private bool Disposed { get; set; }
 
         ~KurulumDeposu()
@@ -40,19 +40,31 @@ namespace YPM.Depo.Genel.Kurulum
         {
             bool donenDeger = new bool();
 
-            var islem = await _kurulum.BulAsync(x => x.Ad == "AnaKurulum");
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            {
+                var islem = await gorev.Kurulum.BulAsync(x => x.Ad == "AnaKurulum");
 
-            if (islem == null) donenDeger = false;
-            else donenDeger = islem.Sonuc;
+                if (islem == null)
+                    donenDeger = false;
+                else donenDeger =
+                    islem.Sonuc;
+
+                gorev.Tamamla();
+            }
 
             return donenDeger;
         }
 
         public async Task KurulumYap()
         {
-            var atesle = _kurulum.AtesleProsedurOlustur();
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            {
+                var anaKurulum = await gorev.Kurulum.EkleAsync(new KurulumGercek() { Ad = "AnaKurulum", Sonuc = true });
 
-            await Task.WhenAll(atesle);
+                gorev.Kurulum.AtesleProsedurOlustur().Wait();
+
+                gorev.Tamamla();
+            }
 
             return;
         }

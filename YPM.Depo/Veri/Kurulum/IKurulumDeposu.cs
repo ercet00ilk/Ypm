@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YPM.Depo.Genel.Kurulum
+namespace YPM.Depo.Veri.Kurulum
 {
     public interface IKurulumDeposu
         : IDisposable

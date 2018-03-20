@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using YPM.Depo.Genel.Kisi;
+using YPM.Depo.Ortak;
+using YPM.Depo.Veri.Kisi;
 
 namespace YPM.Web
 {
@@ -11,7 +12,7 @@ namespace YPM.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Kurulum.Islem.Kur().Wait();
+            IlkKurulum.Kur().Wait();
         }
 
         public IConfiguration Configuration { get; }

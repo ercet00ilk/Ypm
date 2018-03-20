@@ -9,6 +9,5 @@ namespace YPM.Birim.Genel.Birim.Kisi
     public interface IKisiBirim
            : IGenericBirim<KisiGercek>
     {
-        new KisiGercek Getir(int kisiId);
     }
 }

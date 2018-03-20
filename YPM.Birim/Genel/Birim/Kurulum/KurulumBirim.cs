@@ -1,4 +1,5 @@
 ﻿using GercekVarlik.Mulk.Varlik.Kurulum.Ortak;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,10 +12,12 @@ namespace YPM.Birim.Genel.Birim.Kurulum
     public class KurulumBirim
          : GenericBirim<KurulumGercek>, IKurulumBirim
     {
+        private readonly YpmSebil _sebil;
+
         public KurulumBirim(YpmSebil sebil)
             : base(sebil)
         {
-
+            _sebil = sebil;
         }
 
         public static IKurulumBirim OrnekVer()
@@ -22,9 +25,17 @@ namespace YPM.Birim.Genel.Birim.Kurulum
             return new KurulumBirim(new YpmSebil());
         }
 
-        public Task AtesleProsedurOlustur()
+        public async Task AtesleProsedurOlustur()
         {
-            throw new NotImplementedException();
+            await _sebil.Database.ExecuteSqlCommandAsync(@"
+                        create proc sp_Atesle
+                        @query nvarchar(max)
+                        as
+                        begin
+                            set nocount on
+                                EXECUTE sp_executesql @query
+                            set nocount off
+                        end");
         }
     }
 }
