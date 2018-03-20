@@ -17,7 +17,7 @@ namespace YPM.Birim.Genel.Birim.Kisi
 
         }
 
-        public static IKisiBirim OrnekVer()
+        public static IKisiBirim YeniGorev()
         {
             return new KisiBirim(new YpmSebil());
         }

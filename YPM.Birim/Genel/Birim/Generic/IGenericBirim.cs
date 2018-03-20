@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace YPM.Birim.Genel.Birim.Generic
 {
     public partial interface IGenericBirim<T>
+        : IDisposable
           where T : class
     {
         T Ekle(T varlik);
@@ -16,7 +17,6 @@ namespace YPM.Birim.Genel.Birim.Generic
         Task<int> SayAsync();
         void Sil(T varlik);
         Task<int> SilAsync(T varlik);
-        void Dispose();
         T Bul(Expression<Func<T, bool>> eslesen);
         ICollection<T> BulKoleksiyon(Expression<Func<T, bool>> eslesen);
         Task<ICollection<T>> BulKoleksiyonAsync(Expression<Func<T, bool>> eslesen);

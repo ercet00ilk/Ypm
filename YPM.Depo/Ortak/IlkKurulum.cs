@@ -25,7 +25,7 @@ namespace YPM.Depo.Ortak
                         transaction.Complete();
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     transaction.Dispose();
                 }

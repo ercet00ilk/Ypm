@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using YPM.Birim.Genel.Birim.Kisi;
 using YPM.SuretVarlik.Mulk.Model.Kisi;
 using YPM.Veri.Kaynak;
@@ -12,12 +13,11 @@ namespace YPM.Depo.Veri.Kisi
     public class KisiDeposu
         : IKisiDeposu
     {
-        private readonly IKisiBirim _kisi = KisiBirim.OrnekVer();
         private bool Disposed { get; set; }
 
-        public KisiDeposu(IKisiBirim kisi)
+        public KisiDeposu()
         {
-            _kisi = kisi;
+
         }
 
 
@@ -38,7 +38,7 @@ namespace YPM.Depo.Veri.Kisi
             {
                 if (Disposing)
                 {
-                    if (_kisi != null) _kisi.Dispose();
+
                 }
                 Disposed = true;
             }
@@ -46,13 +46,28 @@ namespace YPM.Depo.Veri.Kisi
 
         public async Task Ekle(KisiKayitModel kkm)
         {
-            await _kisi.EkleAsync(new KisiGercek()
+
+            try
             {
-                Ad = kkm.name,
-                Soyad = kkm.surname,
-                EPosta = kkm.email,
-                Sifre = kkm.password
-            });
+                using (IKisiBirim kisi = KisiBirim.YeniGorev())
+                {
+                    await kisi.EkleAsync(new KisiGercek()
+                    {
+                        Ad = kkm.name,
+                        Soyad = kkm.surname,
+                        EPosta = kkm.email,
+                        Sifre = kkm.password
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+
         }
     }
 }

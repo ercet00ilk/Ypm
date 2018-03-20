@@ -27,33 +27,172 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public virtual T Bul(Expression<Func<T, bool>> eslesen)
         {
-            return _kur.SingleOrDefault(eslesen);
+            T donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = _kur.SingleOrDefault(eslesen);
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
+
         }
 
         public virtual async Task<T> BulAsync(Expression<Func<T, bool>> eslesen)
         {
-            return await _kur.SingleOrDefaultAsync(eslesen);
+            T donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = await _kur.SingleOrDefaultAsync(eslesen);
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public virtual IQueryable<T> BulEslesen(Expression<Func<T, bool>> belirti)
         {
-            IQueryable<T> sorgu = _kur.Where(belirti);
-            return sorgu;
+
+            IQueryable<T> donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = _kur.Where(belirti);
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public virtual async Task<ICollection<T>> BulEslesenAsyn(Expression<Func<T, bool>> belirti)
         {
-            return await _kur.Where(belirti).ToListAsync();
+            ICollection<T> donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = await _kur.Where(belirti).ToListAsync();
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public ICollection<T> BulKoleksiyon(Expression<Func<T, bool>> eslesen)
         {
-            return _kur.Where(eslesen).ToList();
+            ICollection<T> donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = _kur.Where(eslesen).ToList();
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public async Task<ICollection<T>> BulKoleksiyonAsync(Expression<Func<T, bool>> eslesen)
         {
-            return await _kur.Where(eslesen).ToListAsync();
+            ICollection<T> donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = await _kur.Where(eslesen).ToListAsync();
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public void Dispose()
@@ -76,72 +215,288 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public virtual T Ekle(T varlik)
         {
-            _kur.Add(varlik);
-            _sebil.SaveChanges();
-            return varlik;
+            T donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    _kur.Add(varlik);
+                    _sebil.SaveChanges();
+                    donenDeger = varlik;
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public virtual async Task<T> EkleAsync(T varlik)
         {
-            _kur.Add(varlik);
-            await _sebil.SaveChangesAsync();
-            return varlik;
+
+            T donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    _kur.Add(varlik);
+                    await _sebil.SaveChangesAsync();
+                    donenDeger = varlik;
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public T Getir(int id)
         {
-            return _kur.Find(id);
+
+            T donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = _kur.Find(id);
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public virtual async Task<T> GetirAsync(int id)
         {
-            return await _kur.FindAsync(id);
+            T donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = await _kur.FindAsync(id);
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public IQueryable<T> GetirTumKoleksiyon(params Expression<Func<T, object>>[] dahilOzellikler)
         {
-            IQueryable<T> sorgu = GetirTumKoleksiyon();
 
-            foreach (Expression<Func<T, object>> dahilOzellik in dahilOzellikler)
+            IQueryable<T> donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
             {
-                sorgu = sorgu.Include<T, object>(dahilOzellik);
+                try
+                {
+                    IQueryable<T> sorgu = GetirTumKoleksiyon();
+
+                    foreach (Expression<Func<T, object>> dahilOzellik in dahilOzellikler)
+                    {
+                        sorgu = sorgu.Include<T, object>(dahilOzellik);
+                    }
+
+                    donenDeger = sorgu;
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
             }
 
-            return sorgu;
+            return donenDeger;
         }
 
         public IQueryable<T> GetirTumKoleksiyon()
         {
-            return _kur;
+
+            IQueryable<T> donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = _kur;
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public virtual async Task<ICollection<T>> GetirTumKoleksiyonAsyn()
         {
-            return await _kur.ToListAsync();
+            ICollection<T> donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    donenDeger = await _kur.ToListAsync();
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return donenDeger;
         }
 
         public T Guncelle(T varlik, object anahtar)
         {
-            if (varlik == null) return null;
-            T varMi = _kur.Find(anahtar);
-            if (varMi != null)
+            T donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
             {
-                _sebil.Entry(varMi).CurrentValues.SetValues(varlik);
-                _sebil.SaveChanges();
+                try
+                {
+
+                    if (varlik == null) return null;
+                    T varMi = _kur.Find(anahtar);
+                    if (varMi != null)
+                    {
+                        _sebil.Entry(varMi).CurrentValues.SetValues(varlik);
+                        _sebil.SaveChanges();
+                    }
+
+                    donenDeger = varMi;
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
             }
-            return varMi;
+
+            return donenDeger;
         }
 
         public virtual async Task<T> GuncelleAsyn(T varlik, object anahtar)
         {
-            if (varlik == null) return null;
-            T varMi = await _kur.FindAsync(anahtar);
-            if (varMi != null)
+
+            T donenDeger = null;
+
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
             {
-                _sebil.Entry(varMi).CurrentValues.SetValues(varlik);
-                await _sebil.SaveChangesAsync();
+                try
+                {
+
+
+                    if (varlik == null) return null;
+                    T varMi = await _kur.FindAsync(anahtar);
+                    if (varMi != null)
+                    {
+                        _sebil.Entry(varMi).CurrentValues.SetValues(varlik);
+                        await _sebil.SaveChangesAsync();
+                    }
+                    donenDeger = varMi;
+
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
             }
-            return varMi;
+
+            return donenDeger;
         }
 
         public virtual void Kaydet()
