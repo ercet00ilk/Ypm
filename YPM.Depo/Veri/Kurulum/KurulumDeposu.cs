@@ -44,10 +44,8 @@ namespace YPM.Depo.Veri.Kurulum
             {
                 var islem = await gorev.Kurulum.BulAsync(x => x.Ad == "AnaKurulum");
 
-                if (islem == null)
-                    donenDeger = false;
-                else donenDeger =
-                    islem.Sonuc;
+                if (islem == null) donenDeger = true;
+                else donenDeger = !(islem.Sonuc);
 
                 gorev.Tamamla();
             }
