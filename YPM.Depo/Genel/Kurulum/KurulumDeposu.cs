@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GercekVarlik.Mulk.Varlik.Kurulum.Ortak;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,25 +36,25 @@ namespace YPM.Depo.Genel.Kurulum
             }
         }
 
-        public Task<bool> KuruluMu()
+        public async Task<bool> KuruluMu()
         {
-            throw new NotImplementedException();
+            bool donenDeger = new bool();
+
+            var islem = await _kurulum.BulAsync(x => x.Ad == "AnaKurulum");
+
+            if (islem == null) donenDeger = false;
+            else donenDeger = islem.Sonuc;
+
+            return donenDeger;
         }
 
-        public Task KurulumYap()
+        public async Task KurulumYap()
         {
-            throw new NotImplementedException();
+            var atesle = _kurulum.AtesleProsedurOlustur();
+
+            await Task.WhenAll(atesle);
+
+            return;
         }
-
-        //public Task<bool> KuruluMu()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public async Task KurulumYap()
-        //{
-        //    await _kurulum.AtesleProsedurOlustur();
-        //    return;
-        //}
     }
 }

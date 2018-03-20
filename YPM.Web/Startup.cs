@@ -21,7 +21,7 @@ namespace YPM.Web
         {
             services.AddMvc();
 
-            services.AddScoped<IKisiDeposu, KisiDeposu>();
+            services.AddTransient<IKisiDeposu, KisiDeposu>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,16 +14,21 @@ namespace YPM.Web
 
         internal async Task Kur()
         {
+
+
             IKurulumDeposu kur = new KurulumDeposu();
 
             try
             {
-                if (await kur.KuruluMu()) await kur.KurulumYap();
+                if (await kur.KuruluMu()) kur.KurulumYap().Wait();
             }
             finally
             {
                 ((IDisposable)kur).Dispose();
             }
         }
+
+
+
     }
 }
