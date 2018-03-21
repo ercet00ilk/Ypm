@@ -1,9 +1,6 @@
 ﻿using GercekVarlik.Mulk.Varlik.Kisi.Ortak;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
 using YPM.Birim.Genel.Birim.Generic;
 using YPM.Birim.Genel.Birim.Kisi;
 using YPM.Birim.Genel.Birim.Lokasyon;
@@ -11,7 +8,6 @@ using YPM.Depo.Ortak;
 using YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak;
 using YPM.SuretVarlik.Mulk.Enum.Ortak;
 using YPM.SuretVarlik.Mulk.Model.Kisi;
-using YPM.Veri.Kaynak;
 
 namespace YPM.Depo.Veri.Kisi
 {
@@ -22,9 +18,7 @@ namespace YPM.Depo.Veri.Kisi
 
         public KisiDeposu()
         {
-
         }
-
 
         ~KisiDeposu()
         {
@@ -43,7 +37,6 @@ namespace YPM.Depo.Veri.Kisi
             {
                 if (Disposing)
                 {
-
                 }
                 Disposed = true;
             }
@@ -52,8 +45,6 @@ namespace YPM.Depo.Veri.Kisi
         public async Task<BasariliBasarisiz> Ekle(KisiKayitModel kkm)
         {
             BasariliBasarisiz donenDeger = new BasariliBasarisiz();
-
-            KisiGercek donus = new KisiGercek();
 
             using (IGorevli gorev = Gorevli.YeniGorev())
             {
@@ -68,27 +59,37 @@ namespace YPM.Depo.Veri.Kisi
                     EpostaOnayliMi = kkm.EpostaOnayliMi
                 })
                 {
+                    KisiGercek donus = new KisiGercek();
+
+                    donus = await gorev.Kisi.EkleAsync(kg);
+
                     using (ILokasyonBirim lokasyon = LokasyonBirim.YeniLokasyon())
                     {
                         using (LokasyonGercek lg = new LokasyonGercek()
                         {
-                            BaglananId = kg.Id,
+                            KisiId = donus.KisiId,
                             IpAdr = kkm.IpAdr,
                             MacAdr = kkm.MacAdr,
                             KayitTarihi = kkm.KayitTarihi
                         })
                         {
-                            donus = await gorev.Kisi.EkleAsync(kg);
+                            try
+                            {
+                                var miLokasyon = await gorev.Lokasyon.BulAsync(x => x.MacAdr == kkm.MacAdr && x.KisiId == donus.KisiId);
 
-                            var miLokasyon = await gorev.Lokasyon.BulAsync(x => x.MacAdr == kkm.MacAdr);
+                                if (miLokasyon == null) await gorev.Lokasyon.EkleAsync(lg);
 
-                            if (miLokasyon == null) await gorev.Lokasyon.EkleAsync(lg);
-                            
+                                donenDeger = BasariliBasarisiz.Basarili;
+                            }
+                            catch (Exception)
+                            {
+                                donenDeger = BasariliBasarisiz.Basarisiz;
+                            }
                         }
                     }
-                }
 
-                gorev.Tamamla();
+                    donus.Dispose();
+                }
             }
 
             return donenDeger;
@@ -107,7 +108,6 @@ namespace YPM.Depo.Veri.Kisi
             }
             catch (Exception)
             {
-
             }
 
             return donenDeger;

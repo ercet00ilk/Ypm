@@ -1,11 +1,8 @@
 ﻿using GercekVarlik.Mulk.Varlik.Kurulum.Ortak;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using YPM.Birim.Genel.Birim.Generic;
-using YPM.Birim.Genel.Birim.Kurulum;
 
 namespace YPM.Depo.Veri.Kurulum
 {
@@ -27,7 +24,6 @@ namespace YPM.Depo.Veri.Kurulum
 
         public static async Task Kur()
         {
-
             using (var transaction = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
@@ -44,8 +40,6 @@ namespace YPM.Depo.Veri.Kurulum
                     transaction.Dispose();
                 }
             }
-
-
         }
 
         protected virtual void Dispose(bool Disposing)
@@ -54,7 +48,6 @@ namespace YPM.Depo.Veri.Kurulum
             {
                 if (Disposing)
                 {
-
                 }
                 Disposed = true;
             }

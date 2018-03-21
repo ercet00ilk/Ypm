@@ -11,7 +11,6 @@ namespace YPM.Veri.Kaynak
         public YpmSebil(DbContextOptions<YpmSebil> options)
             : base(options)
         {
-
         }
 
         public YpmSebil()
@@ -23,18 +22,15 @@ namespace YPM.Veri.Kaynak
 
         public DbSet<KurulumGercek> KurulumTbl { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(VtBilgi.Islem.BaglantiCumlesiVer());
-
 
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.HasDefaultSchema("Mulk");
 
             /*******
@@ -44,7 +40,7 @@ namespace YPM.Veri.Kaynak
 
             //  ==> PrimaryKey,Proroperty
             modelBuilder.Entity<KisiGercek>().ToTable("Kisi", "MulkKisi");
-            modelBuilder.Entity<KisiGercek>().HasKey(c => c.Id);
+            modelBuilder.Entity<KisiGercek>().HasKey(c => c.KisiId);
             modelBuilder.Entity<KisiGercek>().Property(x => x.Ad).HasMaxLength(400);
             modelBuilder.Entity<KisiGercek>().Property(x => x.EPosta).HasMaxLength(150);
             modelBuilder.Entity<KisiGercek>().Property(x => x.Soyad).HasMaxLength(400);
@@ -52,12 +48,30 @@ namespace YPM.Veri.Kaynak
             modelBuilder.Entity<KisiGercek>().Property(x => x.EpostaKontrol).HasMaxLength(20);
 
             modelBuilder.Entity<LokasyonGercek>().ToTable("Lokasyon", "MulkKisi");
-            modelBuilder.Entity<LokasyonGercek>().HasKey(c => c.Id);
+            modelBuilder.Entity<LokasyonGercek>().HasKey(c => c.LokasyonId);
             modelBuilder.Entity<LokasyonGercek>().Property(x => x.MacAdr).HasMaxLength(200);
             modelBuilder.Entity<LokasyonGercek>().Property(x => x.IpAdr).HasMaxLength(200);
 
+            //  ==> ForeignKey
 
-            //  ==> ForeignKey  
+            /*******
+            * Kurulum Mulk
+            *
+            */
+
+            //  ==> PrimaryKey,Proroperty
+            modelBuilder.Entity<KurulumGercek>().ToTable("Kurulum", "MulkKurulum");
+            modelBuilder.Entity<KurulumGercek>().HasKey(c => c.KurulumId);
+            modelBuilder.Entity<KurulumGercek>().Property(c => c.Ad).HasMaxLength(200);
+            modelBuilder.Entity<KurulumGercek>().Property(c => c.Tip).HasMaxLength(200);
+
+            //  ==> ForeignKey
+
+            modelBuilder.Entity<LokasyonGercek>()
+              .HasOne(c => c.Kisi)
+              .WithMany(d => d.Lokasyonlar)
+              .HasForeignKey(c => c.KisiId)
+              .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

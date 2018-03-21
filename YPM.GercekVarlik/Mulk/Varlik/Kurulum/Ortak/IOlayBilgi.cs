@@ -7,6 +7,5 @@
         string Ad { get; set; }
 
         bool Sonuc { get; set; }
-
     }
 }

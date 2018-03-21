@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YPM.SuretVarlik.Mulk.Enum.Ortak
+﻿namespace YPM.SuretVarlik.Mulk.Enum.Ortak
 {
     public enum BasariliBasarisiz
     {

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak
 {
-    interface IVarlikBilgi
+    internal interface IVarlikBilgi
     {
         string Ad { get; set; }
         string Soyad { get; set; }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace YPM.Depo.Veri.Kurulum
@@ -9,6 +7,7 @@ namespace YPM.Depo.Veri.Kurulum
         : IDisposable
     {
         Task<bool> KuruluMu();
+
         Task KurulumYap();
     }
 }

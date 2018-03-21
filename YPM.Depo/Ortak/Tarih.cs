@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 
 namespace YPM.Depo.Ortak
 {
-   public sealed class Tarih
+    public sealed class Tarih
     {
         public static DateTime GuncelTarihVer()
         {
@@ -37,7 +35,7 @@ namespace YPM.Depo.Ortak
                 socket.Close();
             }
 
-            //Offset to get to the "Transmit Timestamp" field (time at which the reply 
+            //Offset to get to the "Transmit Timestamp" field (time at which the reply
             //departed the server for the client, in 64-bit timestamp format."
             const byte serverReplyTime = 40;
 
@@ -60,7 +58,7 @@ namespace YPM.Depo.Ortak
         }
 
         // stackoverflow.com/a/3294698/162671
-        static uint SwapEndianness(ulong x)
+        private static uint SwapEndianness(ulong x)
         {
             return (uint)(((x & 0x000000ff) << 24) +
                            ((x & 0x0000ff00) << 8) +

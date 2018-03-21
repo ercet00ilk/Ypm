@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YPM.SuretVarlik.Mulk.Model.Istisna
+﻿namespace YPM.SuretVarlik.Mulk.Model.Istisna
 {
     public class IstisnaViewModel
     {

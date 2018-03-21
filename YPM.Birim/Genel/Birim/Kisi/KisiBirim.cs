@@ -1,9 +1,5 @@
 ﻿using GercekVarlik.Mulk.Varlik.Kisi.Ortak;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using YPM.Birim.Genel.Birim.Generic;
@@ -42,7 +38,6 @@ namespace YPM.Birim.Genel.Birim.Kisi
                     var mail = await gorev.Kisi.BulAsync(x => x.EPosta == email);
 
                     if (mail == null) donenDeger = VarYok.Yok;
-
                     else donenDeger = VarYok.Var;
 
                     gorev.Tamamla();
@@ -58,12 +53,9 @@ namespace YPM.Birim.Genel.Birim.Kisi
                     if (islemOnay) transaction.Complete();
                     else transaction.Dispose();
                 }
-
-
             }
 
             return donenDeger;
-
         }
     }
 }

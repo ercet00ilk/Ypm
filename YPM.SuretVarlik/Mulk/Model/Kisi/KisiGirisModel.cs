@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace YPM.SuretVarlik.Mulk.Model.Kisi
 {
@@ -21,7 +19,6 @@ namespace YPM.SuretVarlik.Mulk.Model.Kisi
 
         public bool rememberme { get; set; }
 
-
         ~KisiGirisModel()
         {
             Dispose(false);
@@ -34,7 +31,6 @@ namespace YPM.SuretVarlik.Mulk.Model.Kisi
             if (Disposed) return;
             if (Disposing)
             {
-
             }
             Disposed = true;
         }

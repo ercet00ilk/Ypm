@@ -1,20 +1,21 @@
 ﻿using GercekVarlik.Mulk.Varlik.Ortak;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using YPM.GercekVarlik.Mulk.Varlik.Ortak;
 
 namespace GercekVarlik.Mulk.Varlik.Kurulum.Ortak
 {
     public class KurulumGercek
-        : AbsOrtakVarlik, IKimlikBilgi, IOlayBilgi,IKaynakIade
+        : AbsOrtakVarlik, IOlayBilgi, IKaynakIade
     {
-        public int Id { get; set; }
+        public int KurulumId { get; set; }
         public string Tip { get; set; }
         public string Ad { get; set; }
         public bool Sonuc { get; set; }
 
         #region IKaynakIade
 
-
+        [NotMapped]
         public bool Disposed { get; set; }
 
         ~KurulumGercek()
@@ -34,12 +35,11 @@ namespace GercekVarlik.Mulk.Varlik.Kurulum.Ortak
             {
                 if (Disposing)
                 {
-
                 }
                 Disposed = true;
             }
         }
 
-        #endregion
+        #endregion IKaynakIade
     }
 }

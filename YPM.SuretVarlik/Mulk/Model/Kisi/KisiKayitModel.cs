@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using YPM.SuretVarlik.Mulk.Nitelik.Kisi;
 
 namespace YPM.SuretVarlik.Mulk.Model.Kisi
@@ -59,7 +57,6 @@ namespace YPM.SuretVarlik.Mulk.Model.Kisi
             if (Disposed) return;
             if (Disposing)
             {
-
             }
             Disposed = true;
         }

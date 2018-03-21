@@ -9,7 +9,6 @@ using YPM.Veri.Kaynak;
 
 namespace YPM.Birim.Genel.Birim.Generic
 {
-
     public abstract class GenericBirim<T>
         : IGenericBirim<T>
         where T : class
@@ -17,7 +16,6 @@ namespace YPM.Birim.Genel.Birim.Generic
         private YpmSebil _sebil;
         private DbSet<T> _kur;
         private bool Disposed { get; set; }
-
 
         public GenericBirim(YpmSebil sebil)
         {
@@ -51,7 +49,6 @@ namespace YPM.Birim.Genel.Birim.Generic
             }
 
             return donenDeger;
-
         }
 
         public virtual async Task<T> BulAsync(Expression<Func<T, bool>> eslesen)
@@ -84,7 +81,6 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public virtual IQueryable<T> BulEslesen(Expression<Func<T, bool>> belirti)
         {
-
             IQueryable<T> donenDeger = null;
 
             bool IslemOnay = new bool();
@@ -245,7 +241,6 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public virtual async Task<T> EkleAsync(T varlik)
         {
-
             T donenDeger = null;
 
             bool IslemOnay = new bool();
@@ -276,7 +271,6 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public T Getir(int id)
         {
-
             T donenDeger = null;
 
             bool IslemOnay = new bool();
@@ -333,7 +327,6 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public IQueryable<T> GetirTumKoleksiyon(params Expression<Func<T, object>>[] dahilOzellikler)
         {
-
             IQueryable<T> donenDeger = null;
 
             bool IslemOnay = new bool();
@@ -369,7 +362,6 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public IQueryable<T> GetirTumKoleksiyon()
         {
-
             IQueryable<T> donenDeger = null;
 
             bool IslemOnay = new bool();
@@ -434,7 +426,6 @@ namespace YPM.Birim.Genel.Birim.Generic
             {
                 try
                 {
-
                     if (varlik == null) return null;
                     T varMi = _kur.Find(anahtar);
                     if (varMi != null)
@@ -463,7 +454,6 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public virtual async Task<T> GuncelleAsyn(T varlik, object anahtar)
         {
-
             T donenDeger = null;
 
             bool IslemOnay = new bool();
@@ -472,8 +462,6 @@ namespace YPM.Birim.Genel.Birim.Generic
             {
                 try
                 {
-
-
                     if (varlik == null) return null;
                     T varMi = await _kur.FindAsync(anahtar);
                     if (varMi != null)

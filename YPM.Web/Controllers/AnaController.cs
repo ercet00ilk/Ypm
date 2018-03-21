@@ -22,8 +22,7 @@ namespace YPM.Web.Controllers
         //    return HtmlEncoder.Default.Encode($"Hello {name}, NumTimes is: {numTimes}");
         //}
 
-
-        //// 
+        ////
         //// GET: /Ana/
 
         //public string Index()
@@ -31,13 +30,12 @@ namespace YPM.Web.Controllers
         //    return "This is my default action...";
         //}
 
-        //// GET: /Ana/Hosgeldiniz/ 
+        //// GET: /Ana/Hosgeldiniz/
         //// Requires using System.Text.Encodings.Web;
         //public string Welcome(string ad, string soyad)
         //{
         //    return HtmlEncoder.Default.Encode($"Hello {ad}, NumTimes is: {soyad}");
         //}
-
 
         // GET: Movies/Edit/5
         //public async Task<IActionResult> Edit(int? id)

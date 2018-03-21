@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YPM.Birim.Genel.Birim.Kisi;
+﻿using YPM.Birim.Genel.Birim.Kisi;
 using YPM.Birim.Genel.Birim.Kurulum;
 using YPM.Birim.Genel.Birim.Lokasyon;
 using YPM.Veri.Kaynak;
@@ -11,7 +8,6 @@ namespace YPM.Birim.Genel.Birim.Generic
     public class Gorevli
             : IGorevli
     {
-
         private readonly YpmSebil _sebil;
 
         public Gorevli(YpmSebil sebil)
@@ -19,6 +15,7 @@ namespace YPM.Birim.Genel.Birim.Generic
             _sebil = sebil;
             Kisi = new KisiBirim(_sebil);
             Kurulum = new KurulumBirim(_sebil);
+            Lokasyon = new LokasyonBirim(_sebil);
         }
 
         public static IGorevli YeniGorev()
@@ -39,7 +36,5 @@ namespace YPM.Birim.Genel.Birim.Generic
         {
             return _sebil.SaveChanges();
         }
-
-
     }
 }

@@ -44,57 +44,20 @@ namespace YPM.Web.Controllers
                     {
                         if (await KisiKaydet(kkm))
                         {
-                            ViewBag.Script = "$(function () {$('#exampleModal').modal('show');});";
-                            ViewBag.Sonuc = "<div class='modal fade' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"
-                                            + "<div class='modal-dialog' role='document'>"
-                                                + "<div class='modal-content'>"
-                                                    + "<div class='modal-header'>"
-                                                        + "<h5 class='modal-title' id='exampleModalLabel'>Kayıt Başarılı</h5>"
-                                                            + "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"
-                                                                + "<span aria-hidden='true'>&times;</span>"
-                                                            + "</button>"
-                                                    + "</div>"
-                                                    + "<div class='modal-body'> Başarılı bir şekilde kayıt oldunuz. Telefonunuza gelen doğrulama kodu ile üye girişi yapabilirsiniz. </div>"
-                                                    + "<div class='modal-footer'>"
-                                                        + "<a href='javascript:base.GeriGit();' class='btn btn-secondary'>Geri Git</a>"
-                                                        + "<a href='javascript:base.AnaSayfaGit();' class='btn btn-primary'>Ana Sayfa</a>"
-                                                    + "</div>"
-                                                + "</div>"
-                                            + "</div>"
-                                         + "</div>";
+                            ViewBag.Sonuc = "Başarılı bir şekilde kayıt oldunuz. Telefonunuza gelen doğrulama kodu ile üye girişi yapabilirsiniz.";
                         }
                         else
                         {
-                            ViewBag.Script = "$(function () {$('#exampleModal').modal('show');});";
-                            ViewBag.Sonuc = "<div class='modal fade' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>"
-                                            + "<div class='modal-dialog' role='document'>"
-                                                + "<div class='modal-content'>"
-                                                    + "<div class='modal-header'>"
-                                                        + "<h5 class='modal-title' id='exampleModalLabel'>Kayıt Başarısız</h5>"
-                                                            + "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>"
-                                                                + "<span aria-hidden='true'>&times;</span>"
-                                                            + "</button>"
-                                                    + "</div>"
-                                                    + "<div class='modal-body'> Sistem servis dışı.. Lütfen daha sonra tekrar deneyiniz. </div>"
-                                                    + "<div class='modal-footer'>"
-                                                        + "<a href='javascript:base.GeriGit();' class='btn btn-secondary'>Geri Git</a>"
-                                                        + "<a href='javascript:base.AnaSayfaGit();' class='btn btn-primary'>Ana Sayfa</a>"
-                                                    + "</div>"
-                                                + "</div>"
-                                            + "</div>"
-                                         + "</div>";
+                            ViewBag.Sonuc = "Sistem servis dışı.. Lütfen daha sonra tekrar deneyiniz. ";
                         }
 
                         return View("MesajVer");
-
                     }
                 }
             }
 
             return View(kkm);
         }
-
-      
 
         public IActionResult GuvenliGiris()
         {
@@ -107,20 +70,15 @@ namespace YPM.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
             }
 
             return View(kgm);
         }
 
-
         public IActionResult Error()
         {
             return View(new IstisnaViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
-
 
         #region Private
 
@@ -133,9 +91,11 @@ namespace YPM.Web.Controllers
                 case BasariliBasarisiz.Basarisiz:
                     donenDeger = false;
                     break;
+
                 case BasariliBasarisiz.Basarili:
                     donenDeger = true;
                     break;
+
                 default:
                     throw new ApplicationException("Uye.KisiKaydet() switch default döndü.");
             }
@@ -143,9 +103,9 @@ namespace YPM.Web.Controllers
             return donenDeger;
         }
 
-        private  KisiKayitModel BosAlanlariDoldur(KisiKayitModel kkm)
+        private KisiKayitModel BosAlanlariDoldur(KisiKayitModel kkm)
         {
-            kkm.KayitTarihi= _kisi.TarihGetir();
+            kkm.KayitTarihi = _kisi.TarihGetir();
 
             kkm.MacAdr = MacAdresiGetir();
 
@@ -160,7 +120,7 @@ namespace YPM.Web.Controllers
 
         private string IpAdresiGetir()
         {
-          return  Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            return Request.HttpContext.Connection.RemoteIpAddress.ToString();
         }
 
         private string RandomSekizKarakterGetir()
@@ -210,6 +170,6 @@ namespace YPM.Web.Controllers
             return kkm;
         }
 
-        #endregion
+        #endregion Private
     }
 }
