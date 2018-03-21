@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using YPM.Birim.Genel.Birim.Kisi;
 using YPM.Birim.Genel.Birim.Kurulum;
+using YPM.Birim.Genel.Birim.Lokasyon;
 using YPM.Veri.Kaynak;
 
 namespace YPM.Birim.Genel.Birim.Generic
@@ -27,6 +28,7 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         public IKisiBirim Kisi { get; private set; }
         public IKurulumBirim Kurulum { get; private set; }
+        public ILokasyonBirim Lokasyon { get; private set; }
 
         public void Dispose()
         {

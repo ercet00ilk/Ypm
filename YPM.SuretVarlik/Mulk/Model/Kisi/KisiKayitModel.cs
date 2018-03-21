@@ -51,6 +51,7 @@ namespace YPM.SuretVarlik.Mulk.Model.Kisi
         public string IpAdr { get; set; }
         public string MacAdr { get; set; }
         public string EpostaKontrol { get; set; }
+        public DateTime KayitTarihi { get; set; }
         public bool EpostaOnayliMi { get; set; }
 
         protected virtual void Dispose(bool Disposing)

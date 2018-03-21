@@ -11,13 +11,14 @@ using YPM.Veri.Kaynak;
 namespace YPM.Veri.Migrations
 {
     [DbContext(typeof(YpmSebil))]
-    [Migration("20180320083547_v1")]
+    [Migration("20180321094037_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("Mulk")
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -31,6 +32,10 @@ namespace YPM.Veri.Migrations
 
                     b.Property<string>("EPosta")
                         .HasMaxLength(150);
+
+                    b.Property<DateTime>("KayitTarihi")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("select getdate()");
 
                     b.Property<string>("Sifre")
                         .HasMaxLength(400);

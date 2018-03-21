@@ -2,6 +2,5 @@
 {
     public abstract class AbsOrtakVarlik
     {
-        public abstract int Id { get; set; }
     }
 }

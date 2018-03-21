@@ -12,5 +12,6 @@ namespace YPM.Depo.Veri.Kisi
     {
         Task<BasariliBasarisiz> Ekle(KisiKayitModel kkm);
         Task<VarYok> EPostaKontrolAsync(string email);
+        DateTime TarihGetir();
     }
 }

@@ -1,30 +1,26 @@
 ﻿using GercekVarlik.Mulk.Varlik.Ortak;
 using System;
-using YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak;
+using System.Collections.Generic;
+using System.Text;
 using YPM.GercekVarlik.Mulk.Varlik.Ortak;
 
-namespace GercekVarlik.Mulk.Varlik.Kisi.Ortak
+namespace YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak
 {
-    public class KisiGercek
-        : AbsOrtakVarlik, IKimlikBilgi, IKayitTarihi, IVarlikBilgi, IKaynakIade
+    public class LokasyonGercek
+        : AbsOrtakVarlik, IKimlikBilgi, IKayitTarihi, IBaglananKimlikBilgi, IBaglantiBilgi, IKaynakIade
     {
         public int Id { get; set; }
+        public int BaglananId { get; set; }
+        public string IpAdr { get; set; }
+        public string MacAdr { get; set; }
         public DateTime KayitTarihi { get; set; }
-        public string Ad { get; set; }
-        public string Soyad { get; set; }
-        public string EPosta { get; set; }
-        public string Sifre { get; set; }
-        public string EpostaKontrol { get; set; }
-        public bool EpostaOnayliMi { get; set; }
-
-
 
         #region IKaynakIade
 
 
         public bool Disposed { get; set; }
 
-        ~KisiGercek()
+        ~LokasyonGercek()
         {
             Dispose(false);
         }
@@ -48,6 +44,5 @@ namespace GercekVarlik.Mulk.Varlik.Kisi.Ortak
         }
 
         #endregion
-
     }
 }

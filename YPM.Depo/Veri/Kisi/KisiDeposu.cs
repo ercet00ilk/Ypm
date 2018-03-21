@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using YPM.Birim.Genel.Birim.Generic;
 using YPM.Birim.Genel.Birim.Kisi;
+using YPM.Birim.Genel.Birim.Lokasyon;
+using YPM.Depo.Ortak;
+using YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak;
 using YPM.SuretVarlik.Mulk.Enum.Ortak;
 using YPM.SuretVarlik.Mulk.Model.Kisi;
 using YPM.Veri.Kaynak;
@@ -49,24 +53,42 @@ namespace YPM.Depo.Veri.Kisi
         {
             BasariliBasarisiz donenDeger = new BasariliBasarisiz();
 
-            try
+            KisiGercek donus = new KisiGercek();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
             {
-                using (IKisiBirim kisi = KisiBirim.YeniGorev())
+                using (KisiGercek kg = new KisiGercek()
                 {
-                    await kisi.EkleAsync(new KisiGercek()
+                    Ad = Aes.Sifrele(kkm.name),
+                    Soyad = Aes.Sifrele(kkm.surname),
+                    EPosta = kkm.email,
+                    Sifre = Aes.Sifrele(kkm.password),
+                    KayitTarihi = kkm.KayitTarihi,
+                    EpostaKontrol = kkm.EpostaKontrol,
+                    EpostaOnayliMi = kkm.EpostaOnayliMi
+                })
+                {
+                    using (ILokasyonBirim lokasyon = LokasyonBirim.YeniLokasyon())
                     {
-                        Ad = kkm.name,
-                        Soyad = kkm.surname,
-                        EPosta = kkm.email,
-                        Sifre = kkm.password
-                    });
+                        using (LokasyonGercek lg = new LokasyonGercek()
+                        {
+                            BaglananId = kg.Id,
+                            IpAdr = kkm.IpAdr,
+                            MacAdr = kkm.MacAdr,
+                            KayitTarihi = kkm.KayitTarihi
+                        })
+                        {
+                            donus = await gorev.Kisi.EkleAsync(kg);
+
+                            var miLokasyon = await gorev.Lokasyon.BulAsync(x => x.MacAdr == kkm.MacAdr);
+
+                            if (miLokasyon == null) await gorev.Lokasyon.EkleAsync(lg);
+                            
+                        }
+                    }
                 }
 
-                donenDeger = BasariliBasarisiz.Basarili;
-            }
-            catch (Exception)
-            {
-                donenDeger = BasariliBasarisiz.Basarisiz;
+                gorev.Tamamla();
             }
 
             return donenDeger;
@@ -78,7 +100,7 @@ namespace YPM.Depo.Veri.Kisi
 
             try
             {
-                using (IKisiBirim kisi = KisiBirim.YeniGorev())
+                using (IKisiBirim kisi = KisiBirim.YeniKisi())
                 {
                     donenDeger = await kisi.EPostaKontrolAsync(email);
                 }
@@ -91,6 +113,9 @@ namespace YPM.Depo.Veri.Kisi
             return donenDeger;
         }
 
-     
+        public DateTime TarihGetir()
+        {
+            return Tarih.GuncelTarihVer();
+        }
     }
 }

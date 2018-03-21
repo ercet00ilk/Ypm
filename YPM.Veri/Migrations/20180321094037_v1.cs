@@ -12,8 +12,12 @@ namespace YPM.Veri.Migrations
             migrationBuilder.EnsureSchema(
                 name: "MulkKisi");
 
+            migrationBuilder.EnsureSchema(
+                name: "Mulk");
+
             migrationBuilder.CreateTable(
                 name: "KurulumTbl",
+                schema: "Mulk",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -36,6 +40,7 @@ namespace YPM.Veri.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Ad = table.Column<string>(maxLength: 400, nullable: true),
                     EPosta = table.Column<string>(maxLength: 150, nullable: true),
+                    KayitTarihi = table.Column<DateTime>(nullable: false, defaultValueSql: "select getdate()"),
                     Sifre = table.Column<string>(maxLength: 400, nullable: true),
                     Soyad = table.Column<string>(maxLength: 400, nullable: true)
                 },
@@ -48,7 +53,8 @@ namespace YPM.Veri.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "KurulumTbl");
+                name: "KurulumTbl",
+                schema: "Mulk");
 
             migrationBuilder.DropTable(
                 name: "Kisi",

@@ -23,7 +23,7 @@ namespace YPM.Birim.Genel.Birim.Kisi
             _sebil = sebil;
         }
 
-        public static IKisiBirim YeniGorev()
+        public static IKisiBirim YeniKisi()
         {
             return new KisiBirim(new YpmSebil());
         }
@@ -46,6 +46,8 @@ namespace YPM.Birim.Genel.Birim.Kisi
                     else donenDeger = VarYok.Var;
 
                     gorev.Tamamla();
+
+                    islemOnay = true;
                 }
                 catch (Exception)
                 {
@@ -63,7 +65,5 @@ namespace YPM.Birim.Genel.Birim.Kisi
             return donenDeger;
 
         }
-
-        
     }
 }

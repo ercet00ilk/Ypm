@@ -38,7 +38,7 @@ namespace YPM.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    kkm = await BosAlanlariDoldur(kkm);
+                    kkm = BosAlanlariDoldur(kkm);
 
                     if (ModelState.IsValid)
                     {
@@ -143,8 +143,9 @@ namespace YPM.Web.Controllers
             return donenDeger;
         }
 
-        private async Task<KisiKayitModel> BosAlanlariDoldur(KisiKayitModel kkm)
+        private  KisiKayitModel BosAlanlariDoldur(KisiKayitModel kkm)
         {
+            kkm.KayitTarihi= _kisi.TarihGetir();
 
             kkm.MacAdr = MacAdresiGetir();
 

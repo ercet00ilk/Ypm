@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YPM.Birim", "..\YPM.Birim\Y
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YPM.Yonetim", "..\YPM.Yonetim\YPM.Yonetim.csproj", "{5D44E23E-0582-4FBD-B6BF-5FBC323EE68D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YPM.Depo", "..\YPM.Depo\YPM.Depo.csproj", "{7618C218-B4B3-4EFB-97FD-F0AAF3CDDC19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YPM.Depo", "..\YPM.Depo\YPM.Depo.csproj", "{7618C218-B4B3-4EFB-97FD-F0AAF3CDDC19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
