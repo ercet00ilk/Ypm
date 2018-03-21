@@ -32,6 +32,7 @@ namespace YPM.Veri.Kaynak
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            modelBuilder.HasDefaultSchema("Mulk");
 
             /*******
              * Kisi Mulk
@@ -41,6 +42,7 @@ namespace YPM.Veri.Kaynak
             //  ==> PrimaryKey,Proroperty
             modelBuilder.Entity<KisiGercek>().ToTable("Kisi", "MulkKisi");
             modelBuilder.Entity<KisiGercek>().HasKey(c => c.Id);
+            modelBuilder.Entity<KisiGercek>().Property(c => c.KayitTarihi).HasDefaultValueSql("getdate()");
             modelBuilder.Entity<KisiGercek>().Property(x => x.Ad).HasMaxLength(400);
             modelBuilder.Entity<KisiGercek>().Property(x => x.EPosta).HasMaxLength(150);
             modelBuilder.Entity<KisiGercek>().Property(x => x.Soyad).HasMaxLength(400);

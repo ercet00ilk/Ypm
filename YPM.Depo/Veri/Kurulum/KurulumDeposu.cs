@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using YPM.Birim.Genel.Birim.Generic;
 using YPM.Birim.Genel.Birim.Kurulum;
 
@@ -22,6 +23,29 @@ namespace YPM.Depo.Veri.Kurulum
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public static async Task Kur()
+        {
+
+            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled))
+            {
+                try
+                {
+                    using (IKurulumDeposu kur = new KurulumDeposu())
+                    {
+                        if (await kur.KuruluMu()) kur.KurulumYap().Wait();
+
+                        transaction.Complete();
+                    }
+                }
+                catch (Exception)
+                {
+                    transaction.Dispose();
+                }
+            }
+
+
         }
 
         protected virtual void Dispose(bool Disposing)

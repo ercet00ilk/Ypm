@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using YPM.Birim.Genel.Birim.Kisi;
+using YPM.SuretVarlik.Mulk.Enum.Ortak;
 using YPM.SuretVarlik.Mulk.Model.Kisi;
 using YPM.Veri.Kaynak;
 
@@ -44,8 +45,9 @@ namespace YPM.Depo.Veri.Kisi
             }
         }
 
-        public async Task Ekle(KisiKayitModel kkm)
+        public async Task<BasariliBasarisiz> Ekle(KisiKayitModel kkm)
         {
+            BasariliBasarisiz donenDeger = new BasariliBasarisiz();
 
             try
             {
@@ -59,15 +61,36 @@ namespace YPM.Depo.Veri.Kisi
                         Sifre = kkm.password
                     });
                 }
+
+                donenDeger = BasariliBasarisiz.Basarili;
             }
-            catch (Exception ex)
+            catch (Exception)
+            {
+                donenDeger = BasariliBasarisiz.Basarisiz;
+            }
+
+            return donenDeger;
+        }
+
+        public async Task<VarYok> EPostaKontrolAsync(string email)
+        {
+            VarYok donenDeger = new VarYok();
+
+            try
+            {
+                using (IKisiBirim kisi = KisiBirim.YeniGorev())
+                {
+                    donenDeger = await kisi.EPostaKontrolAsync(email);
+                }
+            }
+            catch (Exception)
             {
 
             }
 
-
-
-
+            return donenDeger;
         }
+
+     
     }
 }

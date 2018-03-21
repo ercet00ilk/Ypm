@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\YPM.SuretVarlik\YPM.SuretVarlik.csproj" />
     <ProjectReference Include="..\YPM.Veri\YPM.Veri.csproj" />
   </ItemGroup>
 
