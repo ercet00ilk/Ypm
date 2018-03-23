@@ -47,8 +47,13 @@ namespace YPM.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "area",
+                    template: "{area:exists}/{controller=Ana}/{action=Giris}/{id?}"
+                    );
+
+                routes.MapRoute(
                     name: "default",
-                    template: "{controller=Ana}/{action=Giris}/{id?}");
+                    template: "{controller=ana}/{action=giris}/{id?}");
             });
         }
     }

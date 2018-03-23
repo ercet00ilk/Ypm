@@ -1,4 +1,4 @@
-﻿namespace YPM.Depo.Ortak.MiddleWare
+﻿namespace YPM.Web.Genel.MiddleWare
 {
     public class IstisnaIsleyici
     {

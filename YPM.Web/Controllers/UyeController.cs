@@ -13,9 +13,11 @@ using YPM.SuretVarlik.Mulk.Model.Kisi;
 
 namespace YPM.Web.Controllers
 {
+    [Route("uye")]
     public class UyeController
         : OrtakController
     {
+        private bool Disposed { get; set; }
         private readonly IKisiDeposu _kisi;
 
         public UyeController(IKisiDeposu kisi)
@@ -23,6 +25,7 @@ namespace YPM.Web.Controllers
             _kisi = kisi;
         }
 
+        [Route("yenikayit")]
         public IActionResult YeniKayit()
         {
             return View();
@@ -59,9 +62,10 @@ namespace YPM.Web.Controllers
             return View(kkm);
         }
 
+        [Route("guvenligiris")]
         public IActionResult GuvenliGiris()
         {
-            return View();
+            return Content("qwe");
         }
 
         [HttpPost]
@@ -75,9 +79,19 @@ namespace YPM.Web.Controllers
             return View(kgm);
         }
 
-        public IActionResult Error()
+        public IActionResult Istisna()
         {
             return View(new IstisnaViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (Disposed) return;
+
+            if (disposing && _kisi != null) _kisi.Dispose();
+
+            base.Dispose(disposing);
         }
 
         #region Private

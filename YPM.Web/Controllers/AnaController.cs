@@ -4,6 +4,7 @@ using YPM.SuretVarlik.Mulk.Model.Istisna;
 
 namespace YPM.Web.Controllers
 {
+
     public class AnaController
         : OrtakController
     {
