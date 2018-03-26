@@ -8,7 +8,7 @@ using YPM.GercekVarlik.Mulk.Varlik.Ortak;
 namespace GercekVarlik.Mulk.Varlik.Kisi.Ortak
 {
     public class KisiGercek
-        : AbsOrtakVarlik, IKayitTarihi, IVarlikBilgi, IKaynakIade
+        : AbsOrtakVarlik, IKayitTarihi, IKisiBilgi, IKaynakIade
     {
         public int KisiId { get; set; }
         public DateTime KayitTarihi { get; set; }

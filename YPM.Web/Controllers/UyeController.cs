@@ -102,11 +102,11 @@ namespace YPM.Web.Controllers
 
             switch (await _kisi.Ekle(kkm))
             {
-                case BasariliBasarisiz.Basarisiz:
+                case BasariliBasarisizDurum.Basarisiz:
                     donenDeger = false;
                     break;
 
-                case BasariliBasarisiz.Basarili:
+                case BasariliBasarisizDurum.Basarili:
                     donenDeger = true;
                     break;
 
@@ -180,7 +180,7 @@ namespace YPM.Web.Controllers
 
         private async Task<KisiKayitModel> OyleBirKisiVarMi(KisiKayitModel kkm)
         {
-            if (await _kisi.EPostaKontrolAsync(kkm.email) == VarYok.Var ? true : false) ModelState.AddModelError("", "Bu EPosta adresi alınmış. Başka bir tane deneyin..");
+            if (await _kisi.EPostaKontrolAsync(kkm.email) == VarYokDurum.Var ? true : false) ModelState.AddModelError("", "Bu EPosta adresi alınmış. Başka bir tane deneyin..");
             return kkm;
         }
 

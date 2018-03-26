@@ -8,6 +8,6 @@ namespace YPM.Birim.Genel.Birim.Kisi
     public interface IKisiBirim
            : IGenericBirim<KisiGercek>
     {
-        Task<VarYok> EPostaKontrolAsync(string email);
+        Task<VarYokDurum> EPostaKontrolAsync(string email);
     }
 }

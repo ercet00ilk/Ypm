@@ -1,6 +1,6 @@
 ﻿namespace YPM.SuretVarlik.Mulk.Enum.Ortak
 {
-    public enum BasariliBasarisiz
+    public enum BasariliBasarisizDurum
     {
         Basarisiz = 0,
         Basarili = 1

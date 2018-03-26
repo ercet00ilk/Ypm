@@ -2,6 +2,7 @@
 using GercekVarlik.Mulk.Varlik.Kurulum.Ortak;
 using Microsoft.EntityFrameworkCore;
 using YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak;
+using YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori;
 
 namespace YPM.Veri.Kaynak
 {
@@ -21,6 +22,11 @@ namespace YPM.Veri.Kaynak
         public DbSet<LokasyonGercek> LokasyonTbl { get; set; }
 
         public DbSet<KurulumGercek> KurulumTbl { get; set; }
+
+        public DbSet<UrunMarka> UrunMarkaTbl { get; set; }
+        public DbSet<UrunModel> UrunModelTbl { get; set; }
+        public DbSet<UrunKasa> UrunKasaTbl { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -74,6 +80,30 @@ namespace YPM.Veri.Kaynak
               .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
+
+            /*******
+            * Urun Mulk
+            *
+            */
+
+            //  ==> PrimaryKey,Proroperty
+            modelBuilder.Entity<UrunAracTip>().ToTable("UrunAracTip", "MulkUrun");
+            modelBuilder.Entity<UrunAracTip>().HasKey(c => c.UrunAracTipId);
+            modelBuilder.Entity<UrunAracTip>().Property(x => x.UrunAracTipAd).HasMaxLength(200);
+
+            modelBuilder.Entity<UrunMarka>().ToTable("UrunMarka", "MulkUrun");
+            modelBuilder.Entity<UrunMarka>().HasKey(c => c.UrunMarkaId);
+            modelBuilder.Entity<UrunMarka>().Property(x => x.MarkaAd).HasMaxLength(200);
+
+            modelBuilder.Entity<UrunModel>().ToTable("UrunModel", "MulkUrun");
+            modelBuilder.Entity<UrunModel>().HasKey(c => c.UrunModelId);
+            modelBuilder.Entity<UrunModel>().Property(x => x.ModelAd).HasMaxLength(200);
+
+            modelBuilder.Entity<UrunKasa>().ToTable("UrunKasa", "MulkUrun");
+            modelBuilder.Entity<UrunKasa>().HasKey(c => c.UrunKasaId);
+            modelBuilder.Entity<UrunKasa>().Property(x => x.KasaAd).HasMaxLength(200);
+
+            //  ==> ForeignKey
         }
     }
 }

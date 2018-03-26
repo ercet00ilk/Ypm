@@ -24,11 +24,11 @@ namespace YPM.Birim.Genel.Birim.Kisi
             return new KisiBirim(new YpmSebil());
         }
 
-        public async Task<VarYok> EPostaKontrolAsync(string email)
+        public async Task<VarYokDurum> EPostaKontrolAsync(string email)
         {
             bool islemOnay = new bool();
 
-            VarYok donenDeger = new VarYok();
+            VarYokDurum donenDeger = new VarYokDurum();
 
             using (var transaction = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled))
             using (IGorevli gorev = Gorevli.YeniGorev())
@@ -37,8 +37,8 @@ namespace YPM.Birim.Genel.Birim.Kisi
                 {
                     var mail = await gorev.Kisi.BulAsync(x => x.EPosta == email);
 
-                    if (mail == null) donenDeger = VarYok.Yok;
-                    else donenDeger = VarYok.Var;
+                    if (mail == null) donenDeger = VarYokDurum.Yok;
+                    else donenDeger = VarYokDurum.Var;
 
                     gorev.Tamamla();
 

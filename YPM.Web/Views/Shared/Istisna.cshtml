@@ -1,0 +1,16 @@
+﻿@using YPM.SuretVarlik.Mulk.Model.Istisna
+@model IstisnaViewModel
+
+@{
+    ViewData["Title"] = "Istisna";
+}
+
+<h1 class="text-danger">İstisna.</h1>
+<h2 class="text-danger">Şu an bu işlemi gerçekleştiremiyorum.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>İşlem ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}

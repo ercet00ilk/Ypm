@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "AracTip";
+    Layout = "~/Views/Shared/_BosCerceve.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8" style="background-color:#ddd;">
+        <h2>AracTipEkle</h2>
+
+        @await Component.InvokeAsync("UrunKategoriAracTipEkle")
+
+    </div>
+</div>
+
+<div class="row">
+    <div  class="col-md-8" style="background-color:#ddd;">
+        <h2>AracTipListele</h2>
+        @await Component.InvokeAsync("UrunKategoriAracTipListele")
+    </div>
+</div>
+
+@{ 
+    int i = 1;
+}
+

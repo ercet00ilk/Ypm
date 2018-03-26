@@ -42,9 +42,9 @@ namespace YPM.Depo.Veri.Kisi
             }
         }
 
-        public async Task<BasariliBasarisiz> Ekle(KisiKayitModel kkm)
+        public async Task<BasariliBasarisizDurum> Ekle(KisiKayitModel kkm)
         {
-            BasariliBasarisiz donenDeger = new BasariliBasarisiz();
+            BasariliBasarisizDurum donenDeger = new BasariliBasarisizDurum();
 
             using (IGorevli gorev = Gorevli.YeniGorev())
             {
@@ -79,11 +79,11 @@ namespace YPM.Depo.Veri.Kisi
 
                                 if (miLokasyon == null) await gorev.Lokasyon.EkleAsync(lg);
 
-                                donenDeger = BasariliBasarisiz.Basarili;
+                                donenDeger = BasariliBasarisizDurum.Basarili;
                             }
                             catch (Exception)
                             {
-                                donenDeger = BasariliBasarisiz.Basarisiz;
+                                donenDeger = BasariliBasarisizDurum.Basarisiz;
                             }
                         }
                     }
@@ -95,9 +95,9 @@ namespace YPM.Depo.Veri.Kisi
             return donenDeger;
         }
 
-        public async Task<VarYok> EPostaKontrolAsync(string email)
+        public async Task<VarYokDurum> EPostaKontrolAsync(string email)
         {
-            VarYok donenDeger = new VarYok();
+            VarYokDurum donenDeger = new VarYokDurum();
 
             try
             {

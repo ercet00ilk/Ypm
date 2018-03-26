@@ -90,6 +90,58 @@ namespace YPM.Veri.Migrations
                     b.ToTable("Lokasyon","MulkKisi");
                 });
 
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunAracTip", b =>
+                {
+                    b.Property<int>("UrunAracTipId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("UrunAracTipAd")
+                        .HasMaxLength(200);
+
+                    b.HasKey("UrunAracTipId");
+
+                    b.ToTable("UrunAracTip","MulkUrun");
+                });
+
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKasa", b =>
+                {
+                    b.Property<int>("UrunKasaId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("KasaAd")
+                        .HasMaxLength(200);
+
+                    b.HasKey("UrunKasaId");
+
+                    b.ToTable("UrunKasa","MulkUrun");
+                });
+
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunMarka", b =>
+                {
+                    b.Property<int>("UrunMarkaId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("MarkaAd")
+                        .HasMaxLength(200);
+
+                    b.HasKey("UrunMarkaId");
+
+                    b.ToTable("UrunMarka","MulkUrun");
+                });
+
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunModel", b =>
+                {
+                    b.Property<int>("UrunModelId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ModelAd")
+                        .HasMaxLength(200);
+
+                    b.HasKey("UrunModelId");
+
+                    b.ToTable("UrunModel","MulkUrun");
+                });
+
             modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak.LokasyonGercek", b =>
                 {
                     b.HasOne("GercekVarlik.Mulk.Varlik.Kisi.Ortak.KisiGercek", "Kisi")

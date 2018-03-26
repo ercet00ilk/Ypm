@@ -2,7 +2,7 @@
 
 namespace YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak
 {
-    internal interface IVarlikBilgi
+    internal interface IKisiBilgi
     {
         string Ad { get; set; }
         string Soyad { get; set; }

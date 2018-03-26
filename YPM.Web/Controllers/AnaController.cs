@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using YPM.SuretVarlik.Mulk.Model.Istisna;
+using YPM.Web.Genel.Yapi.Istisna;
 
 namespace YPM.Web.Controllers
 {
@@ -13,6 +16,7 @@ namespace YPM.Web.Controllers
             return View();
         }
 
+        [Route("/Istisna")]
         public IActionResult Istisna()
         {
             return View(new IstisnaViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

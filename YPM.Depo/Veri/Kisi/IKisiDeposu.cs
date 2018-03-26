@@ -8,9 +8,9 @@ namespace YPM.Depo.Veri.Kisi
     public interface IKisiDeposu
         : IDisposable
     {
-        Task<BasariliBasarisiz> Ekle(KisiKayitModel kkm);
+        Task<BasariliBasarisizDurum> Ekle(KisiKayitModel kkm);
 
-        Task<VarYok> EPostaKontrolAsync(string email);
+        Task<VarYokDurum> EPostaKontrolAsync(string email);
 
         DateTime TarihGetir();
     }
