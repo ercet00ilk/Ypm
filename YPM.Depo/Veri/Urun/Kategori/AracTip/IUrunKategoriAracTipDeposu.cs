@@ -11,5 +11,6 @@ namespace YPM.Depo.Veri.Urun.Kategori.AracTip
     {
         Task Ekle(string aracTipAd);
         Task<List<UrunKategoriAracTipModel>> Listele();
+        Task Sil(int id);
     }
 }

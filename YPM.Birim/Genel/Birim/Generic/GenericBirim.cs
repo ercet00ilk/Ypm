@@ -513,6 +513,33 @@ namespace YPM.Birim.Genel.Birim.Generic
             _sebil.SaveChanges();
         }
 
+        public async Task SilAsync(int id)
+        {
+            bool IslemOnay = new bool();
+
+            using (var transaction = _sebil.Database.BeginTransaction())
+            {
+                try
+                {
+                    T SilinecekVarlik = _kur.Find(id);
+                    _kur.Remove(SilinecekVarlik);
+                    await _sebil.SaveChangesAsync();
+                    IslemOnay = true;
+                }
+                catch (Exception)
+                {
+                    IslemOnay = false;
+                }
+                finally
+                {
+                    if (IslemOnay) transaction.Commit();
+                    else transaction.Rollback();
+                }
+            }
+
+            return;
+        }
+
         public virtual async Task<int> SilAsync(T varlik)
         {
             _kur.Remove(varlik);

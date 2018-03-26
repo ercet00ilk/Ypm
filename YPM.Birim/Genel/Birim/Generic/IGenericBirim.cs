@@ -20,6 +20,8 @@ namespace YPM.Birim.Genel.Birim.Generic
 
         void Sil(T varlik);
 
+        Task SilAsync(int id);
+
         Task<int> SilAsync(T varlik);
 
         T Bul(Expression<Func<T, bool>> eslesen);

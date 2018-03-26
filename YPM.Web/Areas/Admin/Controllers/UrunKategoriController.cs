@@ -11,7 +11,20 @@ namespace YPM.Web.Areas.Admin.Controllers
     public class UrunKategoriController
         : AdminOrtakController
     {
+
+
         private bool Disposed { get; set; }
+        private readonly IUrunKategoriAracTipDeposu _aracTipDepo;
+
+        public UrunKategoriController(IUrunKategoriAracTipDeposu aracTipDepo)
+        {
+            _aracTipDepo = aracTipDepo;
+        }
+
+        public IActionResult Giris()
+        {
+            return View();
+        }
 
 
         public IActionResult AracTip()
@@ -19,7 +32,23 @@ namespace YPM.Web.Areas.Admin.Controllers
             return View();
         }
 
-      
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AracTipEkle(UrunKategoriAracTipModel model)
+        {
+            if (!string.IsNullOrEmpty(model.AracTipAd))
+                await _aracTipDepo.Ekle(model.AracTipAd);
+            return RedirectToAction("AracTip");
+        }
+
+        public async Task<IActionResult> AracSil(int? id)
+        {
+            if (id is int) await _aracTipDepo.Sil((int)id);
+
+            return RedirectToAction("AracTip");
+        }
+
+
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> AracTipEkle(UrunKategoriAracTipEkleModel atem)

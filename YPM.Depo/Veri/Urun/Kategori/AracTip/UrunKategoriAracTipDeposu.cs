@@ -49,30 +49,36 @@ namespace YPM.Depo.Veri.Urun.Kategori.AracTip
         public async Task<List<UrunKategoriAracTipModel>> Listele()
         {
 
-
             List<UrunKategoriAracTipModel> list = new List<UrunKategoriAracTipModel>();
 
             {
-                ICollection<UrunAracTip> koleksiyon = null;
                 using (IGorevli gorev = Gorevli.YeniGorev())
                 {
                     var sonuc = await gorev.UrunKategoriAracTip.GetirTumKoleksiyonAsyn();
 
-                    if (sonuc != null) list = koleksiyon.Cast<UrunKategoriAracTipModel>().ToList();
+                    //if (sonuc == null) list.Add(new UrunKategoriAracTipModel() { AracTipAd = "bos", Id = 0 });
+
+                    //if (sonuc.Count <= 0) list.Add(new UrunKategoriAracTipModel() { AracTipAd = "bos", Id = 0 });
+
+                    //if (sonuc.Count > 0) list = sonuc.Cast<UrunKategoriAracTipModel>().ToList();
+
+                    foreach (var item in sonuc)
+                    {
+                        list.Add(new UrunKategoriAracTipModel() { AracTipAd = item.UrunAracTipAd, Id = item.UrunAracTipId });
+                    }
+
                 }
-                koleksiyon = null;
             }
 
-
-
-            //foreach (var item in sonuc)
-            //{
-            //    list.Add(new UrunKategoriAracTipModel() { AracTipAd = item.UrunAracTipAd, Id = item.UrunAracTipId });
-            //}
-
-
-
             return list;
+        }
+
+        public async Task Sil(int id)
+        {
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            {
+                await gorev.UrunKategoriAracTip.SilAsync(id);
+            }
         }
     }
 }

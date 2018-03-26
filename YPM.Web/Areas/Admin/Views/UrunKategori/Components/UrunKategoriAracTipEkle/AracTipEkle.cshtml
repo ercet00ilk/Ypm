@@ -1,0 +1,24 @@
+﻿@using YPM.SuretVarlik.Mulk.Model.Urun.Kategori
+@model UrunKategoriAracTipModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<div class="col-md-8" style="background-color:#ddd;">
+    <h1>AracTipEkle</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-area="Admin" asp-controller="UrunKategori" asp-action="AracTipEkle">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="AracTipAd" class="control-label"></label>
+                    <input asp-for="AracTipAd" class="form-control" />
+                    <span asp-validation-for="AracTipAd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="AracTipEkle" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

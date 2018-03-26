@@ -17,6 +17,7 @@ namespace YPM.Birim.Genel.Birim.Generic
             Kisi = new KisiBirim(_sebil);
             Kurulum = new KurulumBirim(_sebil);
             Lokasyon = new LokasyonBirim(_sebil);
+            UrunKategoriAracTip = new UrunKategoriAracTipBirim(_sebil);
         }
 
         public static IGorevli YeniGorev()
