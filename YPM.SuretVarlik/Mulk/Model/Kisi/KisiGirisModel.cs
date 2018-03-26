@@ -12,7 +12,7 @@ namespace YPM.SuretVarlik.Mulk.Model.Kisi
         [EmailAddress(ErrorMessage = "Lütfen  e-posta adresinizi geçerli bir formatta giriniz.")]
         public string email { get; set; }
 
-        [Required(ErrorMessage = "Lütfen parolanızı giriniz.")]
+
         [StringLength(25, MinimumLength = 5, ErrorMessage = "Parolanızı 5-25 karakter arasında girebilirsiniz.")]
         [DataType(DataType.Password)]
         public string password { get; set; }
