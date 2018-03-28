@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using YPM.Depo.Veri.Urun.Kategori.AracTip;
-using YPM.Depo.Veri.Urun.Kategori.Marka;
+using YPM.Depo.Veri.Urun.Kategori;
 using YPM.SuretVarlik.Mulk.Model.Urun.Kategori;
 
 namespace YPM.Web.Areas.Admin.Controllers
@@ -12,13 +10,12 @@ namespace YPM.Web.Areas.Admin.Controllers
         : AdminOrtakController
     {
 
-
         private bool Disposed { get; set; }
-        private readonly IUrunKategoriAracTipDeposu _aracTipDepo;
+        private readonly IUrunKategoriDeposu _urunKategori;
 
-        public UrunKategoriController(IUrunKategoriAracTipDeposu aracTipDepo)
+        public UrunKategoriController(IUrunKategoriDeposu urunKategori)
         {
-            _aracTipDepo = aracTipDepo;
+            _urunKategori = urunKategori;
         }
 
         public IActionResult Giris()
@@ -26,27 +23,21 @@ namespace YPM.Web.Areas.Admin.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AracTipEkle(UrunKategoriAracTipModel model)
+        //{
+        //    if (!string.IsNullOrEmpty(model.AracTipAd))
+        //        await _aracTipDepo.Ekle(model.AracTipAd);
+        //    return RedirectToAction("AracTip");
+        //}
 
-        public IActionResult AracTip()
-        {
-            return View();
-        }
+        //public async Task<IActionResult> AracSil(int? id)
+        //{
+        //    if (id is int) await _aracTipDepo.Sil((int)id);
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AracTipEkle(UrunKategoriAracTipModel model)
-        {
-            if (!string.IsNullOrEmpty(model.AracTipAd))
-                await _aracTipDepo.Ekle(model.AracTipAd);
-            return RedirectToAction("AracTip");
-        }
-
-        public async Task<IActionResult> AracSil(int? id)
-        {
-            if (id is int) await _aracTipDepo.Sil((int)id);
-
-            return RedirectToAction("AracTip");
-        }
+        //    return RedirectToAction("AracTip");
+        //}
 
 
         //[HttpPost]
@@ -105,8 +96,9 @@ namespace YPM.Web.Areas.Admin.Controllers
         {
             if (Disposed) return;
 
-            //if (disposing && _UrunKategoriMarka != null) _UrunKategoriMarka.Dispose();
-            //if (disposing && _UrunKategoriAracTip != null) _UrunKategoriAracTip.Dispose();
+            if (disposing && _urunKategori != null) _urunKategori.Dispose();
+
+            Disposed = true;
 
             base.Dispose(disposing);
         }

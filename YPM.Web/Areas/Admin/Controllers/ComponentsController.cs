@@ -10,16 +10,10 @@ namespace YPM.Web.Areas.Admin.Controllers
     public class ComponentsController
         : AdminOrtakController
     {
-        public IActionResult UrunKategoriAracTipEkle()
+        public IActionResult UrunKategoriListele()
         {
-            //
-            // Views/Shared/Component.
-            return ViewComponent("UrunKategoriAracTipEkle");
-        }
-
-        public IActionResult UrunKategoriAracTipListele()
-        {
-            return ViewComponent("UrunKategoriAracTipListele");
+            // ViewComponents/Urun/Kategori/UrunKategoriListele
+            return ViewComponent("UrunKategoriListele");
         }
     }
 }

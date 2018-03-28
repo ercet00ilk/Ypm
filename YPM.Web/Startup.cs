@@ -9,8 +9,7 @@ using YPM.Depo.Veri.Kisi;
 using YPM.Depo.Veri.Kurulum;
 using YPM.Depo.Veri.Session;
 using YPM.Depo.Veri.Sistem;
-using YPM.Depo.Veri.Urun.Kategori.AracTip;
-using YPM.Depo.Veri.Urun.Kategori.Marka;
+using YPM.Depo.Veri.Urun.Kategori;
 using YPM.Web.Genel.MiddleWare;
 
 namespace YPM.Web
@@ -36,8 +35,7 @@ namespace YPM.Web
             services.AddTransient<IKisiDeposu, KisiDeposu>();
             services.AddTransient<ISistemDepo, SistemDepo>();
             services.AddTransient<ISessionDepo, SessionDepo>();
-            services.AddTransient<IUrunKategoriAracTipDeposu, UrunKategoriAracTipDeposu>();
-            services.AddTransient<IUrunKategoriMarkaDeposu, UrunKategoriMarkaDeposu>();
+            services.AddTransient<IUrunKategoriDeposu, UrunKategoriDeposu>();
             services.AddMvc();
         }
 

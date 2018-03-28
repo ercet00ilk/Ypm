@@ -90,56 +90,24 @@ namespace YPM.Veri.Migrations
                     b.ToTable("Lokasyon","MulkKisi");
                 });
 
-            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunAracTip", b =>
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriGercek", b =>
                 {
-                    b.Property<int>("UrunAracTipId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("UrunKategoriId");
 
-                    b.Property<string>("UrunAracTipAd")
-                        .HasMaxLength(200);
+                    b.Property<int>("UrunUstKategoriId");
 
-                    b.HasKey("UrunAracTipId");
+                    b.Property<string>("Ad")
+                        .HasMaxLength(250);
 
-                    b.ToTable("UrunAracTip","MulkUrun");
-                });
+                    b.Property<string>("LinkYol")
+                        .HasMaxLength(250);
 
-            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKasa", b =>
-                {
-                    b.Property<int>("UrunKasaId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("ResimYol")
+                        .HasMaxLength(250);
 
-                    b.Property<string>("KasaAd")
-                        .HasMaxLength(200);
+                    b.HasKey("UrunKategoriId", "UrunUstKategoriId");
 
-                    b.HasKey("UrunKasaId");
-
-                    b.ToTable("UrunKasa","MulkUrun");
-                });
-
-            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunMarka", b =>
-                {
-                    b.Property<int>("UrunMarkaId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("MarkaAd")
-                        .HasMaxLength(200);
-
-                    b.HasKey("UrunMarkaId");
-
-                    b.ToTable("UrunMarka","MulkUrun");
-                });
-
-            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunModel", b =>
-                {
-                    b.Property<int>("UrunModelId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ModelAd")
-                        .HasMaxLength(200);
-
-                    b.HasKey("UrunModelId");
-
-                    b.ToTable("UrunModel","MulkUrun");
+                    b.ToTable("Kategori","MulkUrun");
                 });
 
             modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak.LokasyonGercek", b =>

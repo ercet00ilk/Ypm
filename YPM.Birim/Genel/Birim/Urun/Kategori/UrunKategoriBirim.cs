@@ -5,14 +5,14 @@ using YPM.Birim.Genel.Birim.Generic;
 using YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori;
 using YPM.Veri.Kaynak;
 
-namespace YPM.Birim.Genel.Birim.Urun.Kategori.AracTip
+namespace YPM.Birim.Genel.Birim.Urun.Kategori
 {
-    public class UrunKategoriAracTipBirim
-        : GenericBirim<UrunAracTip>, IUrunKategoriAracTipBirim
+    public class UrunKategoriBirim
+            : GenericBirim<UrunKategoriGercek>, IUrunKategoriBirim
     {
         private readonly YpmSebil _sebil;
 
-        public UrunKategoriAracTipBirim(YpmSebil sebil)
+        public UrunKategoriBirim(YpmSebil sebil)
             : base(sebil)
         {
             _sebil = sebil;

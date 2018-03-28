@@ -402,7 +402,7 @@ namespace YPM.Birim.Genel.Birim.Generic
 
                     IslemOnay = true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     IslemOnay = false;
                 }

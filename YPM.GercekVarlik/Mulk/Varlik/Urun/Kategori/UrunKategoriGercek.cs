@@ -6,18 +6,14 @@ namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 {
     public class UrunKategoriGercek
     {
-        public int AracTipId { get; set; }
+        public int UrunKategoriId { get; set; }
 
-        public int MarkaId { get; set; }
+        public int UrunUstKategoriId { get; set; }
 
-        public int ModelId { get; set; }
+        public string Ad { get; set; }
 
-        public int KasaId { get; set; }
+        public string ResimYol { get; set; }
 
-        public int YilId { get; set; }
-
-        public int MotorHacimId { get; set; }
-
-        public int BeygirGucuId { get; set; }
+        public string LinkYol { get; set; }
     }
 }

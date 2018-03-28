@@ -5,12 +5,14 @@ using System.Text;
 
 namespace YPM.SuretVarlik.Mulk.Model.Urun.Kategori
 {
-    public class UrunKategoriAracTipModel
+    public class UrunKategoriModel
     {
-        public int Id { get; set; }
+        public int KategoriId { get; set; }
 
         [Required(ErrorMessage = "Lütfen Arac Tipi giriniz.")]
         [StringLength(140, MinimumLength = 2, ErrorMessage = "Araç Tipini 2 - 140 karakter arasında girebilirsiniz.")]
-        public string AracTipAd { get; set; }
+        public string Ad { get; set; }
+
+        public int UstKategoriId { get; set; }
     }
 }

@@ -23,9 +23,7 @@ namespace YPM.Veri.Kaynak
 
         public DbSet<KurulumGercek> KurulumTbl { get; set; }
 
-        public DbSet<UrunMarka> UrunMarkaTbl { get; set; }
-        public DbSet<UrunModel> UrunModelTbl { get; set; }
-        public DbSet<UrunKasa> UrunKasaTbl { get; set; }
+        public DbSet<UrunKategoriGercek> KategoriTbl { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -87,21 +85,11 @@ namespace YPM.Veri.Kaynak
             */
 
             //  ==> PrimaryKey,Proroperty
-            modelBuilder.Entity<UrunAracTip>().ToTable("UrunAracTip", "MulkUrun");
-            modelBuilder.Entity<UrunAracTip>().HasKey(c => c.UrunAracTipId);
-            modelBuilder.Entity<UrunAracTip>().Property(x => x.UrunAracTipAd).HasMaxLength(200);
-
-            modelBuilder.Entity<UrunMarka>().ToTable("UrunMarka", "MulkUrun");
-            modelBuilder.Entity<UrunMarka>().HasKey(c => c.UrunMarkaId);
-            modelBuilder.Entity<UrunMarka>().Property(x => x.MarkaAd).HasMaxLength(200);
-
-            modelBuilder.Entity<UrunModel>().ToTable("UrunModel", "MulkUrun");
-            modelBuilder.Entity<UrunModel>().HasKey(c => c.UrunModelId);
-            modelBuilder.Entity<UrunModel>().Property(x => x.ModelAd).HasMaxLength(200);
-
-            modelBuilder.Entity<UrunKasa>().ToTable("UrunKasa", "MulkUrun");
-            modelBuilder.Entity<UrunKasa>().HasKey(c => c.UrunKasaId);
-            modelBuilder.Entity<UrunKasa>().Property(x => x.KasaAd).HasMaxLength(200);
+            modelBuilder.Entity<UrunKategoriGercek>().ToTable("Kategori", "MulkUrun");
+            modelBuilder.Entity<UrunKategoriGercek>().HasKey(c => new { c.UrunKategoriId, c.UrunUstKategoriId });
+            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Ad).HasMaxLength(250);
+            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.LinkYol).HasMaxLength(250);
+            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.ResimYol).HasMaxLength(250);
 
             //  ==> ForeignKey
         }

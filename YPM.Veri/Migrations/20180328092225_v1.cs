@@ -55,59 +55,19 @@ namespace YPM.Veri.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UrunAracTip",
+                name: "Kategori",
                 schema: "MulkUrun",
                 columns: table => new
                 {
-                    UrunAracTipId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UrunAracTipAd = table.Column<string>(maxLength: 200, nullable: true)
+                    UrunKategoriId = table.Column<int>(nullable: false),
+                    UrunUstKategoriId = table.Column<int>(nullable: false),
+                    Ad = table.Column<string>(maxLength: 250, nullable: true),
+                    LinkYol = table.Column<string>(maxLength: 250, nullable: true),
+                    ResimYol = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UrunAracTip", x => x.UrunAracTipId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UrunKasa",
-                schema: "MulkUrun",
-                columns: table => new
-                {
-                    UrunKasaId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    KasaAd = table.Column<string>(maxLength: 200, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UrunKasa", x => x.UrunKasaId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UrunMarka",
-                schema: "MulkUrun",
-                columns: table => new
-                {
-                    UrunMarkaId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MarkaAd = table.Column<string>(maxLength: 200, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UrunMarka", x => x.UrunMarkaId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UrunModel",
-                schema: "MulkUrun",
-                columns: table => new
-                {
-                    UrunModelId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ModelAd = table.Column<string>(maxLength: 200, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UrunModel", x => x.UrunModelId);
+                    table.PrimaryKey("PK_Kategori", x => new { x.UrunKategoriId, x.UrunUstKategoriId });
                 });
 
             migrationBuilder.CreateTable(
@@ -152,19 +112,7 @@ namespace YPM.Veri.Migrations
                 schema: "MulkKurulum");
 
             migrationBuilder.DropTable(
-                name: "UrunAracTip",
-                schema: "MulkUrun");
-
-            migrationBuilder.DropTable(
-                name: "UrunKasa",
-                schema: "MulkUrun");
-
-            migrationBuilder.DropTable(
-                name: "UrunMarka",
-                schema: "MulkUrun");
-
-            migrationBuilder.DropTable(
-                name: "UrunModel",
+                name: "Kategori",
                 schema: "MulkUrun");
 
             migrationBuilder.DropTable(

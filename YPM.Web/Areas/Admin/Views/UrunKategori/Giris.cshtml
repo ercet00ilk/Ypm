@@ -7,10 +7,21 @@
 
 <h2>Admin Giris</h2>
 
-<p>
-    <ul>
-        <li><a asp-area="admin" asp-controller="urunkategori" asp-action="aractip">Arac Tip Ekle</a></li>
-        <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-    </ul>
-</p>
+
+<div class="row">
+
+    <div class="container">
+        <div class="col-md-3" style="background: #0077c0;overflow: hidden;">
+            @await Component.InvokeAsync("UrunKategoriListele")
+        </div>
+        <div class="col-md-8" style="background: #37aff7;">
+            burası normal gelecek.
+        </div>
+    </div>
+
+</div>
+
+
+
+
 
