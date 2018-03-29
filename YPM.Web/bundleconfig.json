@@ -20,5 +20,15 @@
     },
     // Optionally generate .map file
     "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/ortak.min.js",
+    "inputFiles": [
+      "wwwroot/js/ortak.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
   }
 ]
