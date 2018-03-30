@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 using YPM.Depo.Veri.Gunluk;
 using YPM.Depo.Veri.Session;
 using YPM.Depo.Veri.Sistem;
-using YPM.SuretVarlik.Mulk.Enum.Ortak;
-using YPM.SuretVarlik.Mulk.Suret.Gunluk;
-using YPM.Web.Genel.Yapi.Istisna;
 
 namespace YPM.Web.Genel.MiddleWare
 {
@@ -41,18 +38,6 @@ namespace YPM.Web.Genel.MiddleWare
             try
             {
                 await _next(httpContext);                
-            }
-            catch (NullReferansIstisna e)
-            {
-
-
-                return;
-            }
-            catch (ListCountSifirOlamaz e)
-            {
-
-
-                return;
             }
             catch (Exception e)
             {

@@ -7,8 +7,7 @@ using YPM.SuretVarlik.Mulk.Model.Urun.Kategori;
 namespace YPM.Depo.Veri.Urun.Kategori
 {
     public interface IUrunKategoriDeposu
-       : IDisposable
     {
-        Task<List<UrunKategoriModel>> Listele();
+        ICollection<UrunKategoriListeleModel> Listele();
     }
 }

@@ -35,7 +35,7 @@ namespace YPM.Web
             services.AddTransient<IKisiDeposu, KisiDeposu>();
             services.AddTransient<ISistemDepo, SistemDepo>();
             services.AddTransient<ISessionDepo, SessionDepo>();
-            services.AddTransient<IUrunKategoriDeposu, UrunKategoriDeposu>();
+            services.AddScoped<IUrunKategoriDeposu, UrunKategoriDeposu>();
             services.AddMvc();
         }
 

@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using YPM.Birim.Genel.Birim.Generic;
 using YPM.Birim.Genel.Birim.Kisi;
 using YPM.Birim.Genel.Birim.Lokasyon;
-using YPM.Depo.Ortak;
 using YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak;
+using YPM.SuretVarlik.Mulk.Enstruman;
 using YPM.SuretVarlik.Mulk.Enum.Ortak;
 using YPM.SuretVarlik.Mulk.Model.Kisi;
 

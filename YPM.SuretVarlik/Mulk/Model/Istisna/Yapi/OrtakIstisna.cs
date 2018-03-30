@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace YPM.Web.Genel.Yapi.Istisna
+namespace YPM.SuretVarlik.Mulk.Model.Istisna.Yapi
 {
     public class OrtakIstisna
         : Exception
     {
-        
+
     }
 }

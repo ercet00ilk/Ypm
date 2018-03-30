@@ -10,62 +10,34 @@ namespace YPM.Depo.Veri.Urun.Kategori
     public class UrunKategoriDeposu
           : IUrunKategoriDeposu
     {
-        private bool Disposed { get; set; }
+        private static ICollection<UrunKategoriListeleModel> listeler;
 
-        ~UrunKategoriDeposu()
+        public UrunKategoriDeposu()
         {
-            Dispose(false);
-        }
+            listeler = new List<UrunKategoriListeleModel>();
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool Disposing)
-        {
-            if (Disposed) return;
-
-            if (Disposing)
+            using (IGorevli gorev = Gorevli.YeniGorev())
             {
-
-            }
-
-            Disposed = true;
-        }
-
-        public async Task<List<UrunKategoriModel>> Listele()
-        {
-            List<UrunKategoriModel> list = new List<UrunKategoriModel>();
-
-            {
-                using (IGorevli gorev = Gorevli.YeniGorev())
+                var donenDeger = gorev.UrunKategori.GetirTumKoleksiyon();
+                foreach (var item in donenDeger)
                 {
-
-
-                    var sonuc = await gorev.UrunKategori.GetirTumKoleksiyonAsyn();
-
-                    //if (sonuc == null) list.Add(new UrunKategoriAracTipModel() { AracTipAd = "bos", Id = 0 });
-
-                    //if (sonuc.Count <= 0) list.Add(new UrunKategoriAracTipModel() { AracTipAd = "bos", Id = 0 });
-
-                    //if (sonuc.Count > 0) list = sonuc.Cast<UrunKategoriAracTipModel>().ToList();
-
-                    foreach (var item in sonuc)
+                    listeler.Add(new UrunKategoriListeleModel()
                     {
-                        list.Add(new UrunKategoriModel()
-                        {
-                            Ad = item.Ad,
-                            KategoriId = item.UrunKategoriId,
-                            UstKategoriId = item.UrunUstKategoriId
-                        });
-                    }
-
+                        Ad = item.Ad,
+                        KategoriId = item.UrunKategoriId,
+                        UstKategoriId = item.UrunUstKategoriId
+                    });
                 }
+
             }
 
-            return list;
+            if (listeler.Count <= 0)
+                listeler.Add(new UrunKategoriListeleModel() { Ad = "bos", KategoriId = 0, UstKategoriId = 0 });
+        }
+
+        public ICollection<UrunKategoriListeleModel> Listele()
+        {
+            return listeler;
         }
 
 

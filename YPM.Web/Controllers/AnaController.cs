@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using YPM.SuretVarlik.Mulk.Model.Istisna;
-using YPM.Web.Genel.Yapi.Istisna;
 
 namespace YPM.Web.Controllers
 {

@@ -1,0 +1,60 @@
+﻿@using YPM.SuretVarlik.Mulk.Model.Urun.Kategori
+@model UrunKategoriEkleModel
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "UrunKategoriEkle";
+    Layout = "~/Views/Shared/_AnaCerceve.cshtml";
+}
+
+<h2>UrunKategoriEkle</h2>
+
+<h4>UrunKategoriEkleModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UrunKategoriEkle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AktifMi" /> @Html.DisplayNameFor(model => model.AktifMi)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tanim" class="control-label"></label>
+                <textarea asp-for="Tanim" class="form-control"></textarea>
+                <span asp-validation-for="Tanim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SayfaBaslik" class="control-label"></label>
+                <textarea asp-for="SayfaBaslik" class="form-control"></textarea>
+                <span asp-validation-for="SayfaBaslik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetaAciklama" class="control-label"></label>
+                <textarea asp-for="MetaAciklama" class="form-control" ></textarea>
+                <span asp-validation-for="MetaAciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetaAnahtarKelime" class="control-label"></label>
+                <textarea asp-for="MetaAnahtarKelime" class="form-control" ></textarea>
+                <span asp-validation-for="MetaAnahtarKelime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

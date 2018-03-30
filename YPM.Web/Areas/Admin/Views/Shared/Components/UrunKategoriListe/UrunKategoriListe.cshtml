@@ -1,0 +1,57 @@
+﻿@using YPM.SuretVarlik.Mulk.Model.Urun.Kategori
+@model IEnumerable<UrunKategoriListeleModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>UrunKategoriListele</h2>
+
+<h4>UrunKategoriListeleModel</h4>
+<hr />
+<div>
+    <ul>
+        @foreach (var kat1 in Model.Where(model => model.UstKategoriId.Equals(0)))
+        {
+            <li>
+                <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat1.KategoriId">@kat1.Ad</a>
+                <ul>
+
+                    @foreach (var kat2 in Model.Where(model => model.UstKategoriId.Equals(kat1.KategoriId)))
+                    {
+                        <li>
+                            <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat2.KategoriId">@kat2.Ad</a>
+                            <ul>
+                                @foreach (var kat3 in Model.Where(model => model.UstKategoriId.Equals(kat2.KategoriId)))
+                                {
+                                    <li>
+                                        <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat3.KategoriId">@kat3.Ad</a>
+                                        <ul>
+                                            @foreach (var kat4 in Model.Where(model => model.UstKategoriId.Equals(kat3.KategoriId)))
+                                            {
+                                                <li>
+                                                    <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat4.KategoriId">@kat4.Ad</a>
+                                                    <ul>
+
+                                                        @foreach (var kat5 in Model.Where(model => model.UstKategoriId.Equals(kat4.KategoriId)))
+                                                        {
+                                                            <li>
+                                                                <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat5.KategoriId">@kat5.Ad</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+
+                                                </li>
+                                            }
+                                        </ul>
+
+                                    </li>
+                                }
+                            </ul>
+
+                        </li>
+                    }
+
+                </ul>
+            </li>
+        }
+    </ul>
+
+</div>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace YPM.SuretVarlik.Mulk.Model.Urun.Kategori
 {
-    public class UrunKategoriModel
+    public class UrunKategoriListeleModel
     {
         public int KategoriId { get; set; }
 

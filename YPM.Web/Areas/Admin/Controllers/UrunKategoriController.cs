@@ -18,10 +18,25 @@ namespace YPM.Web.Areas.Admin.Controllers
             _urunKategori = urunKategori;
         }
 
-        public IActionResult Giris()
+
+        public IActionResult Ekle()
         {
             return View();
         }
+
+        [Route("/Admin/UrunKategori/Tumu")]
+        public IActionResult Tumu()
+        {
+            return View();
+        }
+
+        [Route("/Admin/UrunKategori/Getir/{katId}")]
+        public IActionResult Getir(int katId)
+        {
+            return View();
+        }
+
+
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -96,7 +111,7 @@ namespace YPM.Web.Areas.Admin.Controllers
         {
             if (Disposed) return;
 
-            if (disposing && _urunKategori != null) _urunKategori.Dispose();
+//            if (disposing && _urunKategori != null) _urunKategori.Dispose();
 
             Disposed = true;
 

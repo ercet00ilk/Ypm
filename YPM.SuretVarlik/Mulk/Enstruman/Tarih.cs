@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
-namespace YPM.Depo.Ortak
+namespace YPM.SuretVarlik.Mulk.Enstruman
 {
     public sealed class Tarih
     {
