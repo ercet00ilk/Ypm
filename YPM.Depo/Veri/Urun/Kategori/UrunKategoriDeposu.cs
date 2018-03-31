@@ -1,90 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using YPM.Birim.Genel.Birim.Generic;
-using YPM.SuretVarlik.Mulk.Model.Urun.Kategori;
+using YPM.SuretVarlik.Mulk.Enstruman;
+using YPM.SuretVarlik.Mulk.Model.Istisna.Yapi.Birim;
+using YPM.SuretVarlik.Mulk.Model.Istisna.Yapi.Depo;
+using YPM.SuretVarlik.Mulk.Suret.Urun.Kategori;
 
 namespace YPM.Depo.Veri.Urun.Kategori
 {
     public class UrunKategoriDeposu
           : IUrunKategoriDeposu
     {
-        private static ICollection<UrunKategoriListeleModel> listeler;
+        private static ICollection<UrunKategoriSuret> _tumUrunKategoriListesi;
+        //private static ICollection<UrunKategoriNitelikSuret> _tumUrunKategoriNitelikListesi;
 
         public UrunKategoriDeposu()
         {
-            listeler = new List<UrunKategoriListeleModel>();
+            _tumUrunKategoriListesi = new List<UrunKategoriSuret>();
+            //_tumUrunKategoriNitelikListesi = new List<UrunKategoriNitelikSuret>();
 
             using (IGorevli gorev = Gorevli.YeniGorev())
             {
-                var donenDeger = gorev.UrunKategori.GetirTumKoleksiyon();
-                foreach (var item in donenDeger)
+                var urunKategori = gorev.UrunKategori.GetirTumKoleksiyon();
+
+                if (urunKategori.Count() > 0)
                 {
-                    listeler.Add(new UrunKategoriListeleModel()
+                    foreach (var item in urunKategori)
                     {
-                        Ad = item.Ad,
-                        KategoriId = item.UrunKategoriId,
-                        UstKategoriId = item.UrunUstKategoriId
-                    });
+                        _tumUrunKategoriListesi.Add(new UrunKategoriSuret()
+                        {
+                            Ad = item.Ad,
+                            KategoriId = item.UrunKategoriId,
+                            UstKategoriId = item.UrunUstKategoriId
+                        });
+                    }
+                }
+                else
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = "_tumUrunKategoriListesi Boş Geldi.";
+                        istisna.Sonuc = "  public UrunKategoriDeposu() ";
+                        istisna.IslemOnay = false;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
                 }
 
+                var urunKategoriNitelik = gorev.UrunKategoriNitelik.GetirTumKoleksiyon();
+
+                //if (urunKategoriNitelik.Count() > 0)
+                //{
+                //    foreach (var item in urunKategoriNitelik)
+                //    {
+                //        _tumUrunKategoriNitelikListesi.Add(new UrunKategoriNitelikSuret()
+                //        {
+                //            Ad = item.Ad,
+                //            UrunKategoriNitelikId = item.UrunKategoriNitelikGercekId
+                //        });
+                //    }
+                //}
+                //else
+                //{
+                //    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                //    {
+                //        istisna.TamYol = GetType().FullName;
+                //        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                //        istisna.KisiId = 0;
+                //        istisna.TabanHata = "_tumUrunKategoriNitelikListesi Boş Geldi.";
+                //        istisna.Sonuc = "  public UrunKategoriDeposu() ";
+                //        istisna.IslemOnay = false;
+                //        istisna.Tarih = Tarih.GuncelTarihVer();
+                //        istisna.Yazdir(istisna);
+                //    }
+                //}
+                
             }
 
-            if (listeler.Count <= 0)
-                listeler.Add(new UrunKategoriListeleModel() { Ad = "bos", KategoriId = 0, UstKategoriId = 0 });
         }
 
-        public ICollection<UrunKategoriListeleModel> Listele()
+        public ICollection<UrunKategoriSuret> TumUrunKategoriListesi()
         {
-            return listeler;
+            return _tumUrunKategoriListesi;
         }
 
+        public ICollection<UrunKategoriNitelikSuret> TumUrunKategoriNitelikListesi()
+        {
+            ////return _tumUrunKategoriNitelikListesi;
 
+            return null;
+        }
 
-
-        //public async Task Ekle(string aracTipAd)
-        //{
-        //    using (IGorevli gorev = Gorevli.YeniGorev())
-        //    using (UrunAracTip arac = new UrunAracTip() { UrunAracTipAd = aracTipAd })
-        //    {
-        //        await gorev.UrunKategoriAracTip.EkleAsync(arac);
-        //    }
-        //}
-
-        //public async Task<List<UrunKategoriAracTipModel>> Listele()
-        //{
-
-        //    List<UrunKategoriAracTipModel> list = new List<UrunKategoriAracTipModel>();
-
-        //    {
-        //        using (IGorevli gorev = Gorevli.YeniGorev())
-        //        {
-        //            var sonuc = await gorev.UrunKategoriAracTip.GetirTumKoleksiyonAsyn();
-
-        //            //if (sonuc == null) list.Add(new UrunKategoriAracTipModel() { AracTipAd = "bos", Id = 0 });
-
-        //            //if (sonuc.Count <= 0) list.Add(new UrunKategoriAracTipModel() { AracTipAd = "bos", Id = 0 });
-
-        //            //if (sonuc.Count > 0) list = sonuc.Cast<UrunKategoriAracTipModel>().ToList();
-
-        //            foreach (var item in sonuc)
-        //            {
-        //                list.Add(new UrunKategoriAracTipModel() { AracTipAd = item.UrunAracTipAd, Id = item.UrunAracTipId });
-        //            }
-
-        //        }
-        //    }
-
-        //    return list;
-        //}
-
-        //public async Task Sil(int id)
-        //{
-        //    using (IGorevli gorev = Gorevli.YeniGorev())
-        //    {
-        //        await gorev.UrunKategoriAracTip.SilAsync(id);
-        //    }
-        //}
     }
 }

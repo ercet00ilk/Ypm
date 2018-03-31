@@ -11,9 +11,10 @@ using YPM.Veri.Kaynak;
 namespace YPM.Veri.Migrations
 {
     [DbContext(typeof(YpmSebil))]
-    partial class YpmSebilModelSnapshot : ModelSnapshot
+    [Migration("20180331133122_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

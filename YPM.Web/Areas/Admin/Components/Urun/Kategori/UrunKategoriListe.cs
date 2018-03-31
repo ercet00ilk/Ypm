@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using YPM.Depo.Veri.Urun.Kategori;
-using YPM.SuretVarlik.Mulk.Model.Urun.Kategori;
 
 namespace YPM.Web.Areas.Admin.Components.Urun.Kategori
 {
@@ -21,7 +16,7 @@ namespace YPM.Web.Areas.Admin.Components.Urun.Kategori
 
         public IViewComponentResult Invoke()
         {
-            return View("UrunKategoriListe", _urunKategoriDepo.Listele());
+            return View("UrunKategoriListe", _urunKategoriDepo.TumUrunKategoriListesi());
         }
     }
 }

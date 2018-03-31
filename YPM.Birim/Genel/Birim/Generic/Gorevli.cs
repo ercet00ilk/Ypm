@@ -2,6 +2,7 @@
 using YPM.Birim.Genel.Birim.Kurulum;
 using YPM.Birim.Genel.Birim.Lokasyon;
 using YPM.Birim.Genel.Birim.Urun.Kategori;
+using YPM.Birim.Genel.Birim.Urun.KategoriNitelik;
 using YPM.Veri.Kaynak;
 
 namespace YPM.Birim.Genel.Birim.Generic
@@ -18,6 +19,7 @@ namespace YPM.Birim.Genel.Birim.Generic
             Kurulum = new KurulumBirim(_sebil);
             Lokasyon = new LokasyonBirim(_sebil);
             UrunKategori = new UrunKategoriBirim(_sebil);
+            UrunKategoriNitelik = new UrunKategoriNitelikBirim(_sebil);
         }
 
         public static IGorevli YeniGorev()
@@ -29,6 +31,7 @@ namespace YPM.Birim.Genel.Birim.Generic
         public IKurulumBirim Kurulum { get; private set; }
         public ILokasyonBirim Lokasyon { get; private set; }
         public IUrunKategoriBirim UrunKategori { get; set; }
+        public IUrunKategoriNitelikBirim UrunKategoriNitelik { get; set; }
 
         public void Dispose()
         {

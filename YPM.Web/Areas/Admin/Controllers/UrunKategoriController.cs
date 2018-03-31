@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using YPM.Depo.Veri.Urun.Kategori;
-using YPM.SuretVarlik.Mulk.Model.Urun.Kategori;
+using YPM.SuretVarlik.Mulk.Suret.Urun.Kategori;
+using YPM.Web.Models.Urun.Kategori;
 
 namespace YPM.Web.Areas.Admin.Controllers
 {
@@ -19,15 +21,54 @@ namespace YPM.Web.Areas.Admin.Controllers
         }
 
 
+        [Route("/admin/urunkategori/ekle")]
         public IActionResult Ekle()
         {
-            return View();
+
+
+            // Liste tekrar gelecek
+
+
+
+
+            UrunKategoriEkleModel ke = new UrunKategoriEkleModel();
+
+            ke.TumNitelikler = new List<SelectListItem>();
+            ke.TumNitelikler.Add(new SelectListItem() { Value = "1", Text = "Deneme" });
+            //List<UrunKategoriNitelikSuret> TumNitelikListesi = new List<UrunKategoriNitelikSuret>();
+            //var tumNitelikListesi = _urunKategori.TumUrunKategoriNitelikListesi();
+
+            //foreach (var nitelik in tumNitelikListesi)
+            //{
+            //    ke.TumNitelikler.Add(new SelectListItem { Value = nitelik.UrunKategoriNitelikId.ToString(), Text = nitelik.Ad.ToString() });
+            //}
+
+            return View(ke);
         }
 
-        [Route("/Admin/UrunKategori/Tumu")]
-        public IActionResult Tumu()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/admin/urunkategori/ekle")]
+        public IActionResult Ekle(UrunKategoriEkleModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            model.TumNitelikler = new List<SelectListItem>();
+            model.TumNitelikler.Add(new SelectListItem() { Value = "1", Text = "Deneme" });
+
+
+            //List<UrunKategoriNitelikSuret> TumNitelikListesi = new List<UrunKategoriNitelikSuret>();
+            //var tumNitelikListesi = _urunKategori.TumUrunKategoriNitelikListesi();
+
+            //foreach (var nitelik in tumNitelikListesi)
+            //{
+            //    model.TumNitelikler.Add(new SelectListItem { Value = nitelik.UrunKategoriNitelikId.ToString(), Text = nitelik.Ad.ToString() });
+            //}
+
+            return View(model);
         }
 
         [Route("/Admin/UrunKategori/Getir/{katId}")]
@@ -111,7 +152,7 @@ namespace YPM.Web.Areas.Admin.Controllers
         {
             if (Disposed) return;
 
-//            if (disposing && _urunKategori != null) _urunKategori.Dispose();
+            //            if (disposing && _urunKategori != null) _urunKategori.Dispose();
 
             Disposed = true;
 

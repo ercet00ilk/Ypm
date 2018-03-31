@@ -11,7 +11,7 @@ using YPM.Veri.Kaynak;
 namespace YPM.Veri.Migrations
 {
     [DbContext(typeof(YpmSebil))]
-    [Migration("20180328092225_v1")]
+    [Migration("20180331132855_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,6 +109,19 @@ namespace YPM.Veri.Migrations
                     b.HasKey("UrunKategoriId", "UrunUstKategoriId");
 
                     b.ToTable("Kategori","MulkUrun");
+                });
+
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriNitelikGercek", b =>
+                {
+                    b.Property<int>("UrunKategoriNitelikGercekId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Ad")
+                        .HasMaxLength(250);
+
+                    b.HasKey("UrunKategoriNitelikGercekId");
+
+                    b.ToTable("KategoriNitelikTbl");
                 });
 
             modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak.LokasyonGercek", b =>

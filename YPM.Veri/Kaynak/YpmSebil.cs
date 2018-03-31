@@ -24,6 +24,7 @@ namespace YPM.Veri.Kaynak
         public DbSet<KurulumGercek> KurulumTbl { get; set; }
 
         public DbSet<UrunKategoriGercek> KategoriTbl { get; set; }
+        public DbSet<UrunKategoriNitelikGercek> KategoriNitelikTbl { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -90,6 +91,10 @@ namespace YPM.Veri.Kaynak
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Ad).HasMaxLength(250);
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.LinkYol).HasMaxLength(250);
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.ResimYol).HasMaxLength(250);
+
+            modelBuilder.Entity<UrunKategoriNitelikGercek>().ToTable("KategoriNitelik", "MulkUrun");
+            modelBuilder.Entity<UrunKategoriNitelikGercek>().HasKey(c => c.UrunKategoriNitelikGercekId);
+            modelBuilder.Entity<UrunKategoriNitelikGercek>().Property(x => x.Ad).HasMaxLength(250);
 
             //  ==> ForeignKey
         }

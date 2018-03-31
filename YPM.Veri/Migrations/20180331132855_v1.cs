@@ -18,6 +18,23 @@ namespace YPM.Veri.Migrations
             migrationBuilder.EnsureSchema(
                 name: "MulkUrun");
 
+            migrationBuilder.EnsureSchema(
+                name: "Mulk");
+
+            migrationBuilder.CreateTable(
+                name: "KategoriNitelikTbl",
+                schema: "Mulk",
+                columns: table => new
+                {
+                    UrunKategoriNitelikGercekId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ad = table.Column<string>(maxLength: 250, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_KategoriNitelikTbl", x => x.UrunKategoriNitelikGercekId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Kisi",
                 schema: "MulkKisi",
@@ -103,6 +120,10 @@ namespace YPM.Veri.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "KategoriNitelikTbl",
+                schema: "Mulk");
+
             migrationBuilder.DropTable(
                 name: "Lokasyon",
                 schema: "MulkKisi");
