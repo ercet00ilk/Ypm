@@ -15,28 +15,27 @@ namespace YPM.Web.Models.Urun.Kategori
 
         public bool AktifMi { get; set; }
 
+        [Required(ErrorMessage = "Lütfen Tanım giriniz.")]
+        [StringLength(200, MinimumLength = 5, ErrorMessage = "Tanım 5 - 200 karakter arasında girilebilir.")]
         public string Tanim { get; set; }
 
+        [Required(ErrorMessage = "Lütfen SayfaBaslik giriniz.")]
+        [StringLength(150, MinimumLength = 5, ErrorMessage = "SayfaBaslik 5 - 150 karakter arasında girilebilir.")]
         public string SayfaBaslik { get; set; }
 
-        public string MetaAciklama { get; set; }
+        [Required(ErrorMessage = "Lütfen MetaAciklama giriniz.")]
+        [StringLength(300, MinimumLength = 5, ErrorMessage = "MetaAciklama 5 - 300 karakter arasında girilebilir.")]
+        public string Aciklama { get; set; }
 
-        public string MetaAnahtarKelime { get; set; }
+        [Required(ErrorMessage = "Lütfen MetaAnahtarKelime giriniz.")]
+        [StringLength(150, MinimumLength = 5, ErrorMessage = "MetaAnahtarKelime 5 - 150 karakter arasında girilebilir.")]
+        public string AnahtarKelime { get; set; }
 
         public int[] NitelikEkleId { get; set; }
 
-        public List<UrunKategoriNitelik> KategorininNitelikleri { get; set; }
+        public List<UrunKategoriNitelikModel> KategorininNitelikleri { get; set; }
 
         public List<SelectListItem> TumNitelikler { get; set; }
-
-    }
-
-
-    public class UrunKategoriNitelik
-    {
-        public int UKNId { get; set; }
-
-        public string Ad { get; set; }
     }
 
 

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace YPM.Depo.Veri.Kurulum
 {
-    public interface IKurulumDeposu
-        : IDisposable
+    public interface IKurulumDepo
+     : IDisposable
     {
         Task<bool> KuruluMu();
 

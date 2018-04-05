@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using System;
 using YPM.Depo.Veri.Gunluk;
 using YPM.Depo.Veri.Kisi;
 using YPM.Depo.Veri.Kurulum;
-using YPM.Depo.Veri.Session;
 using YPM.Depo.Veri.Sistem;
 using YPM.Depo.Veri.Urun.Kategori;
 using YPM.Web.Genel.MiddleWare;
+using YPM.Web.Genel.Wrapper.Cookie;
+using YPM.Web.Genel.Wrapper.Session;
 
 namespace YPM.Web
 {
@@ -19,33 +20,46 @@ namespace YPM.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            KurulumDeposu.Kur().Wait();
+            KurulumDepo.Kur().Wait();
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection servisler)
         {
-            // HttpContext
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            // Depo
-            services.AddTransient<IGunlukDepo, GunlukDepo>();
-            services.AddTransient<IKisiDeposu, KisiDeposu>();
-            services.AddTransient<ISistemDepo, SistemDepo>();
-            services.AddTransient<ISessionDepo, SessionDepo>();
-            services.AddScoped<IUrunKategoriDeposu, UrunKategoriDeposu>();
-            services.AddMvc();
+            servisler.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            servisler.AddSingleton<ISessionSar, SessionSar>();
+            servisler.AddSingleton<ICerezSar, CerezSar>();
+
+
+            servisler.AddTransient<IGunlukDepo, GunlukDepo>();
+            servisler.AddTransient<IKisiDepo, KisiDepo>();
+            servisler.AddTransient<ISistemDepo, SistemDepo>();
+            
+            servisler.AddScoped<IUrunKategoriDepo, UrunKategoriDepo>();
+
+
+            servisler.AddMvc()
+                 .AddSessionStateTempDataProvider();
+
+            servisler.AddSession();
+
+            servisler.AddDistributedMemoryCache();
+
+            servisler.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory logFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            logFactory.AddConsole(Configuration.GetSection("Logging"));
-            logFactory.AddDebug();
-
-
+            app.UseSession();
+            app.UseMvcWithDefaultRoute();
+            //app.UseIdentity();
 
             if (env.IsDevelopment())
             {

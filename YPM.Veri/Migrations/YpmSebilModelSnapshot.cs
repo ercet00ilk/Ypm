@@ -92,22 +92,31 @@ namespace YPM.Veri.Migrations
 
             modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriGercek", b =>
                 {
-                    b.Property<int>("UrunKategoriId");
+                    b.Property<int>("UrunKategoriId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("UrunUstKategoriId");
+
+                    b.Property<string>("Aciklama")
+                        .HasMaxLength(400);
 
                     b.Property<string>("Ad")
                         .HasMaxLength(250);
 
-                    b.Property<string>("LinkYol")
+                    b.Property<bool>("AktifMi");
+
+                    b.Property<string>("AnahtarKelime")
+                        .HasMaxLength(400);
+
+                    b.Property<string>("SayfaBaslik")
                         .HasMaxLength(250);
 
-                    b.Property<string>("ResimYol")
-                        .HasMaxLength(250);
+                    b.Property<string>("Tanim")
+                        .HasMaxLength(400);
 
                     b.HasKey("UrunKategoriId", "UrunUstKategoriId");
 
-                    b.ToTable("Kategori","MulkUrun");
+                    b.ToTable("UrunKategori","MulkUrun");
                 });
 
             modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriNitelikGercek", b =>
@@ -120,7 +129,7 @@ namespace YPM.Veri.Migrations
 
                     b.HasKey("UrunKategoriNitelikGercekId");
 
-                    b.ToTable("KategoriNitelik","MulkUrun");
+                    b.ToTable("UrunKategoriNitelik","MulkUrun");
                 });
 
             modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak.LokasyonGercek", b =>

@@ -7,9 +7,9 @@ namespace YPM.Web.Areas.Admin.Components.Urun.Kategori
     public class UrunKategoriListe
         : ViewComponent
     {
-        private readonly IUrunKategoriDeposu _urunKategoriDepo;
+        private readonly IUrunKategoriDepo _urunKategoriDepo;
 
-        public UrunKategoriListe(IUrunKategoriDeposu urunKategoriDepo)
+        public UrunKategoriListe(IUrunKategoriDepo urunKategoriDepo)
         {
             _urunKategoriDepo = urunKategoriDepo;
         }

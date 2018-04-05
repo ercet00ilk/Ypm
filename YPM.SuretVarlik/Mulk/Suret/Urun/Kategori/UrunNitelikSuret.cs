@@ -4,9 +4,9 @@ using System.Text;
 
 namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
 {
-    public class UrunKategoriNitelikSuret
+ public   class UrunNitelikSuret
     {
-        public int UrunKategoriNitelikId { get; set; }
+        public int UrunNitelikId { get; set; }
         public string Ad { get; set; }
     }
 }

@@ -1,17 +1,19 @@
 ﻿using GercekVarlik.Mulk.Varlik.Kurulum.Ortak;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using YPM.Birim.Genel.Birim.Generic;
 
 namespace YPM.Depo.Veri.Kurulum
 {
-    public class KurulumDeposu
-        : IKurulumDeposu
+    public class KurulumDepo
+           : IKurulumDepo
     {
         private bool Disposed { get; set; }
 
-        ~KurulumDeposu()
+        ~KurulumDepo()
         {
             Dispose(false);
         }
@@ -28,7 +30,7 @@ namespace YPM.Depo.Veri.Kurulum
             {
                 try
                 {
-                    using (IKurulumDeposu kur = new KurulumDeposu())
+                    using (IKurulumDepo kur = new KurulumDepo())
                     {
                         if (await kur.KuruluMu()) kur.KurulumYap().Wait();
 

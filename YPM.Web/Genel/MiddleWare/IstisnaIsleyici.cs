@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using YPM.Depo.Veri.Gunluk;
-using YPM.Depo.Veri.Session;
 using YPM.Depo.Veri.Sistem;
+using YPM.Web.Genel.Wrapper.Session;
 
 namespace YPM.Web.Genel.MiddleWare
 {
@@ -15,7 +15,7 @@ namespace YPM.Web.Genel.MiddleWare
         private readonly RequestDelegate _next;
         private readonly IGunlukDepo _gunluk;
         private readonly ISistemDepo _sistem;
-        private readonly ISessionDepo _session;
+        private readonly ISessionSar _session;
         private readonly ILogger<IstisnaIsleyici> _gunlukcu;
 
         public IstisnaIsleyici(
@@ -23,7 +23,7 @@ namespace YPM.Web.Genel.MiddleWare
             ILoggerFactory logFactory,
             IGunlukDepo gunluk,
             ISistemDepo sistem,
-            ISessionDepo session
+            ISessionSar session
             )
         {
             _next = next ?? throw new ArgumentNullException(nameof(next));
@@ -37,7 +37,7 @@ namespace YPM.Web.Genel.MiddleWare
         {
             try
             {
-                await _next(httpContext);                
+                await _next(httpContext);
             }
             catch (Exception e)
             {
@@ -49,7 +49,7 @@ namespace YPM.Web.Genel.MiddleWare
                 //  _next(httpContext).GetType().DeclaringMethod.Name.,
                 //  _sistem.TarihGetir(),
                 //  GunlukDurum.Istisna,
-                //  _session.KisiIdGetir(),
+                //  _session.SuAnki.AktifKisi.KisiId,
                 //  e.GetBaseException().ToString(),
                 //  " İstisna oluştu. "
                 //  ))

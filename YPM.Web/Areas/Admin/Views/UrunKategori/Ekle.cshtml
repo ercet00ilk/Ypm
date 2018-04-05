@@ -38,29 +38,28 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="NitelikEkleId" class="control-label"></label>
-                        <select asp-for="NitelikEkleId" multiple="multiple" asp-items="@Model.TumNitelikler">
-                        </select>
+                        <select asp-for="NitelikEkleId" multiple="multiple" class="form-control" asp-items="@Model.TumNitelikler"></select>
                         <span asp-validation-for="NitelikEkleId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Tanim" class="control-label"></label>
-                        <input asp-for="Tanim" class="form-control" />
+                        <textarea asp-for="Tanim" class="form-control"></textarea>
                         <span asp-validation-for="Tanim" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="SayfaBaslik" class="control-label"></label>
-                        <input asp-for="SayfaBaslik" class="form-control" />
+                        <textarea asp-for="SayfaBaslik" class="form-control"></textarea>
                         <span asp-validation-for="SayfaBaslik" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="MetaAciklama" class="control-label"></label>
-                        <input asp-for="MetaAciklama" class="form-control" />
-                        <span asp-validation-for="MetaAciklama" class="text-danger"></span>
+                        <label asp-for="Aciklama" class="control-label"></label>
+                        <textarea asp-for="Aciklama" class="form-control"></textarea>
+                        <span asp-validation-for="Aciklama" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="MetaAnahtarKelime" class="control-label"></label>
-                        <input asp-for="MetaAnahtarKelime" class="form-control" />
-                        <span asp-validation-for="MetaAnahtarKelime" class="text-danger"></span>
+                        <label asp-for="AnahtarKelime" class="control-label"></label>
+                        <textarea asp-for="AnahtarKelime" class="form-control"></textarea>
+                        <span asp-validation-for="AnahtarKelime" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Ekle" class="btn btn-success" />

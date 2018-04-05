@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using YPM.SuretVarlik.Mulk.Enstruman;
 
 namespace YPM.Depo.Veri.Sistem
 {
@@ -8,6 +9,9 @@ namespace YPM.Depo.Veri.Sistem
          : ISistemDepo
     {
         private bool Disposed { get; set; }
+
+
+     
 
         ~SistemDepo()
         {
@@ -31,9 +35,12 @@ namespace YPM.Depo.Veri.Sistem
             }
         }
 
+    
+
+
         public DateTime TarihGetir()
         {
-            throw new NotImplementedException();
+            return Tarih.GuncelTarihVer();
         }
     }
 }

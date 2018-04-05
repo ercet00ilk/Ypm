@@ -4,10 +4,10 @@ using System.Text;
 using YPM.Birim.Genel.Birim.Generic;
 using YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori;
 
-namespace YPM.Birim.Genel.Birim.Urun.KategoriNitelik
+namespace YPM.Birim.Genel.Birim.Urun.Nitelik
 {
-    public interface IUrunKategoriNitelikBirim
-      : IGenericBirim<UrunKategoriNitelikGercek>
+  public  interface IUrunNitelikBirim
+        : IGenericBirim<UrunNitelikGercek>
     {
     }
 }

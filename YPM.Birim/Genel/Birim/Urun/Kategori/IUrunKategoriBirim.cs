@@ -9,5 +9,6 @@ namespace YPM.Birim.Genel.Birim.Urun.Kategori
     public interface IUrunKategoriBirim
         : IGenericBirim<UrunKategoriGercek>
     {
+
     }
 }

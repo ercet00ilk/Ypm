@@ -23,8 +23,8 @@ namespace YPM.Veri.Kaynak
 
         public DbSet<KurulumGercek> KurulumTbl { get; set; }
 
-        public DbSet<UrunKategoriGercek> KategoriTbl { get; set; }
-        public DbSet<UrunKategoriNitelikGercek> KategoriNitelikTbl { get; set; }
+        public DbSet<UrunKategoriGercek> UrunKategoriTbl { get; set; }
+        public DbSet<UrunNitelikGercek> UrunNitelikTbl { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,6 +36,8 @@ namespace YPM.Veri.Kaynak
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.HasDefaultSchema("Mulk");
 
             /*******
@@ -45,7 +47,9 @@ namespace YPM.Veri.Kaynak
 
             //  ==> PrimaryKey,Proroperty
             modelBuilder.Entity<KisiGercek>().ToTable("Kisi", "MulkKisi");
-            modelBuilder.Entity<KisiGercek>().HasKey(c => c.KisiId);
+            modelBuilder.Entity<KisiGercek>().Property(c => c.KisiId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<KisiGercek>()
+                .HasKey(c => c.KisiId);
             modelBuilder.Entity<KisiGercek>().Property(x => x.Ad).HasMaxLength(400);
             modelBuilder.Entity<KisiGercek>().Property(x => x.EPosta).HasMaxLength(150);
             modelBuilder.Entity<KisiGercek>().Property(x => x.Soyad).HasMaxLength(400);
@@ -53,22 +57,11 @@ namespace YPM.Veri.Kaynak
             modelBuilder.Entity<KisiGercek>().Property(x => x.EpostaKontrol).HasMaxLength(20);
 
             modelBuilder.Entity<LokasyonGercek>().ToTable("Lokasyon", "MulkKisi");
-            modelBuilder.Entity<LokasyonGercek>().HasKey(c => c.LokasyonId);
+            modelBuilder.Entity<LokasyonGercek>().Property(c => c.LokasyonId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<LokasyonGercek>()
+                .HasKey(c => c.LokasyonId);
             modelBuilder.Entity<LokasyonGercek>().Property(x => x.MacAdr).HasMaxLength(200);
             modelBuilder.Entity<LokasyonGercek>().Property(x => x.IpAdr).HasMaxLength(200);
-
-            //  ==> ForeignKey
-
-            /*******
-            * Kurulum Mulk
-            *
-            */
-
-            //  ==> PrimaryKey,Proroperty
-            modelBuilder.Entity<KurulumGercek>().ToTable("Kurulum", "MulkKurulum");
-            modelBuilder.Entity<KurulumGercek>().HasKey(c => c.KurulumId);
-            modelBuilder.Entity<KurulumGercek>().Property(c => c.Ad).HasMaxLength(200);
-            modelBuilder.Entity<KurulumGercek>().Property(c => c.Tip).HasMaxLength(200);
 
             //  ==> ForeignKey
 
@@ -78,7 +71,23 @@ namespace YPM.Veri.Kaynak
               .HasForeignKey(c => c.KisiId)
               .OnDelete(DeleteBehavior.Cascade);
 
-            base.OnModelCreating(modelBuilder);
+            /*******
+            * Kurulum Mulk
+            *
+            */
+
+            //  ==> PrimaryKey,Proroperty
+            modelBuilder.Entity<KurulumGercek>().ToTable("Kurulum", "MulkKurulum");
+            modelBuilder.Entity<KurulumGercek>().Property(c => c.KurulumId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<KurulumGercek>()
+                .HasKey(c => c.KurulumId);
+            modelBuilder.Entity<KurulumGercek>().Property(c => c.Ad).HasMaxLength(200);
+            modelBuilder.Entity<KurulumGercek>().Property(c => c.Tip).HasMaxLength(200);
+
+            //  ==> ForeignKey
+
+
+
 
             /*******
             * Urun Mulk
@@ -86,17 +95,57 @@ namespace YPM.Veri.Kaynak
             */
 
             //  ==> PrimaryKey,Proroperty
-            modelBuilder.Entity<UrunKategoriGercek>().ToTable("Kategori", "MulkUrun");
-            modelBuilder.Entity<UrunKategoriGercek>().HasKey(c => new { c.UrunKategoriId, c.UrunUstKategoriId });
-            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Ad).HasMaxLength(250);
-            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.LinkYol).HasMaxLength(250);
-            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.ResimYol).HasMaxLength(250);
+            modelBuilder.Entity<UrunKategoriGercek>().ToTable("UrunKategori", "MulkUrun");
+            modelBuilder.Entity<UrunKategoriGercek>().Property(c => c.UrunKategoriId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<UrunKategoriGercek>()
+                .HasKey(c => new
+                {
+                    c.UrunKategoriId,
+                    c.UrunUstKategoriId
+                });
 
-            modelBuilder.Entity<UrunKategoriNitelikGercek>().ToTable("KategoriNitelik", "MulkUrun");
-            modelBuilder.Entity<UrunKategoriNitelikGercek>().HasKey(c => c.UrunKategoriNitelikGercekId);
-            modelBuilder.Entity<UrunKategoriNitelikGercek>().Property(x => x.Ad).HasMaxLength(250);
+            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Ad).HasMaxLength(250);
+            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Aciklama).HasMaxLength(400);
+            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.AnahtarKelime).HasMaxLength(400);
+            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.SayfaBaslik).HasMaxLength(250);
+            modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Tanim).HasMaxLength(400);
+
+            modelBuilder.Entity<UrunNitelikGercek>().ToTable("UrunNitelik", "MulkUrun");
+            modelBuilder.Entity<UrunNitelikGercek>().Property(x => x.UrunNitelikId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<UrunNitelikGercek>()
+                .HasKey(c => c.UrunNitelikId);
+            modelBuilder.Entity<UrunNitelikGercek>().Property(x => x.Ad).HasMaxLength(250);
+
+            modelBuilder.Entity<UrunKategoriNitelikGercek>().ToTable("UrunKategoriNitelik", "MulkUrun");
+            modelBuilder.Entity<UrunKategoriNitelikGercek>().Property(c => c.UrunKategoriNitelikId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<UrunKategoriNitelikGercek>()
+                .HasKey(c => new
+                {
+                    c.UrunKategoriNitelikId,
+                    c.UrunKategoriId,
+                    c.UrunNitelikId
+                });
+
 
             //  ==> ForeignKey
+
+
+            modelBuilder
+                .Entity<UrunKategoriNitelikGercek>()
+                .HasOne(c => c.UrunKategori)
+                .WithMany(d => d.KategoriNitelikler)
+                .HasForeignKey(c => c.UrunKategoriId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder
+                .Entity<UrunKategoriNitelikGercek>()
+                .HasOne(c => c.UrunNitelik)
+                .WithMany(d => d.NitelikKategoriler)
+                .HasForeignKey(c => c.UrunNitelikId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
         }
     }
 }

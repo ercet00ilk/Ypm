@@ -9,6 +9,7 @@ namespace YPM.SuretVarlik.Mulk.Enum.Ortak
         Yok = 0,
         Basla = 1,
         Istisna = 2,
-        Bitir = 3,
+        ModelIstisna = 3,
+        Bitir = 4,
     }
 }

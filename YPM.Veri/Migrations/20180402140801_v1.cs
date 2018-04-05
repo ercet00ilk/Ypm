@@ -18,23 +18,6 @@ namespace YPM.Veri.Migrations
             migrationBuilder.EnsureSchema(
                 name: "MulkUrun");
 
-            migrationBuilder.EnsureSchema(
-                name: "Mulk");
-
-            migrationBuilder.CreateTable(
-                name: "KategoriNitelikTbl",
-                schema: "Mulk",
-                columns: table => new
-                {
-                    UrunKategoriNitelikGercekId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Ad = table.Column<string>(maxLength: 250, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_KategoriNitelikTbl", x => x.UrunKategoriNitelikGercekId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Kisi",
                 schema: "MulkKisi",
@@ -72,19 +55,37 @@ namespace YPM.Veri.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Kategori",
+                name: "UrunKategori",
                 schema: "MulkUrun",
                 columns: table => new
                 {
-                    UrunKategoriId = table.Column<int>(nullable: false),
+                    UrunKategoriId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UrunUstKategoriId = table.Column<int>(nullable: false),
                     Ad = table.Column<string>(maxLength: 250, nullable: true),
-                    LinkYol = table.Column<string>(maxLength: 250, nullable: true),
-                    ResimYol = table.Column<string>(maxLength: 250, nullable: true)
+                    AktifMi = table.Column<bool>(nullable: false),
+                    MetaAciklama = table.Column<string>(maxLength: 400, nullable: true),
+                    MetaAnahtarKelime = table.Column<string>(maxLength: 400, nullable: true),
+                    SayfaBaslik = table.Column<string>(maxLength: 250, nullable: true),
+                    Tanim = table.Column<string>(maxLength: 400, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Kategori", x => new { x.UrunKategoriId, x.UrunUstKategoriId });
+                    table.PrimaryKey("PK_UrunKategori", x => new { x.UrunKategoriId, x.UrunUstKategoriId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UrunKategoriNitelik",
+                schema: "MulkUrun",
+                columns: table => new
+                {
+                    UrunKategoriNitelikGercekId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Ad = table.Column<string>(maxLength: 250, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UrunKategoriNitelik", x => x.UrunKategoriNitelikGercekId);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,10 +122,6 @@ namespace YPM.Veri.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "KategoriNitelikTbl",
-                schema: "Mulk");
-
-            migrationBuilder.DropTable(
                 name: "Lokasyon",
                 schema: "MulkKisi");
 
@@ -133,7 +130,11 @@ namespace YPM.Veri.Migrations
                 schema: "MulkKurulum");
 
             migrationBuilder.DropTable(
-                name: "Kategori",
+                name: "UrunKategori",
+                schema: "MulkUrun");
+
+            migrationBuilder.DropTable(
+                name: "UrunKategoriNitelik",
                 schema: "MulkUrun");
 
             migrationBuilder.DropTable(

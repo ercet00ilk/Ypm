@@ -18,12 +18,6 @@ namespace YPM.Web.Controllers
         : OrtakController
     {
         private bool Disposed { get; set; }
-        private readonly IKisiDeposu _kisi;
-
-        public UyeController(IKisiDeposu kisi)
-        {
-            _kisi = kisi;
-        }
 
         [Route("yenikayit")]
         public IActionResult YeniKayit()
@@ -33,19 +27,21 @@ namespace YPM.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> YeniKayit(KisiKayitModel kkm)
+        public async Task<IActionResult> YeniKayit(
+            KisiKayitModel kkm,
+            [FromServices] IKisiDepo _kisi)
         {
             if (ModelState.IsValid)
             {
-                kkm = await OyleBirKisiVarMi(kkm);
+                kkm = await OyleBirKisiVarMi(kkm,_kisi);
 
                 if (ModelState.IsValid)
                 {
-                    kkm = BosAlanlariDoldur(kkm);
+                    kkm = BosAlanlariDoldur(kkm,_kisi);
 
                     if (ModelState.IsValid)
                     {
-                        if (await KisiKaydet(kkm))
+                        if (await KisiKaydet(kkm,_kisi))
                         {
                             ViewBag.Sonuc = "Başarılı bir şekilde kayıt oldunuz. Telefonunuza gelen doğrulama kodu ile üye girişi yapabilirsiniz.";
                         }
@@ -74,6 +70,10 @@ namespace YPM.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var kullanici = HttpContext.User;
+
+                //MyUser u = repository.GetUser(User.Identity.Name); //lookup user by username
+                //ViewData["fullname"] = u.FullName; //whatever...
             }
 
             return View(kgm);
@@ -89,14 +89,17 @@ namespace YPM.Web.Controllers
         {
             if (Disposed) return;
 
-            if (disposing && _kisi != null) _kisi.Dispose();
+            //if (disposing && _kisi != null) _kisi.Dispose();
 
             base.Dispose(disposing);
         }
 
         #region Private
 
-        private async Task<bool> KisiKaydet(KisiKayitModel kkm)
+        private async Task<bool> KisiKaydet(
+            KisiKayitModel kkm,
+            IKisiDepo _kisi
+           )
         {
             bool donenDeger = new bool();
 
@@ -117,7 +120,9 @@ namespace YPM.Web.Controllers
             return donenDeger;
         }
 
-        private KisiKayitModel BosAlanlariDoldur(KisiKayitModel kkm)
+        private KisiKayitModel BosAlanlariDoldur(
+            KisiKayitModel kkm,
+            IKisiDepo _kisi)
         {
             kkm.KayitTarihi = _kisi.TarihGetir();
 
@@ -178,7 +183,9 @@ namespace YPM.Web.Controllers
             return Path.Combine((new HostingEnvironment()).ContentRootPath, "AppData");
         }
 
-        private async Task<KisiKayitModel> OyleBirKisiVarMi(KisiKayitModel kkm)
+        private async Task<KisiKayitModel> OyleBirKisiVarMi(
+            KisiKayitModel kkm,
+            IKisiDepo _kisi)
         {
             if (await _kisi.EPostaKontrolAsync(kkm.email) == VarYokDurum.Var ? true : false) ModelState.AddModelError("", "Bu EPosta adresi alınmış. Başka bir tane deneyin..");
             return kkm;
