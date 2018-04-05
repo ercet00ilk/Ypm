@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace YPM.Web.Genel.Helper
 {
-
     public static class CookieExtensions
     {
         public static Dictionary<string, string> FromStringToDictionary(this string legacyCookie)

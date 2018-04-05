@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 
 namespace YPM.SuretVarlik.Mulk.Model.Istisna.Yapi.Birim
 {
     public class BirimIstisna
-           : OrtakIstisna,IDisposable
+           : OrtakIstisna, IDisposable
     {
         public IDictionary Veri { get; set; }
         public string Link { get; set; }

@@ -7,6 +7,5 @@
         double Iskonto { get; set; }
         double OrtAlis { get; set; }
         double SonAlis { get; set; }
-
     }
 }

@@ -1,7 +1,5 @@
 ﻿using GercekVarlik.Mulk.Varlik.Kisi.Ortak;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using YPM.Birim.Genel.Birim.Generic;
 using YPM.Birim.Genel.Birim.Kisi;
@@ -13,12 +11,10 @@ using YPM.SuretVarlik.Mulk.Model.Kisi;
 
 namespace YPM.Depo.Veri.Kisi
 {
-   public class KisiDepo
-        :IKisiDepo
+    public class KisiDepo
+         : IKisiDepo
     {
         private bool Disposed { get; set; }
-
-      
 
         ~KisiDepo()
         {

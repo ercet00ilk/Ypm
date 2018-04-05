@@ -203,7 +203,6 @@ namespace YPM.Birim.Genel.Birim.Generic
                         istisna.YiginIzleme = ex.StackTrace;
                         istisna.Yazdir(istisna);
                     }
-
                 }
                 finally
                 {

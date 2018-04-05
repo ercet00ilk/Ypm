@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using YPM.Depo.Veri.Gunluk;
 using YPM.Depo.Veri.Kisi;
 using YPM.Depo.Veri.Kurulum;
@@ -28,18 +27,14 @@ namespace YPM.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection servisler)
         {
-
             servisler.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             servisler.AddSingleton<ISessionSar, SessionSar>();
             servisler.AddSingleton<ICerezSar, CerezSar>();
 
-
             servisler.AddTransient<IGunlukDepo, GunlukDepo>();
             servisler.AddTransient<IKisiDepo, KisiDepo>();
             servisler.AddTransient<ISistemDepo, SistemDepo>();
-            
-            servisler.AddScoped<IUrunKategoriDepo, UrunKategoriDepo>();
-
+            servisler.AddTransient<IUrunKategoriDepo, UrunKategoriDepo>();
 
             servisler.AddMvc()
                  .AddSessionStateTempDataProvider();
@@ -89,7 +84,6 @@ namespace YPM.Web
         }
     }
 
-
     /*
     app.Use(async (context, next) =>
     {
@@ -99,7 +93,6 @@ namespace YPM.Web
 
         Debug.WriteLine("Sonraki üyeler çalıştırıldı ve response veriliyor.");
     });
-
 
         /burak adresine request atarsak "/burak adresi ile gelindi." şeklinde bir response alacağız.Aksi tüm durumlar için ise "Response veriliyor." almaya devam ediyor olacağız.
 
@@ -113,7 +106,6 @@ namespace YPM.Web
 
      HTTP GET request'te bulunulduğu zaman "HTTP GET request'te bulunuldu." şeklinde bir response alacağız. Aksi tüm durum ise yine "Response veriliyor." şeklinde bir response almaya devam ediyor olacağız.
 
-
     app.MapWhen(x => x.Request.Method == "GET", internalApp =>
     {
         internalApp.Run(async context =>
@@ -121,7 +113,6 @@ namespace YPM.Web
             await context.Response.WriteAsync("HTTP GET request'te bulunuldu.");
         });
     });
-
 
     app.Run(async context =>
     {

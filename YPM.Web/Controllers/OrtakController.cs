@@ -30,9 +30,7 @@ namespace YPM.Web.Controllers
                                         where c.Key == "password"
                                         select c.Value).FirstOrDefault();
 
-
                         uc.GuvenliGiris(kgm);
-
 
                         cerez = null;
                         kgm.Dispose();

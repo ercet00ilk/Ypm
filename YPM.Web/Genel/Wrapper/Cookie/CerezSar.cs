@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using YPM.SuretVarlik.Mulk.Enstruman;
 using YPM.Web.Genel.Helper;
 
@@ -17,7 +14,6 @@ namespace YPM.Web.Genel.Wrapper.Cookie
         {
             _http = http;
         }
-
 
         public Dictionary<string, string> Getir(string anahtar)
         {
@@ -48,8 +44,8 @@ namespace YPM.Web.Genel.Wrapper.Cookie
                 .Response
                 .Cookies
                 .Append(
-                    anahtar, 
-                    Aes.Sifrele(deger.FromDictionaryToString()), 
+                    anahtar,
+                    Aes.Sifrele(deger.FromDictionaryToString()),
                     secenek);
         }
 
@@ -58,6 +54,4 @@ namespace YPM.Web.Genel.Wrapper.Cookie
             _http.HttpContext.Response.Cookies.Delete(anahtar);
         }
     }
-
-
 }

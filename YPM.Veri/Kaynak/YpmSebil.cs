@@ -25,7 +25,7 @@ namespace YPM.Veri.Kaynak
 
         public DbSet<UrunKategoriGercek> UrunKategoriTbl { get; set; }
         public DbSet<UrunNitelikGercek> UrunNitelikTbl { get; set; }
-
+        public DbSet<UrunKategoriNitelikGercek> UrunKategoriNitelikTbl { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -86,9 +86,6 @@ namespace YPM.Veri.Kaynak
 
             //  ==> ForeignKey
 
-
-
-
             /*******
             * Urun Mulk
             *
@@ -98,12 +95,7 @@ namespace YPM.Veri.Kaynak
             modelBuilder.Entity<UrunKategoriGercek>().ToTable("UrunKategori", "MulkUrun");
             modelBuilder.Entity<UrunKategoriGercek>().Property(c => c.UrunKategoriId).ValueGeneratedOnAdd();
             modelBuilder.Entity<UrunKategoriGercek>()
-                .HasKey(c => new
-                {
-                    c.UrunKategoriId,
-                    c.UrunUstKategoriId
-                });
-
+                .HasKey(c => c.UrunKategoriId);
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Ad).HasMaxLength(250);
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Aciklama).HasMaxLength(400);
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.AnahtarKelime).HasMaxLength(400);
@@ -126,26 +118,21 @@ namespace YPM.Veri.Kaynak
                     c.UrunNitelikId
                 });
 
-
             //  ==> ForeignKey
-
 
             modelBuilder
                 .Entity<UrunKategoriNitelikGercek>()
-                .HasOne(c => c.UrunKategori)
-                .WithMany(d => d.KategoriNitelikler)
+                .HasOne(c => c.Kategori)
+                .WithMany(d => d.KategoriNitelik)
                 .HasForeignKey(c => c.UrunKategoriId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
                 .Entity<UrunKategoriNitelikGercek>()
-                .HasOne(c => c.UrunNitelik)
-                .WithMany(d => d.NitelikKategoriler)
+                .HasOne(c => c.Nitelik)
+                .WithMany(d => d.KategoriNitelik)
                 .HasForeignKey(c => c.UrunNitelikId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-
-
         }
     }
 }

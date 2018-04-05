@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YPM.Birim.Genel.Birim.Generic;
+﻿using YPM.Birim.Genel.Birim.Generic;
 using YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori;
 using YPM.Veri.Kaynak;
 

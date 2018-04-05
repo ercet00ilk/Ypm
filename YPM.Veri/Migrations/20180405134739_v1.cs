@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
-using System.Collections.Generic;
 
 namespace YPM.Veri.Migrations
 {
@@ -61,31 +60,31 @@ namespace YPM.Veri.Migrations
                 {
                     UrunKategoriId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UrunUstKategoriId = table.Column<int>(nullable: false),
+                    Aciklama = table.Column<string>(maxLength: 400, nullable: true),
                     Ad = table.Column<string>(maxLength: 250, nullable: true),
                     AktifMi = table.Column<bool>(nullable: false),
-                    MetaAciklama = table.Column<string>(maxLength: 400, nullable: true),
-                    MetaAnahtarKelime = table.Column<string>(maxLength: 400, nullable: true),
+                    AnahtarKelime = table.Column<string>(maxLength: 400, nullable: true),
+                    BabaId = table.Column<int>(nullable: false),
                     SayfaBaslik = table.Column<string>(maxLength: 250, nullable: true),
                     Tanim = table.Column<string>(maxLength: 400, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UrunKategori", x => new { x.UrunKategoriId, x.UrunUstKategoriId });
+                    table.PrimaryKey("PK_UrunKategori", x => x.UrunKategoriId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UrunKategoriNitelik",
+                name: "UrunNitelik",
                 schema: "MulkUrun",
                 columns: table => new
                 {
-                    UrunKategoriNitelikGercekId = table.Column<int>(nullable: false)
+                    UrunNitelikId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Ad = table.Column<string>(maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UrunKategoriNitelik", x => x.UrunKategoriNitelikGercekId);
+                    table.PrimaryKey("PK_UrunNitelik", x => x.UrunNitelikId);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,11 +111,52 @@ namespace YPM.Veri.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UrunKategoriNitelik",
+                schema: "MulkUrun",
+                columns: table => new
+                {
+                    UrunKategoriNitelikId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UrunKategoriId = table.Column<int>(nullable: false),
+                    UrunNitelikId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UrunKategoriNitelik", x => new { x.UrunKategoriNitelikId, x.UrunKategoriId, x.UrunNitelikId });
+                    table.ForeignKey(
+                        name: "FK_UrunKategoriNitelik_UrunKategori_UrunKategoriId",
+                        column: x => x.UrunKategoriId,
+                        principalSchema: "MulkUrun",
+                        principalTable: "UrunKategori",
+                        principalColumn: "UrunKategoriId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UrunKategoriNitelik_UrunNitelik_UrunNitelikId",
+                        column: x => x.UrunNitelikId,
+                        principalSchema: "MulkUrun",
+                        principalTable: "UrunNitelik",
+                        principalColumn: "UrunNitelikId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Lokasyon_KisiId",
                 schema: "MulkKisi",
                 table: "Lokasyon",
                 column: "KisiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UrunKategoriNitelik_UrunKategoriId",
+                schema: "MulkUrun",
+                table: "UrunKategoriNitelik",
+                column: "UrunKategoriId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UrunKategoriNitelik_UrunNitelikId",
+                schema: "MulkUrun",
+                table: "UrunKategoriNitelik",
+                column: "UrunNitelikId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -130,16 +170,20 @@ namespace YPM.Veri.Migrations
                 schema: "MulkKurulum");
 
             migrationBuilder.DropTable(
-                name: "UrunKategori",
-                schema: "MulkUrun");
-
-            migrationBuilder.DropTable(
                 name: "UrunKategoriNitelik",
                 schema: "MulkUrun");
 
             migrationBuilder.DropTable(
                 name: "Kisi",
                 schema: "MulkKisi");
+
+            migrationBuilder.DropTable(
+                name: "UrunKategori",
+                schema: "MulkUrun");
+
+            migrationBuilder.DropTable(
+                name: "UrunNitelik",
+                schema: "MulkUrun");
         }
     }
 }

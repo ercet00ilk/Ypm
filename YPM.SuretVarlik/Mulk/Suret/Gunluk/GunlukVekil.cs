@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using YPM.SuretVarlik.Mulk.Enum.Ortak;
 
 namespace YPM.SuretVarlik.Mulk.Suret.Gunluk
@@ -65,8 +63,6 @@ namespace YPM.SuretVarlik.Mulk.Suret.Gunluk
 
             if (disposing)
             {
-
-
                 Disposed = true;
             }
 
@@ -102,10 +98,5 @@ namespace YPM.SuretVarlik.Mulk.Suret.Gunluk
         {
             return new GunlukVekil(tamYol, method, tarih, durum, kisiId, istisna, sonuc);
         }
-
-
-
-
-
     }
 }

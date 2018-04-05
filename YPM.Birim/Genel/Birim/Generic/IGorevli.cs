@@ -19,7 +19,6 @@ namespace YPM.Birim.Genel.Birim.Generic
         IUrunNitelikBirim UrunNitelik { get; }
         IUrunKategoriNitelikBirim UrunKategoriNitelik { get; }
 
-
         int Tamamla();
     }
 }

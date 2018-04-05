@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 {
     public class UrunKategoriGercek
+        : IDisposable
     {
-        public UrunKategoriGercek()
-        {
-            this.KategoriNitelikler = new HashSet<UrunKategoriNitelikGercek>();
-        }
-
         public int UrunKategoriId { get; set; }
 
-        public int UrunUstKategoriId { get; set; }
+        public int BabaId { get; set; }
 
         public string Ad { get; set; }
 
@@ -27,7 +22,31 @@ namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 
         public string AnahtarKelime { get; set; }
 
+        public ICollection<UrunKategoriNitelikGercek> KategoriNitelik { get; } = new List<UrunKategoriNitelikGercek>();
 
-        public ICollection<UrunKategoriNitelikGercek> KategoriNitelikler { get; set; }
+        #region IDisposable Support
+
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        void IDisposable.Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion IDisposable Support
     }
 }

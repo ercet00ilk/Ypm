@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace YPM.Web.Models.Urun.Kategori
 {
@@ -37,7 +34,4 @@ namespace YPM.Web.Models.Urun.Kategori
 
         public List<SelectListItem> TumNitelikler { get; set; }
     }
-
-
-
 }

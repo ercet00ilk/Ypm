@@ -33,15 +33,15 @@ namespace YPM.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                kkm = await OyleBirKisiVarMi(kkm,_kisi);
+                kkm = await OyleBirKisiVarMi(kkm, _kisi);
 
                 if (ModelState.IsValid)
                 {
-                    kkm = BosAlanlariDoldur(kkm,_kisi);
+                    kkm = BosAlanlariDoldur(kkm, _kisi);
 
                     if (ModelState.IsValid)
                     {
-                        if (await KisiKaydet(kkm,_kisi))
+                        if (await KisiKaydet(kkm, _kisi))
                         {
                             ViewBag.Sonuc = "Başarılı bir şekilde kayıt oldunuz. Telefonunuza gelen doğrulama kodu ile üye girişi yapabilirsiniz.";
                         }
@@ -83,7 +83,6 @@ namespace YPM.Web.Controllers
         {
             return View(new IstisnaViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
 
         protected override void Dispose(bool disposing)
         {

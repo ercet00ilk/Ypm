@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
 {
@@ -13,7 +11,7 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
         public string Tanim { get; set; }
         public bool AktifMi { get; set; }
         public string Ad { get; set; }
-        public int UrunUstKategoriId { get; set; }
+        public int BabaId { get; set; }
         public List<int> YeniEklenecekNitelikler { get; set; }
     }
 }

@@ -1,21 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Diagnostics;
-using YPM.Depo.Veri.Gunluk;
-using YPM.Depo.Veri.Sistem;
-using YPM.Depo.Veri.Urun.Kategori;
 using YPM.SuretVarlik.Mulk.Model.Istisna;
 using YPM.Web.Genel.Wrapper.Cookie;
-using YPM.Web.Genel.Wrapper.Session;
 
 namespace YPM.Web.Controllers
 {
-
     public class AnaController
         : OrtakController
     {
-       
-
         public IActionResult Giris(
             [FromServices] ICerezSar _cerezSar)
         {
@@ -25,8 +17,6 @@ namespace YPM.Web.Controllers
 
             return View();
         }
-
-        
 
         [Route("/Istisna")]
         public IActionResult Istisna()

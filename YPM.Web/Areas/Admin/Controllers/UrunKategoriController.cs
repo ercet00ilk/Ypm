@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Reflection;
 using YPM.Depo.Veri.Gunluk;
 using YPM.Depo.Veri.Sistem;
 using YPM.Depo.Veri.Urun.Kategori;
-using YPM.SuretVarlik.Mulk.Enum.Ortak;
-using YPM.SuretVarlik.Mulk.Suret.Gunluk;
 using YPM.SuretVarlik.Mulk.Suret.Urun.Kategori;
 using YPM.Web.Genel.Wrapper.Session;
 using YPM.Web.Models.Urun.Kategori;
@@ -19,14 +16,10 @@ namespace YPM.Web.Areas.Admin.Controllers
     {
         private bool Disposed { get; set; }
 
-
         [Route("/admin/urunkategori/ekle")]
         public IActionResult Ekle([FromServices] IUrunKategoriDepo _urunKategori)
         {
-
-
             // Liste tekrar gelecek
-
 
             UrunKategoriEkleModel ke = new UrunKategoriEkleModel();
             ke.TumNitelikler = new List<SelectListItem>();
@@ -46,7 +39,7 @@ namespace YPM.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [Route("/admin/urunkategori/ekle")]
         public IActionResult Ekle(
-            UrunKategoriEkleModel model, 
+            UrunKategoriEkleModel model,
             [FromServices] IUrunKategoriDepo _urunKategori,
             [FromServices] IGunlukDepo _gunluk,
             [FromServices] ISistemDepo _sistem,
@@ -56,7 +49,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-
                 UrunKategoriSuret uks = new UrunKategoriSuret();
                 uks.Ad = model.Ad;
                 uks.AktifMi = model.AktifMi;
@@ -64,11 +56,10 @@ namespace YPM.Web.Areas.Admin.Controllers
                 uks.SayfaBaslik = model.SayfaBaslik;
                 uks.Aciklama = model.Aciklama;
                 uks.AnahtarKelime = model.AnahtarKelime;
-                uks.UrunUstKategoriId = 0;
+                uks.BabaId = 0;
 
                 uks.YeniEklenecekNitelikler = new List<int>();
 
-               
                 for (int i = 0; i < model.NitelikEkleId.Length; i++)
                 {
                     uks.YeniEklenecekNitelikler.Add(model.NitelikEkleId[i]);
@@ -76,8 +67,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
                 if (_urunKategori.UrunKategoriEkle(uks))
                 {
-
-
                     //_gunluk.Ekle(
                     //  new GunlukVekil(
                     //          GetType().FullName,
@@ -132,7 +121,7 @@ namespace YPM.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        private UrunKategoriEkleModel KategoriEkleKontrol(UrunKategoriEkleModel model,IUrunKategoriDepo _urunKategori)
+        private UrunKategoriEkleModel KategoriEkleKontrol(UrunKategoriEkleModel model, IUrunKategoriDepo _urunKategori)
         {
             if (model.NitelikEkleId != null)
             {
@@ -163,8 +152,6 @@ namespace YPM.Web.Areas.Admin.Controllers
             return View();
         }
 
-
-
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> AracTipEkle(UrunKategoriAracTipModel model)
@@ -180,7 +167,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
         //    return RedirectToAction("AracTip");
         //}
-
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -202,7 +188,6 @@ namespace YPM.Web.Areas.Admin.Controllers
         //{
         //    return View(await _UrunKategoriAracTip.Listele());
         //}
-
 
         //public IActionResult MarkaEkle()
         //{
@@ -244,6 +229,5 @@ namespace YPM.Web.Areas.Admin.Controllers
 
             base.Dispose(disposing);
         }
-
     }
 }

@@ -8,50 +8,45 @@
 <hr />
 <div>
     <ul>
-        @foreach (var kat1 in Model.Where(model => model.UrunUstKategoriId.Equals(0)))
+        @foreach (var kat1 in Model.Where(model => model.BabaId.Equals(0)))
         {
             <li>
                 <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat1.UrunKategoriId">@kat1.Ad</a>
                 <ul>
 
-                    @foreach (var kat2 in Model.Where(model => model.UrunUstKategoriId.Equals(kat1.UrunKategoriId)))
+                    @foreach (var kat2 in Model.Where(model => model.BabaId.Equals(kat1.UrunKategoriId)))
                     {
                         <li>
                             <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat2.UrunKategoriId">@kat2.Ad</a>
                             <ul>
-                                @foreach (var kat3 in Model.Where(model => model.UrunUstKategoriId.Equals(kat2.UrunKategoriId)))
+                                @foreach (var kat3 in Model.Where(model => model.BabaId.Equals(kat2.UrunKategoriId)))
                                 {
                                     <li>
                                         <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat3.UrunKategoriId">@kat3.Ad</a>
                                         <ul>
-                                            @foreach (var kat4 in Model.Where(model => model.UrunUstKategoriId.Equals(kat3.UrunKategoriId)))
+                                            @foreach (var kat4 in Model.Where(model => model.BabaId.Equals(kat3.UrunKategoriId)))
                                             {
                                                 <li>
                                                     <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat4.UrunKategoriId">@kat4.Ad</a>
                                                     <ul>
 
-                                                        @foreach (var kat5 in Model.Where(model => model.UrunUstKategoriId.Equals(kat4.UrunKategoriId)))
+                                                        @foreach (var kat5 in Model.Where(model => model.BabaId.Equals(kat4.UrunKategoriId)))
                                                         {
                                                             <li>
                                                                 <a asp-area="admin" asp-controller="urunkategori" asp-action="Getir" asp-route-katId="@kat5.UrunKategoriId">@kat5.Ad</a>
                                                             </li>
                                                         }
                                                     </ul>
-
                                                 </li>
                                             }
                                         </ul>
-
                                     </li>
                                 }
                             </ul>
-
                         </li>
                     }
-
                 </ul>
             </li>
         }
     </ul>
-
 </div>

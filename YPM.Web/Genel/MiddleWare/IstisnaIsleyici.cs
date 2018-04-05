@@ -41,7 +41,6 @@ namespace YPM.Web.Genel.MiddleWare
             }
             catch (Exception e)
             {
-
                 // Alttaki Degerlerle çekilmiyor?
 
                 //using (GunlukVekil suanKiGunluk = GunlukVekil.YeniGunluk(
@@ -56,7 +55,6 @@ namespace YPM.Web.Genel.MiddleWare
                 //{
                 //    _gunluk.Ekle(suanKiGunluk);
                 //}
-
 
                 return;
             }

@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -16,110 +14,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
     public class UrunKategoriDepo
            : IUrunKategoriDepo
     {
-        private static ICollection<UrunKategoriSuret> _tumUrunKategoriListesi;
-        private static ICollection<UrunNitelikSuret> _tumUrunNitelikListesi;
-
-        public UrunKategoriDepo()
-        {
-            if (_tumUrunKategoriListesi == null)
-            {
-                _tumUrunKategoriListesi = new List<UrunKategoriSuret>();
-
-                using (IGorevli gorev = Gorevli.YeniGorev())
-                {
-                    if (!(gorev.UrunKategori.GetirTumKoleksiyon().Count() > 0))
-                    {
-                        gorev.UrunKategori.Ekle(new UrunKategoriGercek()
-                        {
-                            Ad = "Örnek Kategori",
-                            AktifMi = false,
-                            Aciklama = "Örnek Meta Açıklama",
-                            AnahtarKelime = "örnek,meta,anahtar,kelimeler",
-                            SayfaBaslik = "Örnek Kategori",
-                            Tanim = "Örnek Kategori Sayfası",
-                            UrunUstKategoriId = 0
-
-                        });
-                    }
-
-                    if (gorev.UrunKategori.GetirTumKoleksiyon().Count() > 0)
-                    {
-                        foreach (var item in gorev.UrunKategori.GetirTumKoleksiyon())
-                        {
-                            _tumUrunKategoriListesi.Add(new UrunKategoriSuret()
-                            {
-                                UrunKategoriId = item.UrunKategoriId,
-                                UrunUstKategoriId = item.UrunUstKategoriId,
-                                Ad = item.Ad,
-                                Aciklama = item.Aciklama,
-                                AktifMi = item.AktifMi,
-                                AnahtarKelime = item.AnahtarKelime,
-                                SayfaBaslik = item.SayfaBaslik,
-                                Tanim = item.Tanim
-                            });
-                        }
-                    }
-                    else
-                    {
-                        using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
-                        {
-                            istisna.TamYol = GetType().FullName;
-                            istisna.Method = MethodBase.GetCurrentMethod().Name;
-                            istisna.KisiId = 0;
-                            istisna.TabanHata = "_tumUrunNitelikListesi Boş Geldi.";
-                            istisna.Sonuc = "  public UrunKategoriDeposu() ";
-                            istisna.IslemOnay = false;
-                            istisna.Tarih = Tarih.GuncelTarihVer();
-                            istisna.Yazdir(istisna);
-                        }
-                    }
-                }
-            }
-
-            if (_tumUrunNitelikListesi == null)
-            {
-                _tumUrunNitelikListesi = new List<UrunNitelikSuret>();
-
-                using (IGorevli gorev = Gorevli.YeniGorev())
-                {
-
-                    if (!(gorev.UrunNitelik.GetirTumKoleksiyon().Count() > 0))
-                    {
-                        gorev.UrunNitelik.Ekle(new UrunNitelikGercek()
-                        {
-                            Ad = "Örnek Nitelik"
-                        });
-                    }
-
-                    if (gorev.UrunNitelik.GetirTumKoleksiyon().Count() > 0)
-                    {
-                        foreach (var item in gorev.UrunNitelik.GetirTumKoleksiyon())
-                        {
-                            _tumUrunNitelikListesi.Add(new UrunNitelikSuret()
-                            {
-                                Ad = item.Ad,
-                                UrunNitelikId = item.UrunNitelikId
-                            });
-                        }
-                    }
-                    else
-                    {
-                        using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
-                        {
-                            istisna.TamYol = GetType().FullName;
-                            istisna.Method = MethodBase.GetCurrentMethod().Name;
-                            istisna.KisiId = 0;
-                            istisna.TabanHata = "_tumUrunNitelikListesi Boş Geldi.";
-                            istisna.Sonuc = "  public UrunKategoriDeposu() ";
-                            istisna.IslemOnay = false;
-                            istisna.Tarih = Tarih.GuncelTarihVer();
-                            istisna.Yazdir(istisna);
-                        }
-                    }
-                }
-            }
-        }
-
         public bool KontrolEt(string ad)
         {
             bool donenSonuc = new bool();
@@ -136,11 +30,101 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
         public ICollection<UrunKategoriSuret> TumUrunKategoriListesi()
         {
+            List<UrunKategoriSuret> _tumUrunKategoriListesi = new List<UrunKategoriSuret>();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            {
+                if (!(gorev.UrunKategori.GetirTumKoleksiyon().Count() > 0))
+                {
+                    gorev.UrunKategori.Ekle(new UrunKategoriGercek()
+                    {
+                        Ad = "Örnek Kategori",
+                        AktifMi = false,
+                        Aciklama = "Örnek Meta Açıklama",
+                        AnahtarKelime = "örnek,meta,anahtar,kelimeler",
+                        SayfaBaslik = "Örnek Kategori",
+                        Tanim = "Örnek Kategori Sayfası",
+                        BabaId = 0
+                    });
+                }
+
+                if (gorev.UrunKategori.GetirTumKoleksiyon().Count() > 0)
+                {
+                    foreach (var item in gorev.UrunKategori.GetirTumKoleksiyon())
+                    {
+                        _tumUrunKategoriListesi.Add(new UrunKategoriSuret()
+                        {
+                            UrunKategoriId = item.UrunKategoriId,
+                            BabaId = item.BabaId,
+                            Ad = item.Ad,
+                            Aciklama = item.Aciklama,
+                            AktifMi = item.AktifMi,
+                            AnahtarKelime = item.AnahtarKelime,
+                            SayfaBaslik = item.SayfaBaslik,
+                            Tanim = item.Tanim
+                        });
+                    }
+                }
+                else
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = "_tumUrunNitelikListesi Boş Geldi.";
+                        istisna.Sonuc = "  public UrunKategoriDeposu() ";
+                        istisna.IslemOnay = false;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+                }
+            }
+
             return _tumUrunKategoriListesi;
         }
 
         public ICollection<UrunNitelikSuret> TumUrunNitelikListesi()
         {
+            List<UrunNitelikSuret> _tumUrunNitelikListesi = new List<UrunNitelikSuret>();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            {
+                if (!(gorev.UrunNitelik.GetirTumKoleksiyon().Count() > 0))
+                {
+                    gorev.UrunNitelik.Ekle(new UrunNitelikGercek()
+                    {
+                        Ad = "Örnek Nitelik"
+                    });
+                }
+
+                if (gorev.UrunNitelik.GetirTumKoleksiyon().Count() > 0)
+                {
+                    foreach (var item in gorev.UrunNitelik.GetirTumKoleksiyon())
+                    {
+                        _tumUrunNitelikListesi.Add(new UrunNitelikSuret()
+                        {
+                            Ad = item.Ad,
+                            UrunNitelikId = item.UrunNitelikId
+                        });
+                    }
+                }
+                else
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = "_tumUrunNitelikListesi Boş Geldi.";
+                        istisna.Sonuc = "  public UrunKategoriDeposu() ";
+                        istisna.IslemOnay = false;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+                }
+            }
+
             return _tumUrunNitelikListesi;
         }
 
@@ -154,9 +138,28 @@ namespace YPM.Depo.Veri.Urun.Kategori
                 {
                     using (IGorevli gorev = Gorevli.YeniGorev())
                     {
-                        
+                        using (UrunKategoriGercek ukg = new UrunKategoriGercek()
+                        {
+                            Aciklama = uks.Aciklama,
+                            Ad = uks.Ad,
+                            AktifMi = uks.AktifMi,
+                            AnahtarKelime = uks.AnahtarKelime,
+                            BabaId = uks.BabaId,
+                            SayfaBaslik = uks.SayfaBaslik,
+                            Tanim = uks.Tanim
+                        })
+                        {
+                            gorev.UrunKategori.Ekle(ukg);
 
-                        // if (await kur.KuruluMu()) kur.KurulumYap().Wait();
+                            for (int i = 0; i < uks.YeniEklenecekNitelikler.Count; i++)
+                            {
+                                gorev.UrunKategoriNitelik.Ekle(new UrunKategoriNitelikGercek
+                                {
+                                    UrunKategoriId = ukg.UrunKategoriId,
+                                    UrunNitelikId = uks.YeniEklenecekNitelikler[i]
+                                });
+                            }
+                        }
 
                         islemOnay = true;
                     }

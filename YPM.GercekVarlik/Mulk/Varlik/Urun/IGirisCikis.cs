@@ -4,7 +4,6 @@ namespace YPM.GercekVarlik.Mulk.Varlik.Urun
 {
     internal interface IGirisCikis
     {
-
         string StoktakiMiktar { get; set; }
         double StokDegeri { get; set; }
 
@@ -17,6 +16,5 @@ namespace YPM.GercekVarlik.Mulk.Varlik.Urun
         int CikilanAdet { get; set; }
         int CikanKisiId { get; set; }
         DateTime CikisTarihi { get; set; }
-
     }
 }
