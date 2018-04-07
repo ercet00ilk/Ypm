@@ -22,14 +22,14 @@ namespace YPM.Web.Areas.Admin.Controllers
             // Liste tekrar gelecek
 
             UrunKategoriEkleModel ke = new UrunKategoriEkleModel();
-            ke.TumNitelikler = new List<SelectListItem>();
+            ke.TumOzellikGruplari = new List<SelectListItem>();
 
-            List<UrunNitelikSuret> TumNitelikListesi = new List<UrunNitelikSuret>();
-            var tumNitelikListesi = _urunKategori.TumUrunNitelikListesi();
+            List<UrunOzellikSuret> TumOzellikListesi = new List<UrunOzellikSuret>();
+            var tumOzellikListesi = _urunKategori.TumUrunOzellikDinamikListesi();
 
-            foreach (var nitelik in tumNitelikListesi)
+            foreach (var ozellik in tumOzellikListesi)
             {
-                ke.TumNitelikler.Add(new SelectListItem { Value = nitelik.UrunNitelikId.ToString(), Text = nitelik.Ad.ToString() });
+                ke.TumOzellikGruplari.Add(new SelectListItem { Value = ozellik.UrunOzellikId.ToString(), Text = ozellik.Ad.ToString() });
             }
 
             return View(ke);
@@ -39,7 +39,7 @@ namespace YPM.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [Route("/admin/urunkategori/ekle")]
         public IActionResult Ekle(
-            UrunKategoriEkleModel model,
+             UrunKategoriEkleModel model,
             [FromServices] IUrunKategoriDepo _urunKategori,
             [FromServices] IGunlukDepo _gunluk,
             [FromServices] ISistemDepo _sistem,
@@ -60,9 +60,9 @@ namespace YPM.Web.Areas.Admin.Controllers
 
                 uks.YeniEklenecekNitelikler = new List<int>();
 
-                for (int i = 0; i < model.NitelikEkleId.Length; i++)
+                for (int i = 0; i < model.OzellikGrubuEkleId.Length; i++)
                 {
-                    uks.YeniEklenecekNitelikler.Add(model.NitelikEkleId[i]);
+                    uks.YeniEklenecekNitelikler.Add(model.OzellikGrubuEkleId[i]);
                 }
 
                 if (_urunKategori.UrunKategoriEkle(uks))
@@ -108,24 +108,24 @@ namespace YPM.Web.Areas.Admin.Controllers
             //    }
             //}
 
-            model.TumNitelikler = new List<SelectListItem>();
+            model.TumOzellikGruplari = new List<SelectListItem>();
 
-            List<UrunNitelikSuret> TumNitelikListesi = new List<UrunNitelikSuret>();
-            var tumNitelikListesi = _urunKategori.TumUrunNitelikListesi();
+            List<UrunOzellikSuret> TumOzellikListesi = new List<UrunOzellikSuret>();
+            var tumOzellikListesi = _urunKategori.TumUrunOzellikDinamikListesi();
 
-            foreach (var nitelik in tumNitelikListesi)
+            foreach (var ozellik in tumOzellikListesi)
             {
-                model.TumNitelikler.Add(new SelectListItem { Value = nitelik.UrunNitelikId.ToString(), Text = nitelik.Ad.ToString() });
+                model.TumOzellikGruplari.Add(new SelectListItem { Value = ozellik.UrunOzellikId.ToString(), Text = ozellik.Ad.ToString() });
             }
 
             return View(model);
         }
 
-        private UrunKategoriEkleModel KategoriEkleKontrol(UrunKategoriEkleModel model, IUrunKategoriDepo _urunKategori)
+        private UrunKategoriEkleModel KategoriEkleKontrol(UrunKategoriEkleModel model, [FromServices] IUrunKategoriDepo _urunKategori)
         {
-            if (model.NitelikEkleId != null)
+            if (model.OzellikGrubuEkleId != null)
             {
-                if (!(model.NitelikEkleId.Length > 0))
+                if (!(model.OzellikGrubuEkleId.Length > 0))
                 {
                     ModelState.AddModelError("", "Lütfen Nitelikleri Ekleyiniz.");
                 }
@@ -146,78 +146,41 @@ namespace YPM.Web.Areas.Admin.Controllers
             return model;
         }
 
-        [Route("/Admin/UrunKategori/Getir/{katId}")]
-        public IActionResult Getir(int katId)
+        [Route("/Admin/UrunKategori/Detay/{katId:int}")]
+        public IActionResult Detay(
+            int katId,
+            [FromServices]IUrunKategoriDepo _urunKategori)
         {
+            UrunKategoriDetaySuret ds = new UrunKategoriDetaySuret();
+            ds = _urunKategori.UrunKategoriDetayGetir(katId);
+
+            UrunKategoriDetayModel model = new UrunKategoriDetayModel();
+            model.KategoriId = ds.KategoriId;
+            model.Aciklama = ds.Aciklama;
+            model.Ad = ds.Ad;
+            model.AktifMi = ds.AktifMi;
+            model.AnahtarKelime = ds.AnahtarKelime;
+            model.OzellikGrubu = ds.OzellikGrubu;
+            model.SayfaBaslik = ds.SayfaBaslik;
+            model.Tanim = ds.Tanim;
+
+            return View(model);
+        }
+
+        [Route("/Admin/UrunKategori/Duzenle/{katId:int}")]
+        public IActionResult Duzenle(
+         int katId)
+        {
+
+
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AracTipEkle(UrunKategoriAracTipModel model)
-        //{
-        //    if (!string.IsNullOrEmpty(model.AracTipAd))
-        //        await _aracTipDepo.Ekle(model.AracTipAd);
-        //    return RedirectToAction("AracTip");
-        //}
 
-        //public async Task<IActionResult> AracSil(int? id)
-        //{
-        //    if (id is int) await _aracTipDepo.Sil((int)id);
 
-        //    return RedirectToAction("AracTip");
-        //}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AracTipEkle(UrunKategoriAracTipEkleModel atem)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        atem.AracTipAd = atem.AracTipAd.ToUpper();
 
-        //        await _UrunKategoriAracTip.Ekle(atem.AracTipAd);
 
-        //        return RedirectToAction("AracTipListele");
-        //    }
-
-        //    return View(atem);
-        //}
-
-        //public async Task<IActionResult> AracTipListele()
-        //{
-        //    return View(await _UrunKategoriAracTip.Listele());
-        //}
-
-        //public IActionResult MarkaEkle()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> MarkaEkle(UrunKategoriMarkaEkleModel mem)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        mem.Ad = mem.Ad.ToUpper();
-
-        //        await _UrunKategoriMarka.Ekle(mem.Ad);
-
-        //        return MarkaListele();
-        //    }
-
-        //    return View(mem);
-        //}
-
-        //public IActionResult MarkaListele()
-        //{
-        //    List<UrunKategoriMarkaEkleModel> list = new List<UrunKategoriMarkaEkleModel>();
-
-        //    list=
-
-        //    return View();
-        //}
 
         protected override void Dispose(bool disposing)
         {

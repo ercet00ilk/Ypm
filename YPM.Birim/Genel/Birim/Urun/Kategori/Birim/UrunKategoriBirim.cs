@@ -2,7 +2,7 @@
 using YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori;
 using YPM.Veri.Kaynak;
 
-namespace YPM.Birim.Genel.Birim.Urun.Kategori
+namespace YPM.Birim.Genel.Birim.Urun.Kategori.Birim
 {
     public class UrunKategoriBirim
             : GenericBirim<UrunKategoriGercek>, IUrunKategoriBirim

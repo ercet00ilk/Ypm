@@ -28,10 +28,8 @@ namespace YPM.Web.Models.Urun.Kategori
         [StringLength(150, MinimumLength = 5, ErrorMessage = "MetaAnahtarKelime 5 - 150 karakter arasında girilebilir.")]
         public string AnahtarKelime { get; set; }
 
-        public int[] NitelikEkleId { get; set; }
+        public int[] OzellikGrubuEkleId { get; set; }
 
-        public List<UrunKategoriNitelikModel> KategorininNitelikleri { get; set; }
-
-        public List<SelectListItem> TumNitelikler { get; set; }
+        public List<SelectListItem> TumOzellikGruplari { get; set; }
     }
 }

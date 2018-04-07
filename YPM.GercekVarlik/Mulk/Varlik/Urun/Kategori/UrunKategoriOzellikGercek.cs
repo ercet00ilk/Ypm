@@ -1,23 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 {
-    public class UrunKategoriNitelikGercek
-        : IDisposable
+   public class UrunKategoriOzellikGercek
+  : IDisposable
     {
-        public int UrunKategoriNitelikId { get; set; }
+        public int UrunKategoriOzellikId { get; set; }
 
         public int UrunKategoriId { get; set; }
 
         public virtual UrunKategoriGercek Kategori { get; set; }
 
-        public int UrunNitelikId { get; set; }
+        public int UrunOzellikId { get; set; }
 
-        public virtual UrunNitelikGercek Nitelik { get; set; }
+        public virtual UrunOzellikGercek Ozellik { get; set; }
 
         #region IDisposable Support
 
-        private bool disposedValue = false; // To detect redundant calls
+        private bool disposedValue = false; 
 
         protected virtual void Dispose(bool disposing)
         {
@@ -26,7 +28,7 @@ namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
                 if (disposing)
                 {
                     if (Kategori != null) Kategori = null;
-                    if (Nitelik != null) Nitelik = null;
+                    if (Ozellik != null) Ozellik = null;
                 }
 
                 disposedValue = true;

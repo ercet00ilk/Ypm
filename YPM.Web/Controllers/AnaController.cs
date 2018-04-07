@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Diagnostics;
 using YPM.SuretVarlik.Mulk.Model.Istisna;
 using YPM.Web.Genel.Wrapper.Cookie;
+using YPM.Web.Genel.Wrapper.Session;
 
 namespace YPM.Web.Controllers
 {
@@ -9,8 +11,10 @@ namespace YPM.Web.Controllers
         : OrtakController
     {
         public IActionResult Giris(
-            [FromServices] ICerezSar _cerezSar)
+            [FromServices] ICerezSar _cerezSar,
+            [FromServices] ISessionSar _sessionSar)
         {
+
             {
                 if (!UyeGirisYaptiMi()) BeniHatirla(_cerezSar);
             }

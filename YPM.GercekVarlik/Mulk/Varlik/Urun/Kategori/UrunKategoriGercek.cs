@@ -22,7 +22,7 @@ namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 
         public string AnahtarKelime { get; set; }
 
-        public ICollection<UrunKategoriNitelikGercek> KategoriNitelik { get; } = new List<UrunKategoriNitelikGercek>();
+        public ICollection<UrunKategoriOzellikGercek> KategoriOzellik { get; } = new List<UrunKategoriOzellikGercek>();
 
         #region IDisposable Support
 

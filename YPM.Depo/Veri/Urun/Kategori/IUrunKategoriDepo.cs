@@ -7,10 +7,12 @@ namespace YPM.Depo.Veri.Urun.Kategori
     {
         bool KontrolEt(string ad);
 
-        ICollection<UrunKategoriSuret> TumUrunKategoriListesi();
+        ICollection<UrunKategoriSuret> TumUrunKategoriDinamikListesi();
 
-        ICollection<UrunNitelikSuret> TumUrunNitelikListesi();
+        ICollection<UrunOzellikSuret> TumUrunOzellikDinamikListesi();
 
         bool UrunKategoriEkle(UrunKategoriSuret uks);
+
+        UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId);
     }
 }

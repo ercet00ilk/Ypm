@@ -16,7 +16,7 @@ namespace YPM.Web.Areas.Admin.Components.Urun.Kategori
 
         public IViewComponentResult Invoke()
         {
-            return View("UrunKategoriListe", _urunKategoriDepo.TumUrunKategoriListesi());
+            return View("UrunKategoriListe", _urunKategoriDepo.TumUrunKategoriDinamikListesi());
         }
     }
 }

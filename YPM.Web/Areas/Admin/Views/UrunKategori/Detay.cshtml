@@ -1,0 +1,82 @@
+﻿@using YPM.Web.Models.Urun.Kategori
+@model UrunKategoriDetayModel
+@addTagHelper *, ViewComponent
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Detay";
+    Layout = "~/Views/Shared/_AnaCerceve.cshtml";
+}
+
+
+<h2>Admin/UrunKategori/Detay</h2>
+
+<div class="row">
+
+    <div class="container">
+        <div class="col-md-3">
+            @await Component.InvokeAsync("UrunKategoriListe")
+        </div>
+        <div class="col-md-8">
+
+            <h2>Detay </h2>
+
+            <div>
+                <h4>UrunKategoriDetayModel</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ad)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ad)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AktifMi)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.AktifMi)
+                    </dd>
+                    <dt>
+                        <strong>   Özellikleri</strong>
+                    </dt>
+                    <dd>
+                        @foreach (var item in Model.OzellikGrubu)
+                        {
+                            <span style="color:rebeccapurple">@item.Key</span> <span style="color:brown">@item.Value</span><br />
+                        }
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Tanim)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Tanim)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SayfaBaslik)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SayfaBaslik)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Aciklama)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Aciklama)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AnahtarKelime)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.AnahtarKelime)
+                    </dd>
+                </dl>
+            </div>
+            <div>
+                <a asp-area="admin" asp-controller="urunkategori" asp-action="duzenle" asp-route-katId="@Model.KategoriId">Düzenle</a> |
+                <a asp-area="admin" asp-controller="urunkategori" asp-action="ekle">Geri Dön</a>
+            </div>
+        </div>
+    </div>
+</div>

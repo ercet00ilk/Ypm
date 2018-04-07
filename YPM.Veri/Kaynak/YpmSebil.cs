@@ -24,8 +24,8 @@ namespace YPM.Veri.Kaynak
         public DbSet<KurulumGercek> KurulumTbl { get; set; }
 
         public DbSet<UrunKategoriGercek> UrunKategoriTbl { get; set; }
-        public DbSet<UrunNitelikGercek> UrunNitelikTbl { get; set; }
-        public DbSet<UrunKategoriNitelikGercek> UrunKategoriNitelikTbl { get; set; }
+        public DbSet<UrunOzellikGercek> UrunOzellikTbl { get; set; }
+        public DbSet<UrunKategoriOzellikGercek> UrunKategoriOzellikTbl { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -102,36 +102,36 @@ namespace YPM.Veri.Kaynak
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.SayfaBaslik).HasMaxLength(250);
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Tanim).HasMaxLength(400);
 
-            modelBuilder.Entity<UrunNitelikGercek>().ToTable("UrunNitelik", "MulkUrun");
-            modelBuilder.Entity<UrunNitelikGercek>().Property(x => x.UrunNitelikId).ValueGeneratedOnAdd();
-            modelBuilder.Entity<UrunNitelikGercek>()
-                .HasKey(c => c.UrunNitelikId);
-            modelBuilder.Entity<UrunNitelikGercek>().Property(x => x.Ad).HasMaxLength(250);
+            modelBuilder.Entity<UrunOzellikGercek>().ToTable("UrunNitelik", "MulkUrun");
+            modelBuilder.Entity<UrunOzellikGercek>().Property(x => x.UrunOzellikId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<UrunOzellikGercek>()
+                .HasKey(c => c.UrunOzellikId);
+            modelBuilder.Entity<UrunOzellikGercek>().Property(x => x.Ad).HasMaxLength(250);
 
-            modelBuilder.Entity<UrunKategoriNitelikGercek>().ToTable("UrunKategoriNitelik", "MulkUrun");
-            modelBuilder.Entity<UrunKategoriNitelikGercek>().Property(c => c.UrunKategoriNitelikId).ValueGeneratedOnAdd();
-            modelBuilder.Entity<UrunKategoriNitelikGercek>()
+            modelBuilder.Entity<UrunKategoriOzellikGercek>().ToTable("UrunKategoriNitelik", "MulkUrun");
+            modelBuilder.Entity<UrunKategoriOzellikGercek>().Property(c => c.UrunKategoriOzellikId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<UrunKategoriOzellikGercek>()
                 .HasKey(c => new
                 {
-                    c.UrunKategoriNitelikId,
+                    c.UrunKategoriOzellikId,
                     c.UrunKategoriId,
-                    c.UrunNitelikId
+                    c.UrunOzellikId
                 });
 
             //  ==> ForeignKey
 
             modelBuilder
-                .Entity<UrunKategoriNitelikGercek>()
+                .Entity<UrunKategoriOzellikGercek>()
                 .HasOne(c => c.Kategori)
-                .WithMany(d => d.KategoriNitelik)
+                .WithMany(d => d.KategoriOzellik)
                 .HasForeignKey(c => c.UrunKategoriId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
-                .Entity<UrunKategoriNitelikGercek>()
-                .HasOne(c => c.Nitelik)
-                .WithMany(d => d.KategoriNitelik)
-                .HasForeignKey(c => c.UrunNitelikId)
+                .Entity<UrunKategoriOzellikGercek>()
+                .HasOne(c => c.Ozellik)
+                .WithMany(d => d.KategoriOzellik)
+                .HasForeignKey(c => c.UrunOzellikId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

@@ -1,9 +1,13 @@
 ﻿using GercekVarlik.Mulk.Varlik.Kisi.Ortak;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Transactions;
 using YPM.Birim.Genel.Birim.Generic;
+using YPM.SuretVarlik.Mulk.Enstruman;
 using YPM.SuretVarlik.Mulk.Enum.Ortak;
+using YPM.SuretVarlik.Mulk.Model.Istisna.Yapi.Birim;
 using YPM.Veri.Kaynak;
 
 namespace YPM.Birim.Genel.Birim.Kisi
@@ -30,8 +34,9 @@ namespace YPM.Birim.Genel.Birim.Kisi
 
             VarYokDurum donenDeger = new VarYokDurum();
 
-            using (var transaction = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled))
+
             using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
                 try
                 {
@@ -44,14 +49,33 @@ namespace YPM.Birim.Genel.Birim.Kisi
 
                     islemOnay = true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.Hata = ex.ToString();
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public virtual T Bul(Expression<Func<T, bool>> eslesen) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Veri = ex.Data;
+                        istisna.Link = ex.HelpLink;
+                        istisna.HSonuc = ex.HResult;
+                        istisna.Kaynak = ex.Source;
+                        istisna.Mesaj = ex.GetBaseException().Message;
+                        istisna.YiginIzleme = ex.StackTrace;
+                        istisna.Yazdir(istisna);
+                    }
+
                     islemOnay = false;
                 }
                 finally
                 {
-                    if (islemOnay) transaction.Complete();
-                    else transaction.Dispose();
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
                 }
             }
 

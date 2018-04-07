@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.Linq;
 using YPM.SuretVarlik.Mulk.Enstruman;
 using YPM.Web.Genel.Helper;
 
@@ -23,7 +24,7 @@ namespace YPM.Web.Genel.Wrapper.Cookie
                 .HttpContext
                 .Request
                 .Cookies[anahtar])
-                .FromStringToDictionary();
+                .Split('&').Select(s => s.Split('=')).ToDictionary(kvp => kvp[0], kvp => kvp[1]);
 
             return cookie;
         }
@@ -45,13 +46,21 @@ namespace YPM.Web.Genel.Wrapper.Cookie
                 .Cookies
                 .Append(
                     anahtar,
-                    Aes.Sifrele(deger.FromDictionaryToString()),
+                    Aes.Sifrele(string.Join("&", deger.Select(kvp => string.Join("=", kvp.Key, kvp.Value)))),
                     secenek);
         }
 
         public void Sil(string anahtar)
         {
             _http.HttpContext.Response.Cookies.Delete(anahtar);
+        }
+
+        public void TumunuTemizle()
+        {
+            foreach (var item in _http.HttpContext.Request.Cookies.Keys)
+            {
+                _http.HttpContext.Response.Cookies.Delete(item);
+            }
         }
     }
 }

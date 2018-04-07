@@ -11,7 +11,7 @@ using YPM.Veri.Kaynak;
 namespace YPM.Veri.Migrations
 {
     [DbContext(typeof(YpmSebil))]
-    [Migration("20180405134739_v1")]
+    [Migration("20180407081233_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,33 +120,33 @@ namespace YPM.Veri.Migrations
                     b.ToTable("UrunKategori","MulkUrun");
                 });
 
-            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriNitelikGercek", b =>
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriOzellikGercek", b =>
                 {
-                    b.Property<int>("UrunKategoriNitelikId")
+                    b.Property<int>("UrunKategoriOzellikId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("UrunKategoriId");
 
-                    b.Property<int>("UrunNitelikId");
+                    b.Property<int>("UrunOzellikId");
 
-                    b.HasKey("UrunKategoriNitelikId", "UrunKategoriId", "UrunNitelikId");
+                    b.HasKey("UrunKategoriOzellikId", "UrunKategoriId", "UrunOzellikId");
 
                     b.HasIndex("UrunKategoriId");
 
-                    b.HasIndex("UrunNitelikId");
+                    b.HasIndex("UrunOzellikId");
 
                     b.ToTable("UrunKategoriNitelik","MulkUrun");
                 });
 
-            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunNitelikGercek", b =>
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunOzellikGercek", b =>
                 {
-                    b.Property<int>("UrunNitelikId")
+                    b.Property<int>("UrunOzellikId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Ad")
                         .HasMaxLength(250);
 
-                    b.HasKey("UrunNitelikId");
+                    b.HasKey("UrunOzellikId");
 
                     b.ToTable("UrunNitelik","MulkUrun");
                 });
@@ -159,16 +159,16 @@ namespace YPM.Veri.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriNitelikGercek", b =>
+            modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriOzellikGercek", b =>
                 {
                     b.HasOne("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunKategoriGercek", "Kategori")
-                        .WithMany("KategoriNitelik")
+                        .WithMany("KategoriOzellik")
                         .HasForeignKey("UrunKategoriId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunNitelikGercek", "Nitelik")
-                        .WithMany("KategoriNitelik")
-                        .HasForeignKey("UrunNitelikId")
+                    b.HasOne("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunOzellikGercek", "Ozellik")
+                        .WithMany("KategoriOzellik")
+                        .HasForeignKey("UrunOzellikId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
