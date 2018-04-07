@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Transactions;
 using YPM.Birim.Genel.Birim.Generic;
 using YPM.SuretVarlik.Mulk.Enstruman;
 using YPM.SuretVarlik.Mulk.Enum.Ortak;
@@ -33,7 +32,6 @@ namespace YPM.Birim.Genel.Birim.Kisi
             bool islemOnay = new bool();
 
             VarYokDurum donenDeger = new VarYokDurum();
-
 
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())

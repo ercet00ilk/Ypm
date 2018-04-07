@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
+﻿namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
 {
     public class UrunOzellikSuret
     {

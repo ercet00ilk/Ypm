@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using YPM.SuretVarlik.Mulk.Enstruman;
-using YPM.Web.Genel.Helper;
 
 namespace YPM.Web.Genel.Wrapper.Cookie
 {

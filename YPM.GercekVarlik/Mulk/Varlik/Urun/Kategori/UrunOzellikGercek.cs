@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 {
-  public  class UrunOzellikGercek
-     : IDisposable
+    public class UrunOzellikGercek
+       : IDisposable
     {
         public int UrunOzellikId { get; set; }
 

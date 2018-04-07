@@ -171,16 +171,8 @@ namespace YPM.Web.Areas.Admin.Controllers
         public IActionResult Duzenle(
          int katId)
         {
-
-
             return View();
         }
-
-
-
-
-
-
 
         protected override void Dispose(bool disposing)
         {

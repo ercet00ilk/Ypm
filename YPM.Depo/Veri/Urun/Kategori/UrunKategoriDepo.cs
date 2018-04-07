@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Transactions;
 using YPM.Birim.Genel.Birim.Generic;
 using YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori;
 using YPM.SuretVarlik.Mulk.Enstruman;
@@ -116,7 +115,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
                     }
 
                     islemOnay = true;
-
                 }
                 catch (Exception ex)
                 {
@@ -226,10 +224,8 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     var kategori = gorev.UrunKategori.Bul(x => x.UrunKategoriId.Equals(katId));
                     var ozellikGrubu = gorev.UrunKategoriOzellik.GetirTumKoleksiyon(x => x.UrunKategoriId.Equals(kategori.UrunKategoriId));
 

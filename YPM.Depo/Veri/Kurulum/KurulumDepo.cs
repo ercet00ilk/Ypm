@@ -68,7 +68,6 @@ namespace YPM.Depo.Veri.Kurulum
             {
                 try
                 {
-
                     var olay = await gorev.Kurulum.BulAsync(x => x.Ad == "AnaKurulum");
 
                     if (olay == null) donenDeger = true;
@@ -99,7 +98,6 @@ namespace YPM.Depo.Veri.Kurulum
                     if (islemOnay) islem.Commit();
                     else islem.Rollback();
                 }
-
             }
 
             return donenDeger;
@@ -141,7 +139,6 @@ namespace YPM.Depo.Veri.Kurulum
                 finally
                 {
                     if (islemOnay) islem.Commit();
-
                 }
 
                 return;

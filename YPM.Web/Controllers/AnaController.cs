@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Diagnostics;
 using YPM.SuretVarlik.Mulk.Model.Istisna;
 using YPM.Web.Genel.Wrapper.Cookie;
@@ -14,7 +13,6 @@ namespace YPM.Web.Controllers
             [FromServices] ICerezSar _cerezSar,
             [FromServices] ISessionSar _sessionSar)
         {
-
             {
                 if (!UyeGirisYaptiMi()) BeniHatirla(_cerezSar);
             }

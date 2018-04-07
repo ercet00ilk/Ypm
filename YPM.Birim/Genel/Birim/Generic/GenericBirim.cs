@@ -100,7 +100,6 @@ namespace YPM.Birim.Genel.Birim.Generic
                 }
             }
 
-
             return donenDeger;
         }
 
@@ -139,7 +138,6 @@ namespace YPM.Birim.Genel.Birim.Generic
                     istisna.Yazdir(istisna);
                 }
             }
-
 
             return donenDeger;
         }
@@ -180,7 +178,6 @@ namespace YPM.Birim.Genel.Birim.Generic
                 }
             }
 
-
             return donenDeger;
         }
 
@@ -189,7 +186,6 @@ namespace YPM.Birim.Genel.Birim.Generic
             ICollection<T> donenDeger = null;
 
             bool IslemOnay = new bool();
-
 
             try
             {
@@ -221,7 +217,6 @@ namespace YPM.Birim.Genel.Birim.Generic
                 }
             }
 
-
             return donenDeger;
         }
 
@@ -230,7 +225,6 @@ namespace YPM.Birim.Genel.Birim.Generic
             ICollection<T> donenDeger = null;
 
             bool IslemOnay = new bool();
-
 
             try
             {
@@ -261,7 +255,6 @@ namespace YPM.Birim.Genel.Birim.Generic
                     istisna.Yazdir(istisna);
                 }
             }
-
 
             return donenDeger;
         }
@@ -339,39 +332,37 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-           
-                try
-                {
-                    _kur.Add(varlik);
-                    await _sebil.SaveChangesAsync();
-                    donenDeger = varlik;
+            try
+            {
+                _kur.Add(varlik);
+                await _sebil.SaveChangesAsync();
+                donenDeger = varlik;
 
-                    IslemOnay = true;
-                }
-                catch (Exception ex)
-                {
-                    IslemOnay = false;
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
 
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public virtual async Task<T> EkleAsync(T varlik) ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
+                {
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public virtual async Task<T> EkleAsync(T varlik) ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-               
+            }
 
             return donenDeger;
         }
@@ -382,37 +373,35 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-           
-                try
-                {
-                    donenDeger = _kur.Find(id);
+            try
+            {
+                donenDeger = _kur.Find(id);
 
-                    IslemOnay = true;
-                }
-                catch (Exception ex)
-                {
-                    IslemOnay = false;
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
 
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public T Getir(int id) ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
+                {
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public T Getir(int id) ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-               
+            }
 
             return donenDeger;
         }
@@ -423,36 +412,35 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-                try
-                {
-                    donenDeger = await _kur.FindAsync(id);
+            try
+            {
+                donenDeger = await _kur.FindAsync(id);
 
-                    IslemOnay = true;
-                }
-                catch (Exception ex)
-                {
-                    IslemOnay = false;
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
 
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public virtual async Task<T> GetirAsync(int id) ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
+                {
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public virtual async Task<T> GetirAsync(int id) ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-               
+            }
 
             return donenDeger;
         }
@@ -463,44 +451,42 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-            
-                try
+            try
+            {
+                IQueryable<T> sorgu = GetirTumKoleksiyon();
+
+                foreach (Expression<Func<T, object>> dahilOzellik in dahilOzellikler)
                 {
-                    IQueryable<T> sorgu = GetirTumKoleksiyon();
-
-                    foreach (Expression<Func<T, object>> dahilOzellik in dahilOzellikler)
-                    {
-                        sorgu = sorgu.Include<T, object>(dahilOzellik);
-                    }
-
-                    donenDeger = sorgu;
-
-                    IslemOnay = true;
+                    sorgu = sorgu.Include<T, object>(dahilOzellik);
                 }
-                catch (Exception ex)
+
+                donenDeger = sorgu;
+
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
+
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
                 {
-                    IslemOnay = false;
-
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public IQueryable<T> GetirTumKoleksiyon(params Expression<Func<T, object>>[] dahilOzellikler) ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public IQueryable<T> GetirTumKoleksiyon(params Expression<Func<T, object>>[] dahilOzellikler) ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-              
+            }
 
             return donenDeger;
         }
@@ -511,37 +497,35 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-           
-                try
-                {
-                    donenDeger = _kur;
+            try
+            {
+                donenDeger = _kur;
 
-                    IslemOnay = true;
-                }
-                catch (Exception ex)
-                {
-                    IslemOnay = false;
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
 
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public IQueryable<T> GetirTumKoleksiyon() ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
+                {
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public IQueryable<T> GetirTumKoleksiyon() ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-               
+            }
 
             return donenDeger;
         }
@@ -552,37 +536,35 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-            
-                try
-                {
-                    donenDeger = await _kur.ToListAsync();
+            try
+            {
+                donenDeger = await _kur.ToListAsync();
 
-                    IslemOnay = true;
-                }
-                catch (Exception ex)
-                {
-                    IslemOnay = false;
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
 
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public virtual async Task<ICollection<T>> GetirTumKoleksiyonAsyn() ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
+                {
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public virtual async Task<ICollection<T>> GetirTumKoleksiyonAsyn() ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-               
+            }
 
             return donenDeger;
         }
@@ -593,45 +575,43 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-           
-                try
+            try
+            {
+                if (varlik == null) return null;
+                T varMi = _kur.Find(anahtar);
+                if (varMi != null)
                 {
-                    if (varlik == null) return null;
-                    T varMi = _kur.Find(anahtar);
-                    if (varMi != null)
-                    {
-                        _sebil.Entry(varMi).CurrentValues.SetValues(varlik);
-                        _sebil.SaveChanges();
-                    }
-
-                    donenDeger = varMi;
-
-                    IslemOnay = true;
+                    _sebil.Entry(varMi).CurrentValues.SetValues(varlik);
+                    _sebil.SaveChanges();
                 }
-                catch (Exception ex)
+
+                donenDeger = varMi;
+
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
+
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
                 {
-                    IslemOnay = false;
-
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public T Guncelle(T varlik, object anahtar) ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public T Guncelle(T varlik, object anahtar) ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-               
+            }
 
             return donenDeger;
         }
@@ -642,43 +622,42 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-                try
+            try
+            {
+                if (varlik == null) return null;
+                T varMi = await _kur.FindAsync(anahtar);
+                if (varMi != null)
                 {
-                    if (varlik == null) return null;
-                    T varMi = await _kur.FindAsync(anahtar);
-                    if (varMi != null)
-                    {
-                        _sebil.Entry(varMi).CurrentValues.SetValues(varlik);
-                        await _sebil.SaveChangesAsync();
-                    }
-                    donenDeger = varMi;
-
-                    IslemOnay = true;
+                    _sebil.Entry(varMi).CurrentValues.SetValues(varlik);
+                    await _sebil.SaveChangesAsync();
                 }
-                catch (Exception ex)
+                donenDeger = varMi;
+
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
+
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
                 {
-                    IslemOnay = false;
-
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public virtual async Task<T> GuncelleAsyn(T varlik, object anahtar) ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public virtual async Task<T> GuncelleAsyn(T varlik, object anahtar) ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-                
+            }
 
             return donenDeger;
         }
@@ -713,38 +692,36 @@ namespace YPM.Birim.Genel.Birim.Generic
         {
             bool IslemOnay = new bool();
 
-         
-                try
-                {
-                    T SilinecekVarlik = _kur.Find(id);
-                    _kur.Remove(SilinecekVarlik);
-                    await _sebil.SaveChangesAsync();
-                    IslemOnay = true;
-                }
-                catch (Exception ex)
-                {
-                    IslemOnay = false;
+            try
+            {
+                T SilinecekVarlik = _kur.Find(id);
+                _kur.Remove(SilinecekVarlik);
+                await _sebil.SaveChangesAsync();
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
 
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public async Task SilAsync(int id) ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
+                {
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public async Task SilAsync(int id) ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
-                
+            }
 
             return;
         }

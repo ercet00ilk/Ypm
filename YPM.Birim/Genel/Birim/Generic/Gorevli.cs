@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 using YPM.Birim.Genel.Birim.Kisi;
 using YPM.Birim.Genel.Birim.Kurulum;
 using YPM.Birim.Genel.Birim.Lokasyon;

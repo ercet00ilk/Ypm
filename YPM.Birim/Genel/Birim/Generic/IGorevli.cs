@@ -23,7 +23,5 @@ namespace YPM.Birim.Genel.Birim.Generic
         IUrunKategoriOzellikBirim UrunKategoriOzellik { get; }
 
         int Tamamla();
-
-
     }
 }

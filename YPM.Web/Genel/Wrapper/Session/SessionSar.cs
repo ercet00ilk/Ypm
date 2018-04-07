@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
-using YPM.SuretVarlik.Mulk.Enstruman;
 using YPM.SuretVarlik.Mulk.Suret.Session;
 
 namespace YPM.Web.Genel.Wrapper.Session
@@ -41,7 +40,7 @@ namespace YPM.Web.Genel.Wrapper.Session
             var deger = _session.GetString(anahtar);
 
             return deger == null ? default(T) : JsonConvert.DeserializeObject<T>(deger);
-        } 
+        }
 
         public void Sil(string anahtar)
         {

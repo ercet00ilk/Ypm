@@ -16,9 +16,8 @@ namespace YPM.Web.Genel.Wrapper.Cookie
         void TumunuTemizle();
     }
 
-
     /* Kullanımı
-     
+
      if (_cerezSar.VarMi("ypm_kontrol"))//=> Kontrol çerezi varsa
             {
                 if (_cerezSar.VarMi("ypm_giris"))
@@ -54,6 +53,6 @@ namespace YPM.Web.Genel.Wrapper.Cookie
                     HttpOnly = true,
                     Expires = DateTime.Now.AddDays(1)
                 });
-     
+
      */
 }

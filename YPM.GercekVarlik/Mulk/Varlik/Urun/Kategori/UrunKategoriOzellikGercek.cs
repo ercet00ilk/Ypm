@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 {
-   public class UrunKategoriOzellikGercek
-  : IDisposable
+    public class UrunKategoriOzellikGercek
+   : IDisposable
     {
         public int UrunKategoriOzellikId { get; set; }
 
@@ -19,7 +17,7 @@ namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 
         #region IDisposable Support
 
-        private bool disposedValue = false; 
+        private bool disposedValue = false;
 
         protected virtual void Dispose(bool disposing)
         {
