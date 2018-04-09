@@ -6,13 +6,12 @@ namespace YPM.Depo.Veri.Urun.Kategori
     public interface IUrunKategoriDepo
     {
         bool KontrolEt(string ad);
-
         ICollection<UrunKategoriSuret> TumUrunKategoriDinamikListesi();
-
         ICollection<UrunOzellikSuret> TumUrunOzellikDinamikListesi();
-
         bool UrunKategoriEkle(UrunKategoriSuret uks);
-
-        UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId);
+        UrunKategoriSuret UrunKategoriGetir(int katId);
+        UrunKategoriSuret UrunKategoriDuzenle(int katId);
+        int[] KategorininOzellikGrubuGetir(int katId);
+        
     }
 }

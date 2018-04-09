@@ -31,6 +31,7 @@ namespace YPM.Birim.Genel.Birim.Generic
             T donenDeger = null;
 
             bool IslemOnay = new bool();
+
             try
             {
                 donenDeger = _kur.SingleOrDefault(eslesen);
@@ -283,43 +284,35 @@ namespace YPM.Birim.Genel.Birim.Generic
 
             bool IslemOnay = new bool();
 
-            using (var transaction = _sebil.Database.BeginTransaction())
+            try
             {
-                try
-                {
-                    _kur.Add(varlik);
-                    _sebil.SaveChanges();
-                    donenDeger = varlik;
+                _kur.Add(varlik);
+                _sebil.SaveChanges();
+                donenDeger = varlik;
 
-                    IslemOnay = true;
-                }
-                catch (Exception ex)
-                {
-                    IslemOnay = false;
+                IslemOnay = true;
+            }
+            catch (Exception ex)
+            {
+                IslemOnay = false;
 
-                    using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
-                    {
-                        istisna.TamYol = GetType().FullName;
-                        istisna.Method = MethodBase.GetCurrentMethod().Name;
-                        istisna.KisiId = 0;
-                        istisna.Hata = ex.ToString();
-                        istisna.TabanHata = ex.GetBaseException().ToString();
-                        istisna.Sonuc = " public virtual T Ekle(T varlik) ";
-                        istisna.IslemOnay = IslemOnay;
-                        istisna.Tarih = Tarih.GuncelTarihVer();
-                        istisna.Veri = ex.Data;
-                        istisna.Link = ex.HelpLink;
-                        istisna.HSonuc = ex.HResult;
-                        istisna.Kaynak = ex.Source;
-                        istisna.Mesaj = ex.GetBaseException().Message;
-                        istisna.YiginIzleme = ex.StackTrace;
-                        istisna.Yazdir(istisna);
-                    }
-                }
-                finally
+                using (BirimIstisna istisna = BirimIstisna.YeniIstisna())
                 {
-                    if (IslemOnay) transaction.Commit();
-                    else transaction.Rollback();
+                    istisna.TamYol = GetType().FullName;
+                    istisna.Method = MethodBase.GetCurrentMethod().Name;
+                    istisna.KisiId = 0;
+                    istisna.Hata = ex.ToString();
+                    istisna.TabanHata = ex.GetBaseException().ToString();
+                    istisna.Sonuc = " public virtual T Ekle(T varlik) ";
+                    istisna.IslemOnay = IslemOnay;
+                    istisna.Tarih = Tarih.GuncelTarihVer();
+                    istisna.Veri = ex.Data;
+                    istisna.Link = ex.HelpLink;
+                    istisna.HSonuc = ex.HResult;
+                    istisna.Kaynak = ex.Source;
+                    istisna.Mesaj = ex.GetBaseException().Message;
+                    istisna.YiginIzleme = ex.StackTrace;
+                    istisna.Yazdir(istisna);
                 }
             }
 

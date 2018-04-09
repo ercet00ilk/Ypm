@@ -151,8 +151,8 @@ namespace YPM.Web.Areas.Admin.Controllers
             int katId,
             [FromServices]IUrunKategoriDepo _urunKategori)
         {
-            UrunKategoriDetaySuret ds = new UrunKategoriDetaySuret();
-            ds = _urunKategori.UrunKategoriDetayGetir(katId);
+            UrunKategoriSuret ds = new UrunKategoriSuret();
+            ds = _urunKategori.UrunKategoriGetir(katId);
 
             UrunKategoriDetayModel model = new UrunKategoriDetayModel();
             model.KategoriId = ds.KategoriId;
@@ -169,9 +169,49 @@ namespace YPM.Web.Areas.Admin.Controllers
 
         [Route("/Admin/UrunKategori/Duzenle/{katId:int}")]
         public IActionResult Duzenle(
-         int katId)
+         int katId,
+         [FromServices]IUrunKategoriDepo _urunKategori)
         {
-            return View();
+
+
+            UrunKategoriEkleModel ukem = new UrunKategoriEkleModel();
+
+
+            {
+                UrunKategoriSuret uks = new UrunKategoriSuret();
+
+                uks = _urunKategori.UrunKategoriGetir(katId);
+
+                ukem.Aciklama = uks.Aciklama;
+                ukem.Ad = uks.Ad;
+                ukem.AktifMi = uks.AktifMi;
+                ukem.AnahtarKelime = uks.AnahtarKelime;
+                ukem.SayfaBaslik = uks.SayfaBaslik;
+                ukem.Tanim = uks.Tanim;
+
+                uks.Dispose();
+            }
+
+            {
+                ukem.TumOzellikGruplari = new List<SelectListItem>();
+
+                foreach (var ozellik in _urunKategori.TumUrunOzellikDinamikListesi())
+                {
+                    ukem.TumOzellikGruplari
+                        .Add(new SelectListItem
+                        {
+                            Value = ozellik.UrunOzellikId.ToString(),
+                            Text = ozellik.Ad.ToString()
+                        });
+                }
+
+            }
+
+            {
+                ukem.OzellikGrubuEkleId = _urunKategori.KategorininOzellikGrubuGetir(katId);
+            }
+
+            return View(ukem);
         }
 
         protected override void Dispose(bool disposing)

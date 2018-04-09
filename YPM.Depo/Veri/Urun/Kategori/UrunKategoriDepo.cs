@@ -14,6 +14,8 @@ namespace YPM.Depo.Veri.Urun.Kategori
     public class UrunKategoriDepo
            : IUrunKategoriDepo
     {
+
+
         public bool KontrolEt(string ad)
         {
             bool islemOnay = new bool();
@@ -88,7 +90,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
                         {
                             _tumUrunKategoriListesi.Add(new UrunKategoriSuret()
                             {
-                                UrunKategoriId = item.UrunKategoriId,
+                                KategoriId = item.UrunKategoriId,
                                 BabaId = item.BabaId,
                                 Ad = item.Ad,
                                 Aciklama = item.Aciklama,
@@ -215,11 +217,11 @@ namespace YPM.Depo.Veri.Urun.Kategori
             return _tumUrunOzellikListesi;
         }
 
-        public UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId)
+        public UrunKategoriSuret UrunKategoriGetir(int katId)
         {
             bool islemOnay = new bool();
 
-            UrunKategoriDetaySuret ds = new UrunKategoriDetaySuret();
+            UrunKategoriSuret ds = new UrunKategoriSuret();
 
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
@@ -303,13 +305,22 @@ namespace YPM.Depo.Veri.Urun.Kategori
                     })
                     {
                         gorev.UrunKategori.Ekle(ukg);
+                        List<int> donder = new List<int>();
 
-                        for (int i = 0; i < uks.YeniEklenecekNitelikler.Count; i++)
+                        uks.YeniEklenecekNitelikler.ForEach(x => donder.Add(x));// Ya bu
+
+                        //foreach (var item in uks.YeniEklenecekNitelikler)  // Ya bu
+                        //{
+                        //    donder.Add(item.Key);
+                        //}
+
+
+                        for (int i = 0; i < donder.Count; i++)
                         {
                             gorev.UrunKategoriOzellik.Ekle(new UrunKategoriOzellikGercek
                             {
                                 UrunKategoriId = ukg.UrunKategoriId,
-                                UrunOzellikId = uks.YeniEklenecekNitelikler[i]
+                                UrunOzellikId = donder[i]
                             });
                         }
                     }
@@ -340,6 +351,124 @@ namespace YPM.Depo.Veri.Urun.Kategori
             }
 
             return islemOnay;
+        }
+
+        public UrunKategoriSuret UrunKategoriDuzenle(int katId)
+        {
+            bool islemOnay = new bool();
+
+            UrunKategoriSuret ds = new UrunKategoriSuret();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+
+                    var kategori = gorev.UrunKategori.Bul(x => x.UrunKategoriId.Equals(katId));
+                    var ozellikGrubu = gorev.UrunKategoriOzellik.GetirTumKoleksiyon(x => x.UrunKategoriId.Equals(katId));
+
+                    ds.Aciklama = kategori.Aciklama;
+                    ds.Ad = kategori.Ad;
+                    ds.AktifMi = kategori.AktifMi;
+                    ds.AnahtarKelime = kategori.AnahtarKelime;
+                    ds.KategoriId = kategori.UrunKategoriId;
+                    ds.SayfaBaslik = kategori.SayfaBaslik;
+                    ds.Tanim = kategori.Tanim;
+                    ds.OzellikGrubu = (
+
+                        from urKat in gorev.UrunKategori.GetirTumKoleksiyon()
+
+                        join urKatOz in gorev.UrunKategoriOzellik.GetirTumKoleksiyon()
+                            on urKat.UrunKategoriId
+                            equals urKatOz.UrunKategoriId
+
+                        join urOz in gorev.UrunOzellik.GetirTumKoleksiyon()
+                            on urKatOz.UrunOzellikId
+                            equals urOz.UrunOzellikId
+
+                        where urKat.UrunKategoriId.Equals(kategori.UrunKategoriId)
+
+                        select urOz
+
+                                       ).ToDictionary(k => k.UrunOzellikId, v => v.Ad);
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return ds;
+        }
+
+        public int[] KategorininOzellikGrubuGetir(int katId)
+        {
+            bool islemOnay = new bool();
+
+            List<int> ds = new List<int>();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+
+                    var kategori = gorev.UrunKategori.Bul(x => x.UrunKategoriId.Equals(katId));
+                    var ozellikler = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunKategoriId.Equals(katId)).ToList();
+
+                    for (int i = 0; i < ozellikler.Count(); i++)
+                    {
+                        ds.Add(ozellikler[i].UrunOzellikId);
+                    }
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public int[] KategorininOzellikGrubuGetir(int katId) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return ds.ToArray();
         }
     }
 }

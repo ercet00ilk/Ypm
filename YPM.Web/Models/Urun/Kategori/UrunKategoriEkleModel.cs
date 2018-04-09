@@ -31,5 +31,6 @@ namespace YPM.Web.Models.Urun.Kategori
         public int[] OzellikGrubuEkleId { get; set; }
 
         public List<SelectListItem> TumOzellikGruplari { get; set; }
+
     }
 }
