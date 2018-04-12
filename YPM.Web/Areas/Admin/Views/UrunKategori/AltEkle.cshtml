@@ -1,0 +1,66 @@
+﻿@using YPM.Web.Models.Urun.Kategori
+@model UrunKategoriAltEkleModel
+@addTagHelper *, ViewComponent
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "AltEkle";
+    Layout = "~/Views/Shared/_AnaCerceve.cshtml";
+}
+
+<h2>AltEkle</h2>
+
+<h4>UrunKategoriAltEkleModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AltEkle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AktifMi" /> @Html.DisplayNameFor(model => model.AktifMi)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tanim" class="control-label"></label>
+                <input asp-for="Tanim" class="form-control" />
+                <span asp-validation-for="Tanim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SayfaBaslik" class="control-label"></label>
+                <input asp-for="SayfaBaslik" class="form-control" />
+                <span asp-validation-for="SayfaBaslik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aciklama" class="control-label"></label>
+                <input asp-for="Aciklama" class="form-control" />
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnahtarKelime" class="control-label"></label>
+                <input asp-for="AnahtarKelime" class="form-control" />
+                <span asp-validation-for="AnahtarKelime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnaKatId" class="control-label"></label>
+                <select asp-for="AnaKatId" asp-items="@Model.TumKategoriler"  class="form-control"></select>
+                <span asp-validation-for="AnaKatId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ekle" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -285,6 +285,95 @@ namespace YPM.Web.Areas.Admin.Controllers
             return View();
         }
 
+        [Route("/admin/urunkategori/altekle")]
+        public IActionResult AltEkle(
+            [FromServices]IUrunKategoriDepo _urunKategori)
+        {
+            UrunKategoriAltEkleModel aem = new UrunKategoriAltEkleModel();
+
+            {
+
+                aem.TumKategoriler = new List<SelectListItem>();
+
+                // Tip SelectListIteme Benzediği için aynen geçtim.
+                List<UrunOzellikSuret> TumKategoriListesi = new List<UrunOzellikSuret>();
+
+                aem.TumKategoriler.Add(new SelectListItem() { Text = "Seçiniz", Selected = true, Value = "" });
+
+                var tumKategoriListesi = _urunKategori.TumUrunKategoriDinamikListesi();
+
+                foreach (var kat1 in tumKategoriListesi.Where(x => x.BabaId.Equals(0)))
+                {
+                    aem.TumKategoriler.Add(new SelectListItem { Value = kat1.KategoriId.ToString(), Text = "-" + kat1.Ad.ToString() });
+
+                    foreach (var kat2 in tumKategoriListesi.Where(x => x.BabaId.Equals(kat1.KategoriId)))
+                    {
+                        aem.TumKategoriler.Add(new SelectListItem { Value = kat2.KategoriId.ToString(), Text = "--" + kat2.Ad.ToString() });
+
+                        foreach (var kat3 in tumKategoriListesi.Where(x => x.BabaId.Equals(kat2.KategoriId)))
+                        {
+                            aem.TumKategoriler.Add(new SelectListItem { Value = kat3.KategoriId.ToString(), Text = "---" + kat3.Ad.ToString() });
+
+
+                        }
+                    }
+                }
+
+
+            }
+
+            return View(aem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/admin/urunkategori/altekle")]
+        public IActionResult AltEkle(
+            UrunKategoriAltEkleModel aem,
+           [FromServices]IUrunKategoriDepo _urunKategori)
+        {
+
+            if (!(aem.AnaKatId > 0)) ModelState.AddModelError("", "Lütfen Kategori seçiniz.");
+
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            {
+
+                aem.TumKategoriler = new List<SelectListItem>();
+
+                // Tip SelectListIteme Benzediği için aynen geçtim.
+                List<UrunOzellikSuret> TumKategoriListesi = new List<UrunOzellikSuret>();
+
+                aem.TumKategoriler.Add(new SelectListItem() { Text = "Seçiniz", Selected = true, Value = "-1" });
+
+                var tumKategoriListesi = _urunKategori.TumUrunKategoriDinamikListesi();
+
+                foreach (var kat1 in tumKategoriListesi.Where(x => x.BabaId.Equals(0)))
+                {
+                    aem.TumKategoriler.Add(new SelectListItem { Value = kat1.KategoriId.ToString(), Text = "-" + kat1.Ad.ToString() });
+
+                    foreach (var kat2 in tumKategoriListesi.Where(x => x.BabaId.Equals(kat1.KategoriId)))
+                    {
+                        aem.TumKategoriler.Add(new SelectListItem { Value = kat2.KategoriId.ToString(), Text = "--" + kat2.Ad.ToString() });
+
+                        foreach (var kat3 in tumKategoriListesi.Where(x => x.BabaId.Equals(kat2.KategoriId)))
+                        {
+                            aem.TumKategoriler.Add(new SelectListItem { Value = kat3.KategoriId.ToString(), Text = "---" + kat3.Ad.ToString() });
+
+
+                        }
+                    }
+                }
+
+
+            }
+
+            return View(aem);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (Disposed) return;
