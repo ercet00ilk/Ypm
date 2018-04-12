@@ -6,5 +6,6 @@ namespace YPM.Birim.Genel.Birim.Urun.Kategori.Ozellik
     public interface IUrunKategoriOzellikBirim
         : IGenericBirim<UrunKategoriOzellikGercek>
     {
+        bool IcerirMi(int kategoriId, int deger);
     }
 }

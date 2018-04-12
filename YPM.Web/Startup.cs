@@ -9,6 +9,7 @@ using YPM.Depo.Veri.Kurulum;
 using YPM.Depo.Veri.Sistem;
 using YPM.Depo.Veri.Urun.Kategori;
 using YPM.Web.Genel.MiddleWare;
+using YPM.Web.Genel.Wrapper.Cache;
 using YPM.Web.Genel.Wrapper.Cookie;
 using YPM.Web.Genel.Wrapper.Session;
 
@@ -30,14 +31,19 @@ namespace YPM.Web
             servisler.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             servisler.AddSingleton<ISessionSar, SessionSar>();
             servisler.AddSingleton<ICerezSar, CerezSar>();
+            servisler.AddSingleton<IOnBellekSar, OnBellekSar>();
 
             servisler.AddTransient<IGunlukDepo, GunlukDepo>();
             servisler.AddTransient<IKisiDepo, KisiDepo>();
             servisler.AddTransient<ISistemDepo, SistemDepo>();
             servisler.AddTransient<IUrunKategoriDepo, UrunKategoriDepo>();
 
+            
+
             servisler.AddMvc()
                  .AddSessionStateTempDataProvider();
+
+            servisler.AddMemoryCache();
 
             servisler.AddSession();
 

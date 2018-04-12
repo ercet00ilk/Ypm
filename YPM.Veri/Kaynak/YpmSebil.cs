@@ -102,13 +102,13 @@ namespace YPM.Veri.Kaynak
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.SayfaBaslik).HasMaxLength(250);
             modelBuilder.Entity<UrunKategoriGercek>().Property(x => x.Tanim).HasMaxLength(400);
 
-            modelBuilder.Entity<UrunOzellikGercek>().ToTable("UrunNitelik", "MulkUrun");
+            modelBuilder.Entity<UrunOzellikGercek>().ToTable("UrunOzellik", "MulkUrun");
             modelBuilder.Entity<UrunOzellikGercek>().Property(x => x.UrunOzellikId).ValueGeneratedOnAdd();
             modelBuilder.Entity<UrunOzellikGercek>()
                 .HasKey(c => c.UrunOzellikId);
             modelBuilder.Entity<UrunOzellikGercek>().Property(x => x.Ad).HasMaxLength(250);
 
-            modelBuilder.Entity<UrunKategoriOzellikGercek>().ToTable("UrunKategoriNitelik", "MulkUrun");
+            modelBuilder.Entity<UrunKategoriOzellikGercek>().ToTable("UrunKategoriOzellik", "MulkUrun");
             modelBuilder.Entity<UrunKategoriOzellikGercek>().Property(c => c.UrunKategoriOzellikId).ValueGeneratedOnAdd();
             modelBuilder.Entity<UrunKategoriOzellikGercek>()
                 .HasKey(c => new

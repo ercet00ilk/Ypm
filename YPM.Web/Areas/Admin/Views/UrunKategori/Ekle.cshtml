@@ -18,11 +18,12 @@
         </div>
         <div class="col-md-8">
             <div class="col-md-8">
-                <h2>UrunKategoriEkle</h2>
 
+                <h2>UrunKategoriEkle </h2>
+                <h3> <a asp-area="admin" asp-controller="urunkategori" asp-action="altekle" class="btn btn-info">Alt Kategori Ekle</a></h3>
                 <h4>UrunKategoriEkleModel</h4>
                 <hr />
-                <form asp-action="Ekle">
+                <form asp-action="ekle" asp-controller="urunkategori" asp-area="admin" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Ad" class="control-label"></label>

@@ -11,6 +11,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
         bool UrunKategoriEkle(UrunKategoriSuret uks);
         UrunKategoriSuret UrunKategoriGetir(int katId);
         UrunKategoriSuret UrunKategoriDuzenle(int katId);
+        bool UrunKategoriDuzenle(UrunKategoriSuret uks);
         int[] KategorininOzellikGrubuGetir(int katId);
         
     }

@@ -5,8 +5,11 @@ using YPM.Depo.Veri.Gunluk;
 using YPM.Depo.Veri.Sistem;
 using YPM.Depo.Veri.Urun.Kategori;
 using YPM.SuretVarlik.Mulk.Suret.Urun.Kategori;
+using YPM.Web.Genel.Wrapper.Cache;
 using YPM.Web.Genel.Wrapper.Session;
 using YPM.Web.Models.Urun.Kategori;
+using Microsoft.Extensions.Caching.Memory;
+using System.Linq;
 
 namespace YPM.Web.Areas.Admin.Controllers
 {
@@ -58,11 +61,11 @@ namespace YPM.Web.Areas.Admin.Controllers
                 uks.AnahtarKelime = model.AnahtarKelime;
                 uks.BabaId = 0;
 
-                uks.YeniEklenecekNitelikler = new List<int>();
+                uks.YeniEklenecekOzellikler = new List<int>();
 
                 for (int i = 0; i < model.OzellikGrubuEkleId.Length; i++)
                 {
-                    uks.YeniEklenecekNitelikler.Add(model.OzellikGrubuEkleId[i]);
+                    uks.YeniEklenecekOzellikler.Add(model.OzellikGrubuEkleId[i]);
                 }
 
                 if (_urunKategori.UrunKategoriEkle(uks))
@@ -127,12 +130,12 @@ namespace YPM.Web.Areas.Admin.Controllers
             {
                 if (!(model.OzellikGrubuEkleId.Length > 0))
                 {
-                    ModelState.AddModelError("", "Lütfen Nitelikleri Ekleyiniz.");
+                    ModelState.AddModelError("", "Lütfen Özellikleri Ekleyiniz.");
                 }
             }
             else
             {
-                ModelState.AddModelError("", "Lütfen İlgili Nitelikleri Seçiniz.");
+                ModelState.AddModelError("", "Lütfen İlgili Özellikleri Seçiniz.");
             }
 
             if (model.Ad != null)
@@ -170,8 +173,11 @@ namespace YPM.Web.Areas.Admin.Controllers
         [Route("/Admin/UrunKategori/Duzenle/{katId:int}")]
         public IActionResult Duzenle(
          int katId,
-         [FromServices]IUrunKategoriDepo _urunKategori)
+         [FromServices]IUrunKategoriDepo _urunKategori,
+         [FromServices] ISessionSar _sessionSar)
         {
+
+            _sessionSar.Ekle("KatId", katId);
 
 
             UrunKategoriEkleModel ukem = new UrunKategoriEkleModel();
@@ -212,6 +218,71 @@ namespace YPM.Web.Areas.Admin.Controllers
             }
 
             return View(ukem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/Admin/UrunKategori/Duzenle/{katId:int}")]
+        public IActionResult Duzenle(
+            UrunKategoriEkleModel model,
+            [FromServices]IUrunKategoriDepo _urunKategori,
+            [FromServices] ISessionSar _sessionSar)
+        {
+
+            int katId = new int();
+
+            katId = _sessionSar.Getir<int>("KatId");
+
+            _sessionSar.Sil("KatId");
+
+            if (!(katId > 0)) return NotFound();
+
+            UrunKategoriSuret uks = new UrunKategoriSuret();
+
+            {
+                uks.KategoriId = katId;
+                uks.Aciklama = model.Aciklama;
+                uks.Ad = model.Ad;
+                uks.AktifMi = model.AktifMi;
+                uks.AnahtarKelime = model.AnahtarKelime;
+                uks.SayfaBaslik = model.SayfaBaslik;
+                uks.Tanim = model.Tanim;
+            }
+
+            {
+                uks.YeniEklenecekOzellikler = new List<int>();
+                uks.YeniEklenecekOzellikler.AddRange(model.OzellikGrubuEkleId);
+            }
+
+
+            if (_urunKategori.UrunKategoriDuzenle(uks))
+            {
+                //_gunluk.Ekle(
+                //  new GunlukVekil(
+                //          GetType().FullName,
+                //          MethodBase.GetCurrentMethod().Name,
+                //          _sistem.TarihGetir(),
+                //          GunlukDurum.ModelIstisna,
+                //          _sessionSar.SuAnki.AktifKisi.KisiId,
+                //          " Kategori ekleme işlemi başarılı. "
+                //      ));
+            }
+            else
+            {
+                //_gunluk.Ekle(
+                //  new GunlukVekil(
+                //          GetType().FullName,
+                //          MethodBase.GetCurrentMethod().Name,
+                //          _sistem.TarihGetir(),
+                //          GunlukDurum.ModelIstisna,
+                //          _sessionSar.SuAnki.AktifKisi.KisiId,
+                //          " Kategori ekleme işlemi başarısız. "
+                //      ));
+            }
+
+            uks.Dispose();
+
+            return View();
         }
 
         protected override void Dispose(bool disposing)

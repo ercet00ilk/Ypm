@@ -16,7 +16,7 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
         public string Ad { get; set; }
         public int BabaId { get; set; }
         public IDictionary<int, string> OzellikGrubu { get; set; }
-        public List<int> YeniEklenecekNitelikler { get; set; }
+        public List<int> YeniEklenecekOzellikler { get; set; }
 
         #region IDisposable Support
         private bool disposedValue = false;
@@ -28,7 +28,7 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
                 if (disposing)
                 {
                     if (OzellikGrubu != null) OzellikGrubu = null;
-                    if (YeniEklenecekNitelikler != null) YeniEklenecekNitelikler = null;
+                    if (YeniEklenecekOzellikler != null) YeniEklenecekOzellikler = null;
                 }
 
 

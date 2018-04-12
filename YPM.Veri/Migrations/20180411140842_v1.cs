@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
+using System.Collections.Generic;
 
 namespace YPM.Veri.Migrations
 {
@@ -74,7 +75,7 @@ namespace YPM.Veri.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UrunNitelik",
+                name: "UrunOzellik",
                 schema: "MulkUrun",
                 columns: table => new
                 {
@@ -84,7 +85,7 @@ namespace YPM.Veri.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UrunNitelik", x => x.UrunOzellikId);
+                    table.PrimaryKey("PK_UrunOzellik", x => x.UrunOzellikId);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,7 +113,7 @@ namespace YPM.Veri.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UrunKategoriNitelik",
+                name: "UrunKategoriOzellik",
                 schema: "MulkUrun",
                 columns: table => new
                 {
@@ -123,19 +124,19 @@ namespace YPM.Veri.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UrunKategoriNitelik", x => new { x.UrunKategoriOzellikId, x.UrunKategoriId, x.UrunOzellikId });
+                    table.PrimaryKey("PK_UrunKategoriOzellik", x => new { x.UrunKategoriOzellikId, x.UrunKategoriId, x.UrunOzellikId });
                     table.ForeignKey(
-                        name: "FK_UrunKategoriNitelik_UrunKategori_UrunKategoriId",
+                        name: "FK_UrunKategoriOzellik_UrunKategori_UrunKategoriId",
                         column: x => x.UrunKategoriId,
                         principalSchema: "MulkUrun",
                         principalTable: "UrunKategori",
                         principalColumn: "UrunKategoriId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UrunKategoriNitelik_UrunNitelik_UrunOzellikId",
+                        name: "FK_UrunKategoriOzellik_UrunOzellik_UrunOzellikId",
                         column: x => x.UrunOzellikId,
                         principalSchema: "MulkUrun",
-                        principalTable: "UrunNitelik",
+                        principalTable: "UrunOzellik",
                         principalColumn: "UrunOzellikId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -147,15 +148,15 @@ namespace YPM.Veri.Migrations
                 column: "KisiId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UrunKategoriNitelik_UrunKategoriId",
+                name: "IX_UrunKategoriOzellik_UrunKategoriId",
                 schema: "MulkUrun",
-                table: "UrunKategoriNitelik",
+                table: "UrunKategoriOzellik",
                 column: "UrunKategoriId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UrunKategoriNitelik_UrunOzellikId",
+                name: "IX_UrunKategoriOzellik_UrunOzellikId",
                 schema: "MulkUrun",
-                table: "UrunKategoriNitelik",
+                table: "UrunKategoriOzellik",
                 column: "UrunOzellikId");
         }
 
@@ -170,7 +171,7 @@ namespace YPM.Veri.Migrations
                 schema: "MulkKurulum");
 
             migrationBuilder.DropTable(
-                name: "UrunKategoriNitelik",
+                name: "UrunKategoriOzellik",
                 schema: "MulkUrun");
 
             migrationBuilder.DropTable(
@@ -182,7 +183,7 @@ namespace YPM.Veri.Migrations
                 schema: "MulkUrun");
 
             migrationBuilder.DropTable(
-                name: "UrunNitelik",
+                name: "UrunOzellik",
                 schema: "MulkUrun");
         }
     }

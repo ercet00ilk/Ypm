@@ -134,7 +134,7 @@ namespace YPM.Veri.Migrations
 
                     b.HasIndex("UrunOzellikId");
 
-                    b.ToTable("UrunKategoriNitelik","MulkUrun");
+                    b.ToTable("UrunKategoriOzellik","MulkUrun");
                 });
 
             modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori.UrunOzellikGercek", b =>
@@ -147,7 +147,7 @@ namespace YPM.Veri.Migrations
 
                     b.HasKey("UrunOzellikId");
 
-                    b.ToTable("UrunNitelik","MulkUrun");
+                    b.ToTable("UrunOzellik","MulkUrun");
                 });
 
             modelBuilder.Entity("YPM.GercekVarlik.Mulk.Varlik.Kisi.Ortak.LokasyonGercek", b =>
