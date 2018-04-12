@@ -27,7 +27,6 @@ namespace YPM.Birim.Genel.Birim.Urun.Kategori.Ozellik
 
             bool icerirMi = new bool();
 
-
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {

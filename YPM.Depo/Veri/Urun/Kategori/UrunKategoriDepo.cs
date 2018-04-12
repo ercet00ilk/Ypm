@@ -14,8 +14,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
     public class UrunKategoriDepo
            : IUrunKategoriDepo
     {
-
-
         public bool KontrolEt(string ad)
         {
             bool islemOnay = new bool();
@@ -309,7 +307,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
                         uks.YeniEklenecekOzellikler.ForEach(x => donder.Add(x));
 
-
                         for (int i = 0; i < donder.Count; i++)
                         {
                             gorev.UrunKategoriOzellik.Ekle(new UrunKategoriOzellikGercek
@@ -357,10 +354,8 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     var kategori = gorev.UrunKategori.Bul(x => x.UrunKategoriId.Equals(katId));
                     var ozellikGrubu = gorev.UrunKategoriOzellik.GetirTumKoleksiyon(x => x.UrunKategoriId.Equals(katId));
 
@@ -426,10 +421,8 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     var kategori = gorev.UrunKategori.Bul(x => x.UrunKategoriId.Equals(katId));
                     var ozellikler = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunKategoriId.Equals(katId)).ToList();
 
@@ -473,7 +466,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
                     var varlik = gorev.UrunKategori.Bul(x => x.UrunKategoriId.Equals(uks.KategoriId));
@@ -487,7 +479,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
                     gorev.UrunKategori.Guncelle(varlik, uks.KategoriId);
 
-
                     List<int> eskiOzellikList = new List<int>();
 
                     eskiOzellikList = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunKategoriId.Equals(uks.KategoriId)).Select(x => x.UrunKategoriOzellikId).ToList();
@@ -495,7 +486,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
                     List<int> yeniOzellikList = new List<int>();
 
                     yeniOzellikList = uks.YeniEklenecekOzellikler;
-
 
                     for (int i = 0; i < yeniOzellikList.Count; i++)
                     {
@@ -523,8 +513,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
                         gorev.UrunKategoriOzellik.Sil(silinecekVarlik);
                     }
-
-
 
                     islemOnay = true;
                 }

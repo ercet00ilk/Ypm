@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
 {
@@ -19,6 +18,7 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
         public List<int> YeniEklenecekOzellikler { get; set; }
 
         #region IDisposable Support
+
         private bool disposedValue = false;
 
         protected virtual void Dispose(bool disposing)
@@ -30,7 +30,6 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
                     if (OzellikGrubu != null) OzellikGrubu = null;
                     if (YeniEklenecekOzellikler != null) YeniEklenecekOzellikler = null;
                 }
-
 
                 disposedValue = true;
             }
@@ -47,8 +46,7 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
 
             GC.SuppressFinalize(this);
         }
-        #endregion
 
-
+        #endregion IDisposable Support
     }
 }

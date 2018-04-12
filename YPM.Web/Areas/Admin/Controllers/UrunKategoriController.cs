@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Linq;
 using YPM.Depo.Veri.Gunluk;
 using YPM.Depo.Veri.Sistem;
 using YPM.Depo.Veri.Urun.Kategori;
 using YPM.SuretVarlik.Mulk.Suret.Urun.Kategori;
-using YPM.Web.Genel.Wrapper.Cache;
 using YPM.Web.Genel.Wrapper.Session;
 using YPM.Web.Models.Urun.Kategori;
-using Microsoft.Extensions.Caching.Memory;
-using System.Linq;
 
 namespace YPM.Web.Areas.Admin.Controllers
 {
@@ -176,12 +174,9 @@ namespace YPM.Web.Areas.Admin.Controllers
          [FromServices]IUrunKategoriDepo _urunKategori,
          [FromServices] ISessionSar _sessionSar)
         {
-
             _sessionSar.Ekle("KatId", katId);
 
-
             UrunKategoriEkleModel ukem = new UrunKategoriEkleModel();
-
 
             {
                 UrunKategoriSuret uks = new UrunKategoriSuret();
@@ -210,7 +205,6 @@ namespace YPM.Web.Areas.Admin.Controllers
                             Text = ozellik.Ad.ToString()
                         });
                 }
-
             }
 
             {
@@ -228,7 +222,6 @@ namespace YPM.Web.Areas.Admin.Controllers
             [FromServices]IUrunKategoriDepo _urunKategori,
             [FromServices] ISessionSar _sessionSar)
         {
-
             int katId = new int();
 
             katId = _sessionSar.Getir<int>("KatId");
@@ -253,7 +246,6 @@ namespace YPM.Web.Areas.Admin.Controllers
                 uks.YeniEklenecekOzellikler = new List<int>();
                 uks.YeniEklenecekOzellikler.AddRange(model.OzellikGrubuEkleId);
             }
-
 
             if (_urunKategori.UrunKategoriDuzenle(uks))
             {
@@ -292,7 +284,6 @@ namespace YPM.Web.Areas.Admin.Controllers
             UrunKategoriAltEkleModel aem = new UrunKategoriAltEkleModel();
 
             {
-
                 aem.TumKategoriler = new List<SelectListItem>();
 
                 // Tip SelectListIteme Benzediği için aynen geçtim.
@@ -313,13 +304,23 @@ namespace YPM.Web.Areas.Admin.Controllers
                         foreach (var kat3 in tumKategoriListesi.Where(x => x.BabaId.Equals(kat2.KategoriId)))
                         {
                             aem.TumKategoriler.Add(new SelectListItem { Value = kat3.KategoriId.ToString(), Text = "---" + kat3.Ad.ToString() });
-
-
                         }
                     }
                 }
+            }
 
+            {
+                aem.TumOzellikGruplari = new List<SelectListItem>();
 
+                foreach (var ozellik in _urunKategori.TumUrunOzellikDinamikListesi())
+                {
+                    aem.TumOzellikGruplari
+                        .Add(new SelectListItem
+                        {
+                            Value = ozellik.UrunOzellikId.ToString(),
+                            Text = ozellik.Ad.ToString()
+                        });
+                }
             }
 
             return View(aem);
@@ -332,22 +333,44 @@ namespace YPM.Web.Areas.Admin.Controllers
             UrunKategoriAltEkleModel aem,
            [FromServices]IUrunKategoriDepo _urunKategori)
         {
-
             if (!(aem.AnaKatId > 0)) ModelState.AddModelError("", "Lütfen Kategori seçiniz.");
+
+            if (aem.OzellikGrubuEkleId == null) ModelState.AddModelError("", "Lütfen Nitelik seçiniz.");
 
             if (ModelState.IsValid)
             {
+                UrunKategoriSuret uks = new UrunKategoriSuret();
 
+                {
+                    uks.Aciklama = aem.Aciklama;
+                    uks.Ad = aem.Ad;
+                    uks.AktifMi = aem.AktifMi;
+                    uks.AnahtarKelime = aem.AnahtarKelime;
+                    uks.BabaId = aem.AnaKatId;
+                    uks.SayfaBaslik = aem.SayfaBaslik;
+                    uks.Tanim = aem.Tanim;
+                }
+
+                {
+                    uks.YeniEklenecekOzellikler = new List<int>();
+                    uks.YeniEklenecekOzellikler.AddRange(aem.OzellikGrubuEkleId);
+                }
+
+                if (_urunKategori.UrunKategoriEkle(uks))
+                {
+                }
+                else
+                {
+                }
             }
 
             {
-
                 aem.TumKategoriler = new List<SelectListItem>();
 
                 // Tip SelectListIteme Benzediği için aynen geçtim.
                 List<UrunOzellikSuret> TumKategoriListesi = new List<UrunOzellikSuret>();
 
-                aem.TumKategoriler.Add(new SelectListItem() { Text = "Seçiniz", Selected = true, Value = "-1" });
+                aem.TumKategoriler.Add(new SelectListItem() { Text = "Seçiniz", Selected = true, Value = "0" });
 
                 var tumKategoriListesi = _urunKategori.TumUrunKategoriDinamikListesi();
 
@@ -362,13 +385,23 @@ namespace YPM.Web.Areas.Admin.Controllers
                         foreach (var kat3 in tumKategoriListesi.Where(x => x.BabaId.Equals(kat2.KategoriId)))
                         {
                             aem.TumKategoriler.Add(new SelectListItem { Value = kat3.KategoriId.ToString(), Text = "---" + kat3.Ad.ToString() });
-
-
                         }
                     }
                 }
+            }
 
+            {
+                aem.TumOzellikGruplari = new List<SelectListItem>();
 
+                foreach (var ozellik in _urunKategori.TumUrunOzellikDinamikListesi())
+                {
+                    aem.TumOzellikGruplari
+                        .Add(new SelectListItem
+                        {
+                            Value = ozellik.UrunOzellikId.ToString(),
+                            Text = ozellik.Ad.ToString()
+                        });
+                }
             }
 
             return View(aem);

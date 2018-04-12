@@ -38,8 +38,6 @@ namespace YPM.Web
             servisler.AddTransient<ISistemDepo, SistemDepo>();
             servisler.AddTransient<IUrunKategoriDepo, UrunKategoriDepo>();
 
-            
-
             servisler.AddMvc()
                  .AddSessionStateTempDataProvider();
 

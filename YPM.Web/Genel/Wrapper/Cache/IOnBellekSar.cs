@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace YPM.Web.Genel.Wrapper.Cache
+﻿namespace YPM.Web.Genel.Wrapper.Cache
 {
     public interface IOnBellekSar
     {
@@ -14,13 +9,11 @@ namespace YPM.Web.Genel.Wrapper.Cache
         bool VarMi<T>(string anahtar, out T deger);
 
         T Getir<T>(string anahtar);
-
-        
     }
 
     /** Kullanımı
-     * 
-     * 
+     *
+     *
      *     {
                 _onBellekSar.Ekle<int>("AdminUrunKategoriEkle", katId, 15);
             }
