@@ -481,7 +481,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
                     List<int> eskiOzellikList = new List<int>();
 
-                    eskiOzellikList = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunKategoriId.Equals(uks.KategoriId)).Select(x => x.UrunKategoriOzellikId).ToList();
+                    eskiOzellikList = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunKategoriId.Equals(uks.KategoriId)).Select(x => x.UrunOzellikId).ToList();
 
                     List<int> yeniOzellikList = new List<int>();
 

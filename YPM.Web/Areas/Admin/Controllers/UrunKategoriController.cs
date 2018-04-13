@@ -232,8 +232,8 @@ namespace YPM.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("/admin/urunkategori/duzenle/{katId:int}")]
-        public IActionResult Duzenle(
+        [Route("/admin/urunkategori/duzennle/{katId:int}")]
+        public IActionResult Duzennle(
             int katId,
             [FromForm] UrunKategoriEkleModel model,
             [FromServices]IUrunKategoriDepo _urunKategori)
@@ -268,6 +268,9 @@ namespace YPM.Web.Areas.Admin.Controllers
                 //          _sessionSar.SuAnki.AktifKisi.KisiId,
                 //          " Kategori ekleme işlemi başarılı. "
                 //      ));
+
+                return RedirectToAction("detay", new { katId = katId });
+
             }
             else
             {
@@ -280,7 +283,13 @@ namespace YPM.Web.Areas.Admin.Controllers
                 //          _sessionSar.SuAnki.AktifKisi.KisiId,
                 //          " Kategori ekleme işlemi başarısız. "
                 //      ));
+
+
+                return RedirectToAction("detay", new { katId = katId });
+
+
             }
+
 
             uks.Dispose();
 
