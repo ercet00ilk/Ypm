@@ -77,6 +77,17 @@ namespace YPM.Web.Areas.Admin.Controllers
                     //          _sessionSar.SuAnki.AktifKisi.KisiId,
                     //          " Kategori ekleme işlemi başarılı. "
                     //      ));
+
+
+                    ViewBag.Script = "$(function () { $('#EkleModal').modal('show');});";
+                    ViewBag.Baslik = "Ekledim Gitti";
+                    ViewBag.Aciklama = "Vatana millete hayırlı uğurlu olsun.";
+                    ViewBag.AltBilgi = "<button type='button' class='btn btn-default' data-dismiss='modal'>Umursama</button>"
+                                     + "<button type ='button' class='btn btn-primary'>Atarlan</button>";
+
+
+
+
                 }
                 else
                 {
@@ -89,6 +100,13 @@ namespace YPM.Web.Areas.Admin.Controllers
                     //          _sessionSar.SuAnki.AktifKisi.KisiId,
                     //          " Kategori ekleme işlemi başarısız. "
                     //      ));
+
+
+                    ViewBag.Script = "$(function () { $('#EkleModal').modal('show');});";
+                    ViewBag.Baslik = "Eklenmedi";
+                    ViewBag.Aciklama = "Hayıtlısı be gülüm...";
+                    ViewBag.AltBilgi = "<button type='button' class='btn btn-default' data-dismiss='modal'>Umursama</button>"
+                                     + "<button type ='button' class='btn btn-primary'>Atarlan</button>";
                 }
             }
 
@@ -171,10 +189,8 @@ namespace YPM.Web.Areas.Admin.Controllers
         [Route("/Admin/UrunKategori/Duzenle/{katId:int}")]
         public IActionResult Duzenle(
          int katId,
-         [FromServices]IUrunKategoriDepo _urunKategori,
-         [FromServices] ISessionSar _sessionSar)
+         [FromServices]IUrunKategoriDepo _urunKategori)
         {
-            _sessionSar.Ekle("KatId", katId);
 
             UrunKategoriEkleModel ukem = new UrunKategoriEkleModel();
 
@@ -182,13 +198,13 @@ namespace YPM.Web.Areas.Admin.Controllers
                 UrunKategoriSuret uks = new UrunKategoriSuret();
 
                 uks = _urunKategori.UrunKategoriGetir(katId);
-
                 ukem.Aciklama = uks.Aciklama;
                 ukem.Ad = uks.Ad;
                 ukem.AktifMi = uks.AktifMi;
                 ukem.AnahtarKelime = uks.AnahtarKelime;
                 ukem.SayfaBaslik = uks.SayfaBaslik;
                 ukem.Tanim = uks.Tanim;
+
 
                 uks.Dispose();
             }
@@ -218,16 +234,10 @@ namespace YPM.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [Route("/Admin/UrunKategori/Duzenle/{katId:int}")]
         public IActionResult Duzenle(
-            UrunKategoriEkleModel model,
-            [FromServices]IUrunKategoriDepo _urunKategori,
-            [FromServices] ISessionSar _sessionSar)
+            int katId,
+            [FromForm] UrunKategoriEkleModel model,
+            [FromServices]IUrunKategoriDepo _urunKategori)
         {
-            int katId = new int();
-
-            katId = _sessionSar.Getir<int>("KatId");
-
-            _sessionSar.Sil("KatId");
-
             if (!(katId > 0)) return NotFound();
 
             UrunKategoriSuret uks = new UrunKategoriSuret();
