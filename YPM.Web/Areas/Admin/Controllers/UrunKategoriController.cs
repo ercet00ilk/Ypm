@@ -11,7 +11,7 @@ using YPM.Web.Models.Urun.Kategori;
 
 namespace YPM.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("admin")]
     public class UrunKategoriController
         : AdminOrtakController
     {
@@ -165,7 +165,7 @@ namespace YPM.Web.Areas.Admin.Controllers
             return model;
         }
 
-        [Route("/Admin/UrunKategori/Detay/{katId:int}")]
+        [Route("/admin/urunkategori/detay/{katId:int}")]
         public IActionResult Detay(
             int katId,
             [FromServices]IUrunKategoriDepo _urunKategori)
@@ -186,7 +186,7 @@ namespace YPM.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        [Route("/Admin/UrunKategori/Duzenle/{katId:int}")]
+        [Route("/admin/urunkategori/duzenle/{katId:int}")]
         public IActionResult Duzenle(
          int katId,
          [FromServices]IUrunKategoriDepo _urunKategori)
@@ -232,7 +232,7 @@ namespace YPM.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("/Admin/UrunKategori/Duzenle/{katId:int}")]
+        [Route("/admin/urunkategori/duzenle/{katId:int}")]
         public IActionResult Duzenle(
             int katId,
             [FromForm] UrunKategoriEkleModel model,
@@ -415,6 +415,13 @@ namespace YPM.Web.Areas.Admin.Controllers
             }
 
             return View(aem);
+        }
+
+
+        [Route("/admin/urunkategori/ozellikekle")]
+        public IActionResult OzellikEkle()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)
