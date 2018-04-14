@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
+using System.Collections.Generic;
 
 namespace YPM.Veri.Migrations
 {
@@ -80,7 +81,8 @@ namespace YPM.Veri.Migrations
                 {
                     UrunOzellikId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Ad = table.Column<string>(maxLength: 250, nullable: true)
+                    Ad = table.Column<string>(maxLength: 250, nullable: true),
+                    Durum = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -10,6 +10,8 @@ namespace YPM.GercekVarlik.Mulk.Varlik.Urun.Kategori
 
         public string Ad { get; set; }
 
+        public bool Durum { get; set; }
+
         public ICollection<UrunKategoriOzellikGercek> KategoriOzellik { get; } = new List<UrunKategoriOzellikGercek>();
 
         #region IDisposable Support

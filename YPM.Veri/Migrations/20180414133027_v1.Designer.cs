@@ -11,7 +11,7 @@ using YPM.Veri.Kaynak;
 namespace YPM.Veri.Migrations
 {
     [DbContext(typeof(YpmSebil))]
-    [Migration("20180411140842_v1")]
+    [Migration("20180414133027_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,6 +145,8 @@ namespace YPM.Veri.Migrations
 
                     b.Property<string>("Ad")
                         .HasMaxLength(250);
+
+                    b.Property<bool>("Durum");
 
                     b.HasKey("UrunOzellikId");
 

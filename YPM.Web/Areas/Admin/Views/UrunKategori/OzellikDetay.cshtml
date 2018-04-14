@@ -1,0 +1,51 @@
+﻿@using YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
+@model List<UrunOzellikSuret>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "OzellikDetay";
+    Layout = "~/Views/Shared/_AnaCerceve.cshtml";
+}
+
+<h2>OzellikDetay</h2>
+
+<form asp-controller="qwe" asp-action="qwe" asp-area="qwe" method="post" class="form-horizontal" role="form">
+    <fieldset class="form-group">
+        
+        
+        <div class="checkbox checkboxlist col-sm-9">
+            @{
+                for (int i = 0; i < Model.Count(); i++)
+                {
+                    <input asp-for="@Model[i].SeciliMi" type="checkbox" />
+                    <input asp-for="@Model[i].SeciliMi" type="hidden" />
+
+                    <label asp-for="@Model[i].UrunOzellikId">@Model[i].Ad</label>
+                    <input asp-for="@Model[i].UrunOzellikId" type="hidden" />
+
+                    <label asp-for="@Model[i].KategoriSayisi">@Model[i].KategoriSayisi</label>
+                    <input asp-for="@Model[i].KategoriSayisi" type="hidden" />
+
+                    <label asp-for="@Model[i].OzellikSayisi">@Model[i].OzellikSayisi</label>
+                    <input asp-for="@Model[i].OzellikSayisi" type="hidden" />
+
+                    <label asp-for="@Model[i].Durum">@Model[i].Durum</label>
+                    <input asp-for="@Model[i].Durum" type="hidden" />
+
+
+                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-danger">Duzenle</a> 
+                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-info">Durumu Değiştir</a>
+                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-default">Sil</a>
+
+            <br />
+                }
+            }
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <input type="submit" id="submit1" value="Duzenle" class="btn btn-sm btn-success" />
+            </div>
+        </div>
+    </fieldset>
+</form>

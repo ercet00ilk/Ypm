@@ -145,6 +145,8 @@ namespace YPM.Veri.Migrations
                     b.Property<string>("Ad")
                         .HasMaxLength(250);
 
+                    b.Property<bool>("Durum");
+
                     b.HasKey("UrunOzellikId");
 
                     b.ToTable("UrunOzellik","MulkUrun");

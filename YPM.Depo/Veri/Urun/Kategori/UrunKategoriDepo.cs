@@ -541,5 +541,102 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
             return islemOnay;
         }
+
+        public List<UrunOzellikSuret> KategoriOzellikDetayGetir()
+        {
+            bool islemOnay = new bool();
+
+            List<UrunOzellikSuret> ds = new List<UrunOzellikSuret>();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+
+                    List<UrunOzellikGercek> urunOzellik = gorev.UrunOzellik.GetirTumKoleksiyon().ToList();
+
+                    var urunKategori = gorev.UrunKategori.GetirTumKoleksiyon();
+
+                    var urunKategoriOzellik = gorev.UrunKategoriOzellik.GetirTumKoleksiyon();
+
+
+                    for (int i = 0; i < urunOzellik.Count; i++)
+                    {
+                        int urunOzellikId = urunOzellik[i].UrunOzellikId;
+                        int urunKategoriId = urunKategoriOzellik.Where(x => x.UrunOzellikId.Equals(urunOzellikId)).Select(x => x.UrunKategoriId).FirstOrDefault();
+
+
+
+                        ds.Add(new UrunOzellikSuret
+                        {
+                            UrunOzellikId = urunOzellik[i].UrunOzellikId,
+                            Ad = urunOzellik[i].Ad,
+                            Durum = urunOzellik[i].Durum,
+                            KategoriSayisi = (
+
+                                         from urKat in gorev.UrunKategori.GetirTumKoleksiyon()
+
+                                         join urKatOz in gorev.UrunKategoriOzellik.GetirTumKoleksiyon()
+                                             on urKat.UrunKategoriId
+                                             equals urKatOz.UrunKategoriId
+
+                                         join urOz in gorev.UrunOzellik.GetirTumKoleksiyon()
+                                             on urKatOz.UrunOzellikId
+                                             equals urOz.UrunOzellikId
+
+                                         where urKatOz.UrunKategoriId.Equals(urunKategoriId)
+
+                                         select urKatOz).Count()
+
+                             ,
+                            OzellikSayisi = (
+
+                                         from urKat in gorev.UrunKategori.GetirTumKoleksiyon()
+
+                                         join urKatOz in gorev.UrunKategoriOzellik.GetirTumKoleksiyon()
+                                             on urKat.UrunKategoriId
+                                             equals urKatOz.UrunKategoriId
+
+                                         join urOz in gorev.UrunOzellik.GetirTumKoleksiyon()
+                                             on urKatOz.UrunOzellikId
+                                             equals urOz.UrunOzellikId
+
+                                         where urKatOz.UrunOzellikId.Equals(urunOzellikId)
+
+                                         select urKatOz).Count(),
+                            SeciliMi = true
+
+                        });
+                    }
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public List<UrunOzellikSuret> KategoriOzellikDetayGetir() ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return ds;
+        }
     }
 }

@@ -433,6 +433,23 @@ namespace YPM.Web.Areas.Admin.Controllers
             return View();
         }
 
+        [Route("/admin/urunkategori/ozellikduzenle")]
+        public IActionResult OzellikDuzenle()
+        {
+            return View();
+        }
+
+        [Route("/admin/urunkategori/ozellikdetay")]
+        public IActionResult OzellikDetay(
+           [FromServices]IUrunKategoriDepo _urunKategori)
+        {
+            List<UrunOzellikSuret> modelList = new List<UrunOzellikSuret>();
+
+            modelList = _urunKategori.KategoriOzellikDetayGetir();
+
+            return View(modelList);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (Disposed) return;
