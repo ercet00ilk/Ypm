@@ -12,35 +12,65 @@
 
 <form asp-controller="qwe" asp-action="qwe" asp-area="qwe" method="post" class="form-horizontal" role="form">
     <fieldset class="form-group">
-        
-        
+
+
         <div class="checkbox checkboxlist col-sm-9">
-            @{
-                for (int i = 0; i < Model.Count(); i++)
-                {
-                    <input asp-for="@Model[i].SeciliMi" type="checkbox" />
-                    <input asp-for="@Model[i].SeciliMi" type="hidden" />
-
-                    <label asp-for="@Model[i].UrunOzellikId">@Model[i].Ad</label>
-                    <input asp-for="@Model[i].UrunOzellikId" type="hidden" />
-
-                    <label asp-for="@Model[i].KategoriSayisi">@Model[i].KategoriSayisi</label>
-                    <input asp-for="@Model[i].KategoriSayisi" type="hidden" />
-
-                    <label asp-for="@Model[i].OzellikSayisi">@Model[i].OzellikSayisi</label>
-                    <input asp-for="@Model[i].OzellikSayisi" type="hidden" />
-
-                    <label asp-for="@Model[i].Durum">@Model[i].Durum</label>
-                    <input asp-for="@Model[i].Durum" type="hidden" />
 
 
-                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-danger">Duzenle</a> 
-                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-info">Durumu Değiştir</a>
-                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-default">Sil</a>
 
-            <br />
-                }
-            }
+            <div class="table-responsive">
+                <table class="table table-hover  table-striped">
+                    <thead>
+                        <tr>
+                            <th>Seçim</th>
+                            <th>Adı</th>
+                            <th>Kategori Sayısı</th>
+                            <th>Özellik Sayısı</th>
+                            <th>Durum</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+                            <tr>
+                                <td>
+                                    <input asp-for="@Model[i].SeciliMi" type="checkbox" />
+                                    <input asp-for="@Model[i].SeciliMi" type="hidden" />
+                                </td>
+                                <td>
+                                    <label asp-for="@Model[i].UrunOzellikId">@Model[i].Ad</label>
+                                    <input asp-for="@Model[i].UrunOzellikId" type="hidden" />
+                                </td>
+                                <td>
+                                    <label asp-for="@Model[i].KategoriSayisi">@Model[i].KategoriSayisi</label>
+                                    <input asp-for="@Model[i].KategoriSayisi" type="hidden" />
+                                </td>
+                                <td>
+
+                                    <label asp-for="@Model[i].OzellikSayisi">@Model[i].OzellikSayisi</label>
+                                    <input asp-for="@Model[i].OzellikSayisi" type="hidden" />
+
+                                </td>
+                                <td>
+                                    <label asp-for="@Model[i].Durum">@Model[i].Durum</label>
+                                    <input asp-for="@Model[i].Durum" type="hidden" />
+                                </td>
+                                <td>
+
+                                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-danger">Duzenle</a>
+                                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-info">Durumu Değiştir</a>
+                                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@Model[i].UrunOzellikId" class="btn btn-sm btn-default">Sil</a>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+
         </div>
         <div class="form-group">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
