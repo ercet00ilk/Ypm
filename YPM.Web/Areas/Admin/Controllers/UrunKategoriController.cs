@@ -427,6 +427,18 @@ namespace YPM.Web.Areas.Admin.Controllers
         }
 
 
+        [Route("/admin/urunkategori/ozellik")]
+        public IActionResult Ozellik(
+            [FromServices]IUrunKategoriDepo _urunKategori)
+        {
+            List<UrunOzellikSuret> modelList = new List<UrunOzellikSuret>();
+
+            modelList = _urunKategori.KategoriOzellikDetayGetir();
+
+            return View(modelList);
+        }
+
+
         [Route("/admin/urunkategori/ozellikekle")]
         public IActionResult OzellikEkle()
         {
