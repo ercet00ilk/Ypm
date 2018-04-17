@@ -835,7 +835,8 @@ namespace YPM.Depo.Veri.Urun.Kategori
                 {
                     var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
 
-                    gorev.UrunOzellik.Sil(ozellik);
+                    if (ozellik!=null) gorev.UrunOzellik.Sil(ozellik);
+                   
 
                     islemOnay = true;
                 }
@@ -879,12 +880,10 @@ namespace YPM.Depo.Veri.Urun.Kategori
                 {
                     var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
 
-                    int bagKatSayi = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunOzellikId.Equals(ozellik)).Count();
+                    int bagKatSayi = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunOzellikId.Equals(ozellik.UrunOzellikId)).Count();
 
                     if (bagKatSayi != 0) ds = true;
-                    else ds = false;
-
-                    gorev.UrunOzellik.Sil(ozellik);
+                    else ds = false;                    
 
                     islemOnay = true;
                 }

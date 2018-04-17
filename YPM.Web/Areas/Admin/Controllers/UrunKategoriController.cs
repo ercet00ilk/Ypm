@@ -463,6 +463,8 @@ namespace YPM.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _urunKategori.UrunOzellikEkle(new UrunOzellikSuret { Ad = model.Ad, Durum = model.Durum });
+
+                return RedirectToAction("Ozellik");
             }
 
             return View(model);
@@ -475,9 +477,11 @@ namespace YPM.Web.Areas.Admin.Controllers
         {
             if (!(ozellikId > 0)) return NotFound();
             _urunKategori.OzellikDurumDegistir(ozellikId);
+
             return RedirectToAction("Ozellik");
         }
 
+        [Route("/admin/urunkategori/ozelliksil/{ozellikId:int}")]
         public IActionResult OzellikSil(
              int ozellikId,
             [FromServices]IUrunKategoriDepo _urunKategori)
@@ -485,17 +489,13 @@ namespace YPM.Web.Areas.Admin.Controllers
             if (!(ozellikId > 0)) return NotFound();
             if (_urunKategori.OzellikBagliMi(ozellikId))
             {
-                ViewBag.Script = "$(function () { $('#EkleModal').modal('show');});";
-                ViewBag.Baslik = "Bu özelliğin bağlı olduğu kategorileri var.";
-                ViewBag.Aciklama = "Bu özellik değiştirilemez, değiştirilmesi teklif dahi edilemez, teklif dahi edenle işimiz olmaz..";
-                ViewBag.AltBilgi = "<button type='button' class='btn btn-default' data-dismiss='modal'>Umursama</button>"
-                                 + "<button type ='button' class='btn btn-primary'>Atarlan</button>";
 
                 return RedirectToAction("Ozellik");
             }
             else
             {
                 _urunKategori.OzellikSil(ozellikId);
+
                 return RedirectToAction("Ozellik");
             }
 
