@@ -22,5 +22,10 @@ namespace YPM.Depo.Veri.Urun.Kategori
         int[] KategorininOzellikGrubuGetir(int katId);
 
         List<UrunOzellikSuret> KategoriOzellikDetayGetir();
+
+        bool BoyleBirOzellikVarMi(string ad);
+
+        bool BoyleBirKategoriVarMi(string ad);
+        void UrunOzellikEkle(UrunOzellikSuret urunOzellikSuret);
     }
 }

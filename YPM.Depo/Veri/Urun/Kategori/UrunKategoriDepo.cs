@@ -638,5 +638,142 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
             return ds;
         }
+
+        public bool BoyleBirOzellikVarMi(string ad)
+        {
+            bool islemOnay = new bool();
+
+            bool ds = new bool();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+
+                    var ozellik = gorev.UrunOzellik.Bul(x => x.Ad == ad);
+
+                    if (ozellik != null) ds = true;
+                    else ds = false;
+
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return ds;
+        }
+
+        public bool BoyleBirKategoriVarMi(string ad)
+        {
+            bool islemOnay = new bool();
+
+            bool ds = new bool();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+
+                    var kategori = gorev.UrunKategori.Bul(x => x.Ad == ad);
+
+                    if (kategori != null) ds = true;
+                    else ds = false;
+
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return ds;
+        }
+
+        public void UrunOzellikEkle(UrunOzellikSuret urunOzellikSuret)
+        {
+            bool islemOnay = new bool();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+
+                    gorev.UrunOzellik.Ekle(new UrunOzellikGercek { Ad=urunOzellikSuret.Ad,Durum=urunOzellikSuret.Durum});
+
+                    gorev.Tamamla();
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return;
+        }
     }
 }

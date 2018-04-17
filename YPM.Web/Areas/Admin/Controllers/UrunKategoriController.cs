@@ -22,8 +22,10 @@ namespace YPM.Web.Areas.Admin.Controllers
         {
             // Liste tekrar gelecek
 
-            UrunKategoriEkleModel ke = new UrunKategoriEkleModel();
-            ke.TumOzellikGruplari = new List<SelectListItem>();
+            UrunKategoriEkleModel ke = new UrunKategoriEkleModel
+            {
+                TumOzellikGruplari = new List<SelectListItem>()
+            };
 
             List<UrunOzellikSuret> TumOzellikListesi = new List<UrunOzellikSuret>();
             var tumOzellikListesi = _urunKategori.TumUrunOzellikDinamikListesi();
@@ -48,18 +50,22 @@ namespace YPM.Web.Areas.Admin.Controllers
         {
             model = KategoriEkleKontrol(model, _urunKategori);
 
+            if (_urunKategori.BoyleBirKategoriVarMi(model.Ad)) ModelState.AddModelError("", "Böyle bir kategori zaten var.");
+
             if (ModelState.IsValid)
             {
-                UrunKategoriSuret uks = new UrunKategoriSuret();
-                uks.Ad = model.Ad;
-                uks.AktifMi = model.AktifMi;
-                uks.Tanim = model.Tanim;
-                uks.SayfaBaslik = model.SayfaBaslik;
-                uks.Aciklama = model.Aciklama;
-                uks.AnahtarKelime = model.AnahtarKelime;
-                uks.BabaId = 0;
+                UrunKategoriSuret uks = new UrunKategoriSuret
+                {
+                    Ad = model.Ad,
+                    AktifMi = model.AktifMi,
+                    Tanim = model.Tanim,
+                    SayfaBaslik = model.SayfaBaslik,
+                    Aciklama = model.Aciklama,
+                    AnahtarKelime = model.AnahtarKelime,
+                    BabaId = 0,
 
-                uks.YeniEklenecekOzellikler = new List<int>();
+                    YeniEklenecekOzellikler = new List<int>()
+                };
 
                 for (int i = 0; i < model.OzellikGrubuEkleId.Length; i++)
                 {
@@ -173,15 +179,17 @@ namespace YPM.Web.Areas.Admin.Controllers
             UrunKategoriSuret ds = new UrunKategoriSuret();
             ds = _urunKategori.UrunKategoriGetir(katId);
 
-            UrunKategoriDetayModel model = new UrunKategoriDetayModel();
-            model.KategoriId = ds.KategoriId;
-            model.Aciklama = ds.Aciklama;
-            model.Ad = ds.Ad;
-            model.AktifMi = ds.AktifMi;
-            model.AnahtarKelime = ds.AnahtarKelime;
-            model.OzellikGrubu = ds.OzellikGrubu;
-            model.SayfaBaslik = ds.SayfaBaslik;
-            model.Tanim = ds.Tanim;
+            UrunKategoriDetayModel model = new UrunKategoriDetayModel
+            {
+                KategoriId = ds.KategoriId,
+                Aciklama = ds.Aciklama,
+                Ad = ds.Ad,
+                AktifMi = ds.AktifMi,
+                AnahtarKelime = ds.AnahtarKelime,
+                OzellikGrubu = ds.OzellikGrubu,
+                SayfaBaslik = ds.SayfaBaslik,
+                Tanim = ds.Tanim
+            };
 
             return View(model);
         }
@@ -269,7 +277,8 @@ namespace YPM.Web.Areas.Admin.Controllers
                 //          " Kategori ekleme işlemi başarılı. "
                 //      ));
 
-                return RedirectToAction("detay", new { katId = katId });
+                uks.Dispose();
+                return RedirectToAction("detay", new { katId });
 
             }
             else
@@ -284,16 +293,11 @@ namespace YPM.Web.Areas.Admin.Controllers
                 //          " Kategori ekleme işlemi başarısız. "
                 //      ));
 
-
-                return RedirectToAction("detay", new { katId = katId });
+                uks.Dispose();
+                return RedirectToAction("detay", new { katId });
 
 
             }
-
-
-            uks.Dispose();
-
-            return View();
         }
 
         [Route("/admin/urunkategori/altekle")]
@@ -349,30 +353,32 @@ namespace YPM.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         [Route("/admin/urunkategori/altekle")]
         public IActionResult AltEkle(
-            UrunKategoriAltEkleModel aem,
+            UrunKategoriAltEkleModel model,
            [FromServices]IUrunKategoriDepo _urunKategori)
         {
-            if (!(aem.AnaKatId > 0)) ModelState.AddModelError("", "Lütfen Kategori seçiniz.");
+            if (!(model.AnaKatId > 0)) ModelState.AddModelError("", "Lütfen Kategori seçiniz.");
 
-            if (aem.OzellikGrubuEkleId == null) ModelState.AddModelError("", "Lütfen Nitelik seçiniz.");
+            if (model.OzellikGrubuEkleId == null) ModelState.AddModelError("", "Lütfen Nitelik seçiniz.");
+
+            if (_urunKategori.BoyleBirKategoriVarMi(model.Ad)) ModelState.AddModelError("", "Böyle bir kategori zaten var.");
 
             if (ModelState.IsValid)
             {
                 UrunKategoriSuret uks = new UrunKategoriSuret();
 
                 {
-                    uks.Aciklama = aem.Aciklama;
-                    uks.Ad = aem.Ad;
-                    uks.AktifMi = aem.AktifMi;
-                    uks.AnahtarKelime = aem.AnahtarKelime;
-                    uks.BabaId = aem.AnaKatId;
-                    uks.SayfaBaslik = aem.SayfaBaslik;
-                    uks.Tanim = aem.Tanim;
+                    uks.Aciklama = model.Aciklama;
+                    uks.Ad = model.Ad;
+                    uks.AktifMi = model.AktifMi;
+                    uks.AnahtarKelime = model.AnahtarKelime;
+                    uks.BabaId = model.AnaKatId;
+                    uks.SayfaBaslik = model.SayfaBaslik;
+                    uks.Tanim = model.Tanim;
                 }
 
                 {
                     uks.YeniEklenecekOzellikler = new List<int>();
-                    uks.YeniEklenecekOzellikler.AddRange(aem.OzellikGrubuEkleId);
+                    uks.YeniEklenecekOzellikler.AddRange(model.OzellikGrubuEkleId);
                 }
 
                 if (_urunKategori.UrunKategoriEkle(uks))
@@ -384,37 +390,37 @@ namespace YPM.Web.Areas.Admin.Controllers
             }
 
             {
-                aem.TumKategoriler = new List<SelectListItem>();
+                model.TumKategoriler = new List<SelectListItem>();
 
                 // Tip SelectListIteme Benzediği için aynen geçtim.
                 List<UrunOzellikSuret> TumKategoriListesi = new List<UrunOzellikSuret>();
 
-                aem.TumKategoriler.Add(new SelectListItem() { Text = "Seçiniz", Selected = true, Value = "0" });
+                model.TumKategoriler.Add(new SelectListItem() { Text = "Seçiniz", Selected = true, Value = "0" });
 
                 var tumKategoriListesi = _urunKategori.TumUrunKategoriDinamikListesi();
 
                 foreach (var kat1 in tumKategoriListesi.Where(x => x.BabaId.Equals(0)))
                 {
-                    aem.TumKategoriler.Add(new SelectListItem { Value = kat1.KategoriId.ToString(), Text = "-" + kat1.Ad.ToString() });
+                    model.TumKategoriler.Add(new SelectListItem { Value = kat1.KategoriId.ToString(), Text = "-" + kat1.Ad.ToString() });
 
                     foreach (var kat2 in tumKategoriListesi.Where(x => x.BabaId.Equals(kat1.KategoriId)))
                     {
-                        aem.TumKategoriler.Add(new SelectListItem { Value = kat2.KategoriId.ToString(), Text = "--" + kat2.Ad.ToString() });
+                        model.TumKategoriler.Add(new SelectListItem { Value = kat2.KategoriId.ToString(), Text = "--" + kat2.Ad.ToString() });
 
                         foreach (var kat3 in tumKategoriListesi.Where(x => x.BabaId.Equals(kat2.KategoriId)))
                         {
-                            aem.TumKategoriler.Add(new SelectListItem { Value = kat3.KategoriId.ToString(), Text = "---" + kat3.Ad.ToString() });
+                            model.TumKategoriler.Add(new SelectListItem { Value = kat3.KategoriId.ToString(), Text = "---" + kat3.Ad.ToString() });
                         }
                     }
                 }
             }
 
             {
-                aem.TumOzellikGruplari = new List<SelectListItem>();
+                model.TumOzellikGruplari = new List<SelectListItem>();
 
                 foreach (var ozellik in _urunKategori.TumUrunOzellikDinamikListesi())
                 {
-                    aem.TumOzellikGruplari
+                    model.TumOzellikGruplari
                         .Add(new SelectListItem
                         {
                             Value = ozellik.UrunOzellikId.ToString(),
@@ -423,7 +429,7 @@ namespace YPM.Web.Areas.Admin.Controllers
                 }
             }
 
-            return View(aem);
+            return View(model);
         }
 
 
@@ -443,6 +449,23 @@ namespace YPM.Web.Areas.Admin.Controllers
         public IActionResult OzellikEkle()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/admin/urunkategori/ozellikekle")]
+        public IActionResult OzellikEkle(
+            UrunKategoriOzellikEkle model,
+            [FromServices]IUrunKategoriDepo _urunKategori)
+        {
+            if (_urunKategori.BoyleBirOzellikVarMi(model.Ad)) ModelState.AddModelError("", "Böyle bir özellik zaten var.");
+
+            if (ModelState.IsValid)
+            {
+                _urunKategori.UrunOzellikEkle(new UrunOzellikSuret { Ad = model.Ad, Durum = model.Durum });
+            }
+
+            return View(model);
         }
 
         [Route("/admin/urunkategori/ozellikduzenle")]

@@ -1,7 +1,42 @@
-﻿
+﻿@using YPM.Web.Areas.Admin.Models.Urun.Kategori
+@model UrunKategoriOzellikEkle
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     ViewData["Title"] = "OzellikEkle";
     Layout = "~/Views/Shared/_AnaCerceve.cshtml";
 }
 
 <h2>OzellikEkle</h2>
+
+<h4>UrunKategoriOzellikEkle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="OzellikEkle">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Durum" /> @Html.DisplayNameFor(model => model.Durum)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ekle" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
