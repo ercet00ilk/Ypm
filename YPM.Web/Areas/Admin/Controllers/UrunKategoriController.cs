@@ -6,8 +6,8 @@ using YPM.Depo.Veri.Gunluk;
 using YPM.Depo.Veri.Sistem;
 using YPM.Depo.Veri.Urun.Kategori;
 using YPM.SuretVarlik.Mulk.Suret.Urun.Kategori;
+using YPM.Web.Areas.Admin.Models.Urun.Kategori;
 using YPM.Web.Genel.Wrapper.Session;
-using YPM.Web.Models.Urun.Kategori;
 
 namespace YPM.Web.Areas.Admin.Controllers
 {
