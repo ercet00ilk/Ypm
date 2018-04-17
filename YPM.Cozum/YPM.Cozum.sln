@@ -15,6 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YPM.Birim", "..\YPM.Birim\Y
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YPM.Depo", "..\YPM.Depo\YPM.Depo.csproj", "{7618C218-B4B3-4EFB-97FD-F0AAF3CDDC19}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sorgu", "Sorgu", "{A96797B0-7BE7-4A4D-AB85-25B14A14524F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "urunSorgu", "urunSorgu", "{235235E0-0424-4F1A-9AB3-5433250ACF56}"
+	ProjectSection(SolutionItems) = preProject
+		UrunKategoriOzellik.sql = UrunKategoriOzellik.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +55,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{235235E0-0424-4F1A-9AB3-5433250ACF56} = {A96797B0-7BE7-4A4D-AB85-25B14A14524F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85BD1693-0052-48FC-BBEC-6EA0A54886A8}
