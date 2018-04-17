@@ -744,7 +744,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
                 try
                 {
 
-                    gorev.UrunOzellik.Ekle(new UrunOzellikGercek { Ad=urunOzellikSuret.Ad,Durum=urunOzellikSuret.Durum});
+                    gorev.UrunOzellik.Ekle(new UrunOzellikGercek { Ad = urunOzellikSuret.Ad, Durum = urunOzellikSuret.Durum });
 
                     gorev.Tamamla();
 
@@ -774,6 +774,144 @@ namespace YPM.Depo.Veri.Urun.Kategori
             }
 
             return;
+        }
+
+        public void OzellikDurumDegistir(int ozellikId)
+        {
+            bool islemOnay = new bool();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+
+                    var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
+
+                    if (ozellik.Durum) ozellik.Durum = false;
+                    else ozellik.Durum = true;
+
+                    gorev.UrunOzellik.Guncelle(ozellik, ozellik.UrunOzellikId);
+
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return;
+        }
+
+        public void OzellikSil(int ozellikId)
+        {
+            bool islemOnay = new bool();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+                    var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
+
+                    gorev.UrunOzellik.Sil(ozellik);
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return;
+        }
+
+        public bool OzellikBagliMi(int ozellikId)
+        {
+            bool islemOnay = new bool();
+
+            bool ds = new bool();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+                    var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
+
+                    int bagKatSayi = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunOzellikId.Equals(ozellik)).Count();
+
+                    if (bagKatSayi != 0) ds = true;
+                    else ds = false;
+
+                    gorev.UrunOzellik.Sil(ozellik);
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public UrunKategoriDetaySuret UrunKategoriDetayGetir(int katId) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return ds;
         }
     }
 }

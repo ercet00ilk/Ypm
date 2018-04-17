@@ -26,6 +26,13 @@ namespace YPM.Depo.Veri.Urun.Kategori
         bool BoyleBirOzellikVarMi(string ad);
 
         bool BoyleBirKategoriVarMi(string ad);
+
         void UrunOzellikEkle(UrunOzellikSuret urunOzellikSuret);
+
+        void OzellikDurumDegistir(int ozellikId);
+
+        void OzellikSil(int ozellikId);
+
+        bool OzellikBagliMi(int ozellikId);
     }
 }

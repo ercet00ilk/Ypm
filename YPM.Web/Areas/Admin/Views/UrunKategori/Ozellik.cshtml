@@ -26,9 +26,10 @@
             });
         });
 
+         @Html.Raw(ViewBag.Script)
 
 
-                        //Islem.Deneme();
+                            //Islem.Deneme();
 
     </script>
 }
@@ -88,11 +89,11 @@
                                     @{
                                         if (item.Durum)
                                         {
-                                            <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-info">Pasif Et</a>
+                                            <a asp-area="admin" asp-controller="urunkategori" asp-action="ozellikdurum" asp-route-ozellikId="@item.UrunOzellikId" class="btn btn-sm btn-info">Pasif Et</a>
                                         }
                                         else
                                         {
-                                            <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-success">Aktif Et</a>
+                                            <a asp-area="admin" asp-controller="urunkategori" asp-action="ozellikdurum" asp-route-ozellikId="@item.UrunOzellikId" class="btn btn-sm btn-success">Aktif Et</a>
                                         }
                                     }
                                     <input asp-for="@item.Durum" type="hidden" />
@@ -112,3 +113,22 @@
 
 
 </form>
+
+
+
+<div class="modal fade bs-example-modal-lg" id="EkleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@Html.Raw(ViewBag.Baslik)</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Raw(ViewBag.Aciklama)
+            </div>
+            <div class="modal-footer">
+                @Html.Raw(ViewBag.AltBilgi)
+            </div>
+        </div>
+    </div>
+</div>
