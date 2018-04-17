@@ -28,7 +28,7 @@
 
 
 
-        Islem.Deneme();
+                    //Islem.Deneme();
 
     </script>
 }
@@ -36,73 +36,72 @@
 <h2>Ozellik</h2>
 
 <p>
-    <a asp-action="qwe" class="btn btn-sm btn-success">Yeni Oluştur</a>
-    <a asp-action="qwe" class="btn btn-sm btn-warning">Durumu Değiştir</a>
+    <a asp-action="qwe" class="btn btn-sm btn-success">Oluştur</a>
+    <a asp-action="qwe" class="btn btn-sm btn-warning">Düzenle</a>
     <a asp-action="qwe" class="btn btn-sm btn-danger">Sil</a>
 </p>
 
-<form asp-controller="qwe" asp-action="qwe" asp-area="qwe" method="post" class="form-horizontal" role="form">
-    <fieldset class="form-group">
-        <div class="checkbox checkboxlist col-sm-9">
-            <div class="table-responsive">
-                <table class="table table-hover  table-striped">
-                    <thead>
+<fieldset class="form-group">
+    <div class="checkbox checkboxlist col-sm-9">
+        <div class="table-responsive">
+            <table class="table table-hover  table-striped  KategoriOzellik">
+                <thead>
+                    <tr>
+                        <th>
+                            <span style="margin: 1px;"><input for="TumunuSec" type="checkbox" name="TumunuSec" id="TumunuSec" /></span>
+                        </th>
+                        <th>@Html.DisplayNameFor(model => model.Ad)</th>
+                        <th>@Html.DisplayNameFor(model => model.KategoriSayisi)</th>
+                        <th>@Html.DisplayNameFor(model => model.OzellikSayisi)</th>
+                        <th>@Html.DisplayNameFor(model => model.Durum)</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th><input for="TumunuSec" type="checkbox" name="TumunuSec" id="TumunuSec" /></th>
-                            <th>@Html.DisplayNameFor(model => model.SeciliMi)</th>
-                            <th>@Html.DisplayNameFor(model => model.Ad)</th>
-                            <th>@Html.DisplayNameFor(model => model.KategoriSayisi)</th>
-                            <th>@Html.DisplayNameFor(model => model.OzellikSayisi)</th>
-                            <th>@Html.DisplayNameFor(model => model.Durum)</th>
+
+                            <td>
+                                <input asp-for="@item.SeciliMi" type="checkbox" />
+                                <input asp-for="@item.SeciliMi" type="hidden" />
+                            </td>
+                            <td>
+                                <label asp-for="@item.UrunOzellikId">@item.Ad</label>
+                                <input asp-for="@item.UrunOzellikId" type="hidden" />
+                            </td>
+                            <td>
+                                <label asp-for="@item.KategoriSayisi">@item.KategoriSayisi</label>
+                                <input asp-for="@item.KategoriSayisi" type="hidden" />
+                            </td>
+                            <td>
+
+                                <label asp-for="@item.OzellikSayisi">@item.OzellikSayisi</label>
+                                <input asp-for="@item.OzellikSayisi" type="hidden" />
+
+                            </td>
+                            <td>
+                                @{
+                                    if (item.Durum)
+                                    {
+                                        <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-info">Pasif Et</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-success">Aktif Et</a>
+                                    }
+                                }
+                                <input asp-for="@item.Durum" type="hidden" />
+                            </td>
+                            <td>
+
+                                <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-warning">Duzenle</a>
+                                <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-danger">Sil</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-
-                                <td>
-                                    <input asp-for="@item.SeciliMi" type="checkbox" />
-                                    <input asp-for="@item.SeciliMi" type="hidden" />
-                                </td>
-                                <td>
-                                    <label asp-for="@item.UrunOzellikId">@item.Ad</label>
-                                    <input asp-for="@item.UrunOzellikId" type="hidden" />
-                                </td>
-                                <td>
-                                    <label asp-for="@item.KategoriSayisi">@item.KategoriSayisi</label>
-                                    <input asp-for="@item.KategoriSayisi" type="hidden" />
-                                </td>
-                                <td>
-
-                                    <label asp-for="@item.OzellikSayisi">@item.OzellikSayisi</label>
-                                    <input asp-for="@item.OzellikSayisi" type="hidden" />
-
-                                </td>
-                                <td>
-                                    <label asp-for="@item.Durum">
-
-                                        @{
-                                            if (item.Durum)
-                                            {<span>Aktif</span>}
-                                            else
-                                            { <span>Pasif</span>}
-                                        }
-
-                                    </label>
-                                    <input asp-for="@item.Durum" type="hidden" />
-                                </td>
-                                <td>
-
-                                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-default">Duzenle</a>
-                                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-warning">Durumu Değiştir</a>
-                                    <a asp-area="admin" asp-controller="urunkategori" asp-action="qwe" asp-route-Id="@item.UrunOzellikId" class="btn btn-sm btn-danger">Sil</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
-    </fieldset>
-</form>
+    </div>
+</fieldset>

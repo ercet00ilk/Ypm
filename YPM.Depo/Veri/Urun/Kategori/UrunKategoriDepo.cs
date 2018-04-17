@@ -606,7 +606,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
                                          where urKatOz.UrunOzellikId.Equals(urunOzellikId)
 
                                          select urKatOz).Count(),
-                            SeciliMi = true
+                            SeciliMi = false
 
                         });
                     }
