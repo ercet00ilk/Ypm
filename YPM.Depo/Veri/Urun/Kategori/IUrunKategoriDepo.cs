@@ -34,5 +34,9 @@ namespace YPM.Depo.Veri.Urun.Kategori
         void OzellikSil(int ozellikId);
 
         bool OzellikBagliMi(int ozellikId);
+
+        UrunOzellikSuret UrunOzellikGetir(int ozellikId);
+
+        int[] OzelligeBagliKategorileriGetir(int ozellikGrupDetayId);
     }
 }

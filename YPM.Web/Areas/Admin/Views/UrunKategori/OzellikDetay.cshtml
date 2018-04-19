@@ -1,8 +1,119 @@
-﻿
+﻿@using YPM.Web.Areas.Admin.Models.Urun.Kategori
+@using System.Linq
+@model UrunKategoriOzellikGrupDetayModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     ViewData["Title"] = "OzellikDetay";
     Layout = "~/Views/Shared/_AnaCerceve.cshtml";
+
 }
 
-<h2>OzellikDetay</h2>
+<h2>@Html.DisplayFor(model => model.Ad)</h2>
+<h4>Özellik Grubu detayları</h4>
+<hr />
 
+<div class="row">
+    <div class="container">
+        <div class="col-md-6">
+
+            <!-- tabs left -->
+            <div class="tabbable">
+                <ul class="nav nav-pills nav-stacked col-md-3">
+                    <li class="active"><a href="#TemelBilgiler" data-toggle="tab">Temel Bilgiler</a></li>
+                    <li><a href="#Kategoriler" data-toggle="tab">Kategoriler</a></li>
+                    <li><a href="#c" data-toggle="tab">Twee</a></li>
+                </ul>
+                <div class="tab-content col-md-9">
+                    <div class="tab-pane active" id="TemelBilgiler">
+
+
+                        <div>
+                            <h4>Temel Bilgiler</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Ad)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Ad)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Durum)
+                                </dt>
+                                <dd>
+                                    @{
+                                        if (Model.Durum)
+                                        {
+                                            <span>Evet</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Hayır</span>
+                                        }
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="Kategoriler">
+
+                        <form asp-action="ozellikdettay" asp-controller="urunkategori" asp-area="admin" method="post" role="form">
+                            <ul>
+
+
+                                @foreach (var kat1 in Model.TumKategoriSecilen.Where(x => x.BabaId.Equals(0)))
+                                {
+
+                                    <li>
+                                        <input type="checkbox" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat1)].Durum" />
+                                        <label asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat1)].Durum">@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat1)].Ad</label>
+                                        <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat1)].UrunOzellikId" />
+                                        <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat1)].Ad" />
+                                        <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat1)].Durum" />
+                                        <ul>
+                                            @foreach (var kat2 in Model.TumKategoriSecilen.Where(x => x.BabaId.Equals(kat1.UrunOzellikId)))
+                                            {
+                                                <li>
+                                                    <input type="checkbox" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat2)].Durum" />
+                                                    <label asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat2)].Durum">@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat2)].Ad</label>
+                                                    <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat2)].UrunOzellikId" />
+                                                    <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat2)].Ad" />
+                                                    <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat2)].Durum" />
+                                                    <ul>
+                                                        @foreach (var kat3 in Model.TumKategoriSecilen.Where(x => x.BabaId.Equals(kat2.UrunOzellikId)))
+                                                        {
+                                                            <li>
+                                                                <input type="checkbox" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].Durum" />
+                                                                <label asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].Durum">@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].Ad</label>
+                                                                <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].UrunOzellikId" />
+                                                                <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].Ad" />
+                                                                <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].Durum" />
+
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+
+
+                            </ul>
+                            <button type="submit" name="action" class="btn  btn-sm btn-success">Gönder</button>
+                        </form>
+
+                    </div>
+                    <div class="tab-pane" id="c">
+                        Thirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum auctor accumsan. Duis pharetra
+                        varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae.
+                    </div>
+                </div>
+            </div>
+            <!-- /tabs -->
+        </div>
+    </div>
+</div>

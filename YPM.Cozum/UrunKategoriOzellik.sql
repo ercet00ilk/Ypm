@@ -2,7 +2,7 @@
 go
 select * from MulkUrun.UrunOzellik;
 go
-select * from MulkUrun.UrunKategoriOzellik;
+select * from MulkUrun.UrunKategoriOzellik where UrunOzellikId=3;
 go
 select * from MulkUrun.UrunKategori;
 go

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using YPM.Depo.Veri.Gunluk;
@@ -502,9 +503,72 @@ namespace YPM.Web.Areas.Admin.Controllers
 
         }
 
-        [Route("/admin/urunkategori/ozellikdetay")]
-        public IActionResult OzellikDetay()
+        [ResponseCache(Duration = 0, NoStore = true)]
+        [Route("/admin/urunkategori/ozellikdetay/{ozellikId:int}")]
+        public IActionResult OzellikDetay(
+            int ozellikId,
+            [FromServices]IUrunKategoriDepo _urunKategori)
         {
+            if (!(ozellikId > 0)) return NotFound();
+
+
+            UrunKategoriOzellikGrupDetayModel model = new UrunKategoriOzellikGrupDetayModel();
+
+            {
+                UrunOzellikSuret uos = new UrunOzellikSuret();
+                try
+                {
+                    uos = _urunKategori.UrunOzellikGetir(ozellikId);
+
+                    model.Ad = uos.Ad;
+                    model.Durum = uos.Durum;
+                    model.OzellikGrupDetayId = uos.UrunOzellikId;
+                }
+                finally
+                {
+                    if (uos != null) uos.Dispose();
+                }
+            }
+
+            {
+                model.TumKategoriSecilen = new List<UrunOzellikSuret>();
+                model.TumKategoriPostedilen = new List<UrunOzellikSuret>();
+
+                var tumKategoriListesi = _urunKategori.TumUrunKategoriDinamikListesi();
+
+
+
+                foreach (var item in tumKategoriListesi)
+                {
+                    model.TumKategoriSecilen.Add(new UrunOzellikSuret { Ad = item.Ad, UrunOzellikId = item.KategoriId, BabaId = item.BabaId, Durum = false });
+                    model.TumKategoriPostedilen.Add(new UrunOzellikSuret { Ad = item.Ad, UrunOzellikId = item.KategoriId, BabaId = item.BabaId, Durum = false });
+                }                
+            }
+
+            {
+                var seciliOlanlar = _urunKategori.OzelligeBagliKategorileriGetir(model.OzellikGrupDetayId).ToList();
+                var TkS = model.TumKategoriSecilen;
+
+                for (int i = 0; i < seciliOlanlar.Count; i++)
+                {
+                    model.TumKategoriSecilen.Where(x => x.UrunOzellikId.Equals(seciliOlanlar[i])).FirstOrDefault().Durum = true;
+                    model.TumKategoriPostedilen.Where(x => x.UrunOzellikId.Equals(seciliOlanlar[i])).FirstOrDefault().Durum = true;
+                }
+
+            }
+
+            return View(model);
+        }
+        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/admin/urunkategori/ozellikdettay")]
+        public IActionResult OzellikDettay(
+          UrunKategoriOzellikGrupDetayModel model,
+          [FromServices]IUrunKategoriDepo _urunKategori)
+        {
+
 
 
             return View();
