@@ -17,10 +17,17 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Models\" />
+    <Folder Include="wwwroot\global\" />
+    <Folder Include="wwwroot\js\global\" />
+    <Folder Include="wwwroot\global\fonts\" />
+    <Folder Include="wwwroot\images\global\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\YPM.Depo\YPM.Depo.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="wwwroot\global\plugins-md.min.css" />
+  </ItemGroup>
 </Project>
