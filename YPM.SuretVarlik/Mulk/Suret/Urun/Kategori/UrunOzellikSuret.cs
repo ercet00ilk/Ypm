@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
@@ -24,6 +25,8 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
         public bool SeciliMi { get; set; }
 
         public int BabaId { get; set; }
+
+        public Dictionary<int,UrunOzellikSuret> YeniEklenecekOzellikler { get; set; }
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls

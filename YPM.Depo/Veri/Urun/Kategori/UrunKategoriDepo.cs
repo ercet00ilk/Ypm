@@ -459,7 +459,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
             return ds.ToArray();
         }
 
-        public bool UrunKategoriDuzenle(UrunKategoriSuret uks)
+        public bool KategorininOzellikleriniDuzenle(UrunKategoriSuret uks)
         {
             bool islemOnay = new bool();
 
@@ -1008,6 +1008,11 @@ namespace YPM.Depo.Veri.Urun.Kategori
             }
 
             return ds.ToArray();
+        }
+
+        public bool UrunOzelliginKategorileriniDuzenle(List<UrunOzellikSuret> uos)
+        {
+            throw new NotImplementedException();
         }
     }
 }

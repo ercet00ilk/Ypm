@@ -266,7 +266,7 @@ namespace YPM.Web.Areas.Admin.Controllers
                 uks.YeniEklenecekOzellikler.AddRange(model.OzellikGrubuEkleId);
             }
 
-            if (_urunKategori.UrunKategoriDuzenle(uks))
+            if (_urunKategori.KategorininOzellikleriniDuzenle(uks))
             {
                 //_gunluk.Ekle(
                 //  new GunlukVekil(
@@ -542,7 +542,7 @@ namespace YPM.Web.Areas.Admin.Controllers
                 {
                     model.TumKategoriSecilen.Add(new UrunOzellikSuret { Ad = item.Ad, UrunOzellikId = item.KategoriId, BabaId = item.BabaId, Durum = false });
                     model.TumKategoriPostedilen.Add(new UrunOzellikSuret { Ad = item.Ad, UrunOzellikId = item.KategoriId, BabaId = item.BabaId, Durum = false });
-                }                
+                }
             }
 
             {
@@ -559,7 +559,7 @@ namespace YPM.Web.Areas.Admin.Controllers
 
             return View(model);
         }
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -568,10 +568,20 @@ namespace YPM.Web.Areas.Admin.Controllers
           UrunKategoriOzellikGrupDetayModel model,
           [FromServices]IUrunKategoriDepo _urunKategori)
         {
+            // List<UrunOzellikSuret> uos = new List<UrunOzellikSuret>();
+
+            //foreach (var suanki in model.TumKategoriPostedilen)
+            //{
+            //    uos.Add(new UrunOzellikSuret { UrunOzellikId = suanki.UrunOzellikId, BabaId = suanki.BabaId, Durum = suanki.Durum,k });
+            //}
 
 
-
-            return View();
+            //if (_urunKategori.UrunOzelliginKategorileriniDuzenle(uos,)) return View();
+            if (true)
+            {
+                return View();
+            }
+            else return RedirectToAction("giris", "ana", new { area = "" });
         }
 
         protected override void Dispose(bool disposing)
