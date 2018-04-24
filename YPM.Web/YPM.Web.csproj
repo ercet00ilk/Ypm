@@ -17,9 +17,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Models\" />
-    <Folder Include="wwwroot\global\" />
-    <Folder Include="wwwroot\js\global\" />
-    <Folder Include="wwwroot\global\fonts\" />
     <Folder Include="wwwroot\images\global\" />
   </ItemGroup>
 
@@ -29,5 +26,15 @@
 
   <ItemGroup>
     <None Remove="wwwroot\global\plugins-md.min.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\js\global\app.min.js" />
+    <Content Remove="wwwroot\global\32px.png" />
+    <Content Remove="wwwroot\global\32px_line.png" />
+    <Content Remove="wwwroot\global\32px_original.png" />
+    <Content Remove="wwwroot\global\bootstrap-select.css" />
+    <Content Remove="wwwroot\global\bootstrap-switch.min.css" />
+    <Content Remove="wwwroot\global\components.min.css" />
+    <Content Remove="wwwroot\global\default.min.css" />
   </ItemGroup>
 </Project>
