@@ -7,7 +7,44 @@
     <meta content=" " name="description" />
     <meta content="" name="author" />
     <title>@ViewData["Title"] - YPM.Web</title>
-
+    <environment include="Development">
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+        <link href="~/wwwroot/css/admin/simple-line-icons/simple-line-icons.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="~/wwwroot/css/admin/bootstrap-switch/bootstrap-switch.css" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN THEME GLOBAL STYLES -->
+        <link href="~/wwwroot/css/admin/components.css" rel="stylesheet" id="style_components" type="text/css" />
+        <link href="~/wwwroot/css/admin/plugins.css" rel="stylesheet" type="text/css" />
+        <!-- END THEME GLOBAL STYLES -->
+         <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <link href="~/wwwroot/css/admin/jstree/style.css" rel="stylesheet" type="text/css" />
+        <!-- BEGIN THEME LAYOUT STYLES -->
+        <link href="~/wwwroot/css/admin/layout/layout.css" rel="stylesheet" type="text/css" />
+        <link href="~/wwwroot/css/admin/layout/default.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="~/wwwroot/css/admin/bootstrap-select/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="~/wwwroot/css/admin/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/wwwroot/css/admin/bootstrap-switch/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN THEME GLOBAL STYLES -->
+        <link href="~/wwwroot/css/admin/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+        <link href="~/wwwroot/css/admin/plugins.min.css" rel="stylesheet" type="text/css" />
+        <!-- END THEME GLOBAL STYLES -->
+         <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <link href="~/wwwroot/css/admin/jstree/style.min.css" rel="stylesheet" type="text/css" />
+        <!-- BEGIN THEME LAYOUT STYLES -->
+        <link href="~/wwwroot/css/admin/layout/layout.min.css" rel="stylesheet" type="text/css" />
+        <link href="~/wwwroot/css/admin/layout/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="~/wwwroot/css/admin/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+    </environment>
    
 </head>
 <body>
@@ -19,6 +56,31 @@
             <p>&copy; 2018 - YPM.Web</p>
         </footer>
     </div>
+
+    <environment include="Development">
+        <!-- BEGIN CORE PLUGINS -->
+        <script src="http://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="~/wwwroot/js/admin/js.cookie.js" type="text/javascript"></script>
+        <script src="~/wwwroot/js/admin/slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script src="../assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>
+        <!-- BEGIN THEME GLOBAL SCRIPTS -->
+        <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+        <!-- END THEME GLOBAL SCRIPTS -->
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="../assets/pages/scripts/ui-tree.min.js" type="text/javascript"></script>
+        <script src="../assets/pages/scripts/components-bootstrap-select.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+        <!-- BEGIN THEME LAYOUT SCRIPTS -->
+        <script src="../assets/layouts/layout3/scripts/layout.min.js" type="text/javascript"></script>
+        <script src="../assets/layouts/layout3/scripts/demo.min.js" type="text/javascript"></script>
+        <script src="../assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+        <script src="../assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+    </environment>
 
     @RenderSection("Scripts", required: false)
 </body>

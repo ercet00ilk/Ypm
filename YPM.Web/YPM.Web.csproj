@@ -18,6 +18,15 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Models\" />
     <Folder Include="wwwroot\images\global\" />
+    <Folder Include="wwwroot\css\admin\" />
+    <Folder Include="wwwroot\css\admin\simple-line-icons\" />
+    <Folder Include="wwwroot\css\admin\simple-line-icons\fonts\" />
+    <Folder Include="wwwroot\css\admin\bootstrap-switch\" />
+    <Folder Include="wwwroot\css\admin\jstree\" />
+    <Folder Include="wwwroot\css\admin\layout\" />
+    <Folder Include="wwwroot\css\admin\bootstrap-select\" />
+    <Folder Include="wwwroot\js\admin\" />
+    <Folder Include="wwwroot\js\admin\slimscroll\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,5 +45,8 @@
     <Content Remove="wwwroot\global\bootstrap-switch.min.css" />
     <Content Remove="wwwroot\global\components.min.css" />
     <Content Remove="wwwroot\global\default.min.css" />
+    <Content Remove="wwwroot\js\global\bootstrap-select.min.js" />
+    <Content Remove="wwwroot\global\font-awesome.min.css" />
+    <Content Remove="wwwroot\global\fonts\FontAwesome.otf" />
   </ItemGroup>
 </Project>
