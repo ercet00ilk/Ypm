@@ -18,9 +18,19 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Models\" />
     <Folder Include="wwwroot\global\" />
-    <Folder Include="wwwroot\js\global\" />
-    <Folder Include="wwwroot\global\fonts\" />
     <Folder Include="wwwroot\images\global\" />
+    <Folder Include="wwwroot\global\simple-line-icons\" />
+    <Folder Include="wwwroot\global\simple-line-icons\fonts\" />
+    <Folder Include="wwwroot\global\bootstrap-switch\" />
+    <Folder Include="wwwroot\global\admin-layout\" />
+    <Folder Include="wwwroot\global\admin-theme\" />
+    <Folder Include="wwwroot\global\bootstrap-select\" />
+    <Folder Include="wwwroot\js\admin-js\" />
+    <Folder Include="wwwroot\js\admin-js\bootstrap-switch\" />
+    <Folder Include="wwwroot\js\admin-js\slim-scroll\" />
+    <Folder Include="wwwroot\js\admin-js\js-tree\" />
+    <Folder Include="wwwroot\js\admin-js\bootstrap-select\" />
+    <Folder Include="wwwroot\js\admin-js\layout\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,5 +39,24 @@
 
   <ItemGroup>
     <None Remove="wwwroot\global\plugins-md.min.css" />
+    <None Remove="wwwroot\global\admin-default\32px_line.png" />
+    <None Remove="wwwroot\global\admin-default\32px_original.png" />
+    <None Remove="wwwroot\global\admin-default\32px.png" />
+    <None Remove="wwwroot\global\admin-default\40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\global\bootstrap-select.css" />
+    <Content Remove="wwwroot\js\global\app.min.js" />
+    <Content Remove="wwwroot\global\fonts\FontAwesome.otf" />
+    <Content Remove="wwwroot\global\fonts\Simple-Line-Icons.dev.svg" />
+    <Content Remove="wwwroot\global\fonts\Simple-Line-Icons.eot" />
+    <Content Remove="wwwroot\global\fonts\Simple-Line-Icons.svg" />
+    <Content Remove="wwwroot\global\fonts\Simple-Line-Icons.ttf" />
+    <Content Remove="wwwroot\global\fonts\Simple-Line-Icons.woff" />
+    <Content Remove="wwwroot\global\fonts\fontawesome-webfont.eot" />
+    <Content Remove="wwwroot\global\fonts\fontawesome-webfont.svg" />
+    <Content Remove="wwwroot\global\fonts\fontawesome-webfont.ttf" />
+    <Content Remove="wwwroot\global\fonts\fontawesome-webfont.woff" />
+    <Content Remove="wwwroot\global\fonts\fontawesome-webfont.woff2" />
   </ItemGroup>
 </Project>
