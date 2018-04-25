@@ -27,6 +27,11 @@
     <Folder Include="wwwroot\css\admin\bootstrap-select\" />
     <Folder Include="wwwroot\js\admin\" />
     <Folder Include="wwwroot\js\admin\slimscroll\" />
+    <Folder Include="wwwroot\js\admin\bootstrap-switch\" />
+    <Folder Include="wwwroot\js\admin\jstree\" />
+    <Folder Include="wwwroot\js\admin\uitree\" />
+    <Folder Include="wwwroot\js\admin\bootstrap-select\" />
+    <Folder Include="wwwroot\js\admin\layout\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,5 +53,7 @@
     <Content Remove="wwwroot\js\global\bootstrap-select.min.js" />
     <Content Remove="wwwroot\global\font-awesome.min.css" />
     <Content Remove="wwwroot\global\fonts\FontAwesome.otf" />
+    <Content Remove="wwwroot\js\global\bootstrap-switch.min.js" />
+    <Content Remove="wwwroot\global\fonts\fontawesome-webfont.eot" />
   </ItemGroup>
 </Project>
