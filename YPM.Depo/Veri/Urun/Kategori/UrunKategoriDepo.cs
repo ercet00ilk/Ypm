@@ -964,7 +964,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
         public int[] OzelligeBagliKategorileriGetir(int ozellikGrupDetayId)
         {
-             bool islemOnay = new bool();
+            bool islemOnay = new bool();
 
             List<int> ds = new List<int>();
 
@@ -1010,9 +1010,98 @@ namespace YPM.Depo.Veri.Urun.Kategori
             return ds.ToArray();
         }
 
-        public bool UrunOzelliginKategorileriniDuzenle(List<UrunOzellikSuret> uos)
+        public bool UrunOzelliginKategorileriniDuzenle(UrunOzellikSuret uos)
         {
-            throw new NotImplementedException();
+            bool islemOnay = new bool();
+
+            bool ds = new bool();
+
+            using (IGorevli gorev = Gorevli.YeniGorev())
+            using (IDbContextTransaction islem = gorev.TransactionBaslat())
+            {
+
+                try
+                {
+
+                    var eskiKategoriList = gorev
+                        .UrunKategoriOzellik
+                        .GetirTumKoleksiyon()
+                        .Where(x => x.UrunOzellikId.Equals(uos.UrunOzellikId)).ToList();
+
+
+                    var yeniListe = uos.TumKategoriPostedilen;
+
+                    for (int i = 0; i < yeniListe.Count(); i++)
+                    {
+                        var suanKiKayit = yeniListe[i];
+
+
+
+
+                        if (suanKiKayit.Durum)
+                        {
+                            {
+                                // kayıt yoksa aç
+                                // kayıt varsa dokunma
+                                // eski listeden sil
+
+
+                                var birDeger = eskiKategoriList.Where(x => x.UrunKategoriId.Equals(suanKiKayit.UrunOzellikId)).FirstOrDefault();
+
+                                if (birDeger == null)
+                                {
+                                    gorev.UrunKategoriOzellik.Ekle(new UrunKategoriOzellikGercek
+                                    {
+                                        UrunKategoriId = suanKiKayit.UrunOzellikId,
+                                        UrunOzellikId = uos.UrunOzellikId
+                                    });
+                                }
+
+                                //var silDeger = eskiKategoriList.Where(x=>x.)
+                            }
+                        }
+                        else
+                        {
+                            {
+                                // kayıt varsa sil
+                                // kayıt yoksa dokunma
+                                // eski listeden sil
+                            }
+                        }
+
+
+
+
+                    }
+
+
+
+                    islemOnay = true;
+                }
+                catch (Exception ex)
+                {
+                    using (DepoIstisna istisna = DepoIstisna.YeniIstisna())
+                    {
+                        istisna.TamYol = GetType().FullName;
+                        istisna.Method = MethodBase.GetCurrentMethod().Name;
+                        istisna.KisiId = 0;
+                        istisna.TabanHata = ex.GetBaseException().ToString();
+                        istisna.Sonuc = " public bool UrunOzelliginKategorileriniDuzenle(UrunOzellikSuret uos) ";
+                        istisna.IslemOnay = islemOnay;
+                        istisna.Tarih = Tarih.GuncelTarihVer();
+                        istisna.Yazdir(istisna);
+                    }
+
+                    islemOnay = false;
+                }
+                finally
+                {
+                    if (islemOnay) islem.Commit();
+                    else islem.Rollback();
+                }
+            }
+
+            return ds;
         }
     }
 }

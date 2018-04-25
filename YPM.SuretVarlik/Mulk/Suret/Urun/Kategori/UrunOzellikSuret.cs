@@ -26,7 +26,7 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
 
         public int BabaId { get; set; }
 
-        public Dictionary<int,UrunOzellikSuret> YeniEklenecekOzellikler { get; set; }
+        public List<UrunOzellikSuret> TumKategoriPostedilen { get; set; }
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls

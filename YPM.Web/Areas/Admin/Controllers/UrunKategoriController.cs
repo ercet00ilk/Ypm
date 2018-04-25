@@ -568,20 +568,17 @@ namespace YPM.Web.Areas.Admin.Controllers
           UrunKategoriOzellikGrupDetayModel model,
           [FromServices]IUrunKategoriDepo _urunKategori)
         {
-            // List<UrunOzellikSuret> uos = new List<UrunOzellikSuret>();
+            UrunOzellikSuret uos = new UrunOzellikSuret();
 
-            //foreach (var suanki in model.TumKategoriPostedilen)
-            //{
-            //    uos.Add(new UrunOzellikSuret { UrunOzellikId = suanki.UrunOzellikId, BabaId = suanki.BabaId, Durum = suanki.Durum,k });
-            //}
+            uos.UrunOzellikId = model.OzellikGrupDetayId;
+            uos.TumKategoriPostedilen = new List<UrunOzellikSuret>();
+            uos.TumKategoriPostedilen = model.TumKategoriPostedilen;
 
-
-            //if (_urunKategori.UrunOzelliginKategorileriniDuzenle(uos,)) return View();
-            if (true)
-            {
+            if (_urunKategori.UrunOzelliginKategorileriniDuzenle(uos))
                 return View();
-            }
-            else return RedirectToAction("giris", "ana", new { area = "" });
+
+            else
+                return RedirectToAction("giris", "ana", new { area = "" });
         }
 
         protected override void Dispose(bool disposing)

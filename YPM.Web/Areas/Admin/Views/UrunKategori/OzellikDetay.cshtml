@@ -61,6 +61,8 @@
                     <div class="tab-pane" id="Kategoriler">
 
                         <form asp-action="ozellikdettay" asp-controller="urunkategori" asp-area="admin" method="post" role="form">
+                            <input type="hidden" asp-for="@Model.OzellikGrupDetayId" />
+
                             <ul>
 
 

@@ -38,6 +38,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
         UrunOzellikSuret UrunOzellikGetir(int ozellikId);
 
         int[] OzelligeBagliKategorileriGetir(int ozellikGrupDetayId);
-        bool UrunOzelliginKategorileriniDuzenle(List<UrunOzellikSuret> uos);
+
+        bool UrunOzelliginKategorileriniDuzenle(UrunOzellikSuret uos);
     }
 }
