@@ -664,7 +664,6 @@
       };
 
       return BootstrapSwitch;
-
     })();
     $.fn.bootstrapSwitch = function() {
       var args, option, ret;
@@ -706,5 +705,4 @@
       onSwitchChange: function() {}
     };
   })(window.jQuery, window);
-
 }).call(this);

@@ -2,12 +2,10 @@
 @model IEnumerable<UrunOzellikSuret>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-
 @{
     ViewData["Title"] = "Ozellik";
     Layout = "~/Views/Shared/_AnaCerceve.cshtml";
 }
-
 
 @section scripts
     {
@@ -27,7 +25,6 @@
         });
 
                                 //Islem.Deneme();
-
     </script>
     <script type="text/javascript">
             @Html.Raw(ViewBag.Script)
@@ -36,9 +33,7 @@
 
 <h2>Ozellik</h2>
 
-
 <form asp-controller="qwe" asp-action="qwe" asp-area="qwe" class="form-horizontal" role="form" method="post">
-
 
     <p>
         <a asp-action="ozellikekle" asp-controller="urunkategori" asp-area="admin" class="btn btn-sm btn-success">Ekle</a>
@@ -83,7 +78,6 @@
 
                                     <label asp-for="@item.OzellikSayisi">@item.OzellikSayisi</label>
                                     <input asp-for="@item.OzellikSayisi" type="hidden" />
-
                                 </td>
                                 <td>
                                     @{
@@ -110,11 +104,7 @@
             </div>
         </div>
     </fieldset>
-
-
 </form>
-
-
 
 <div class="modal fade bs-example-modal-lg" id="EkleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">

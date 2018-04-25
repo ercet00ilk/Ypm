@@ -27,7 +27,6 @@
                 <div class="tab-content col-md-9">
                     <div class="tab-pane active" id="TemelBilgiler">
 
-
                         <div>
                             <h4>Temel Bilgiler</h4>
                             <hr />
@@ -56,7 +55,6 @@
                                 </dd>
                             </dl>
                         </div>
-
                     </div>
                     <div class="tab-pane" id="Kategoriler">
 
@@ -64,7 +62,6 @@
                             <input type="hidden" asp-for="@Model.OzellikGrupDetayId" />
 
                             <ul>
-
 
                                 @foreach (var kat1 in Model.TumKategoriSecilen.Where(x => x.BabaId.Equals(0)))
                                 {
@@ -93,7 +90,6 @@
                                                                 <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].UrunOzellikId" />
                                                                 <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].Ad" />
                                                                 <input type="hidden" asp-for="@Model.TumKategoriPostedilen[Model.TumKategoriSecilen.IndexOf(kat3)].Durum" />
-
                                                             </li>
                                                         }
                                                     </ul>
@@ -102,12 +98,9 @@
                                         </ul>
                                     </li>
                                 }
-
-
                             </ul>
                             <button type="submit" name="action" class="btn  btn-sm btn-success">Gönder</button>
                         </form>
-
                     </div>
                     <div class="tab-pane" id="c">
                         Thirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum auctor accumsan. Duis pharetra

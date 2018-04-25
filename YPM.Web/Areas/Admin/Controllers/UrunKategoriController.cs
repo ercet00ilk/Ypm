@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using YPM.Depo.Veri.Gunluk;
@@ -85,16 +84,11 @@ namespace YPM.Web.Areas.Admin.Controllers
                     //          " Kategori ekleme işlemi başarılı. "
                     //      ));
 
-
                     ViewBag.Script = "$(function () { $('#EkleModal').modal('show');});";
                     ViewBag.Baslik = "Ekledim Gitti";
                     ViewBag.Aciklama = "Vatana millete hayırlı uğurlu olsun.";
                     ViewBag.AltBilgi = "<button type='button' class='btn btn-default' data-dismiss='modal'>Umursama</button>"
                                      + "<button type ='button' class='btn btn-primary'>Atarlan</button>";
-
-
-
-
                 }
                 else
                 {
@@ -107,7 +101,6 @@ namespace YPM.Web.Areas.Admin.Controllers
                     //          _sessionSar.SuAnki.AktifKisi.KisiId,
                     //          " Kategori ekleme işlemi başarısız. "
                     //      ));
-
 
                     ViewBag.Script = "$(function () { $('#EkleModal').modal('show');});";
                     ViewBag.Baslik = "Eklenmedi";
@@ -200,7 +193,6 @@ namespace YPM.Web.Areas.Admin.Controllers
          int katId,
          [FromServices]IUrunKategoriDepo _urunKategori)
         {
-
             UrunKategoriEkleModel ukem = new UrunKategoriEkleModel();
 
             {
@@ -213,7 +205,6 @@ namespace YPM.Web.Areas.Admin.Controllers
                 ukem.AnahtarKelime = uks.AnahtarKelime;
                 ukem.SayfaBaslik = uks.SayfaBaslik;
                 ukem.Tanim = uks.Tanim;
-
 
                 uks.Dispose();
             }
@@ -280,7 +271,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
                 uks.Dispose();
                 return RedirectToAction("detay", new { katId });
-
             }
             else
             {
@@ -296,8 +286,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
                 uks.Dispose();
                 return RedirectToAction("detay", new { katId });
-
-
             }
         }
 
@@ -433,7 +421,6 @@ namespace YPM.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-
         [Route("/admin/urunkategori/ozellik")]
         public IActionResult Ozellik(
             [FromServices]IUrunKategoriDepo _urunKategori)
@@ -444,7 +431,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
             return View(modelList);
         }
-
 
         [Route("/admin/urunkategori/ozellikekle")]
         public IActionResult OzellikEkle()
@@ -490,7 +476,6 @@ namespace YPM.Web.Areas.Admin.Controllers
             if (!(ozellikId > 0)) return NotFound();
             if (_urunKategori.OzellikBagliMi(ozellikId))
             {
-
                 return RedirectToAction("Ozellik");
             }
             else
@@ -499,8 +484,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Ozellik");
             }
-
-
         }
 
         [ResponseCache(Duration = 0, NoStore = true)]
@@ -510,7 +493,6 @@ namespace YPM.Web.Areas.Admin.Controllers
             [FromServices]IUrunKategoriDepo _urunKategori)
         {
             if (!(ozellikId > 0)) return NotFound();
-
 
             UrunKategoriOzellikGrupDetayModel model = new UrunKategoriOzellikGrupDetayModel();
 
@@ -536,8 +518,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
                 var tumKategoriListesi = _urunKategori.TumUrunKategoriDinamikListesi();
 
-
-
                 foreach (var item in tumKategoriListesi)
                 {
                     model.TumKategoriSecilen.Add(new UrunOzellikSuret { Ad = item.Ad, UrunOzellikId = item.KategoriId, BabaId = item.BabaId, Durum = false });
@@ -554,12 +534,10 @@ namespace YPM.Web.Areas.Admin.Controllers
                     model.TumKategoriSecilen.Where(x => x.UrunOzellikId.Equals(seciliOlanlar[i])).FirstOrDefault().Durum = true;
                     model.TumKategoriPostedilen.Where(x => x.UrunOzellikId.Equals(seciliOlanlar[i])).FirstOrDefault().Durum = true;
                 }
-
             }
 
             return View(model);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -576,7 +554,6 @@ namespace YPM.Web.Areas.Admin.Controllers
 
             if (_urunKategori.UrunOzelliginKategorileriniDuzenle(uos))
                 return View();
-
             else
                 return RedirectToAction("giris", "ana", new { area = "" });
         }

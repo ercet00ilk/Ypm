@@ -551,23 +551,18 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     List<UrunOzellikGercek> urunOzellik = gorev.UrunOzellik.GetirTumKoleksiyon().ToList();
 
                     var urunKategori = gorev.UrunKategori.GetirTumKoleksiyon();
 
                     var urunKategoriOzellik = gorev.UrunKategoriOzellik.GetirTumKoleksiyon();
 
-
                     for (int i = 0; i < urunOzellik.Count; i++)
                     {
                         int urunOzellikId = urunOzellik[i].UrunOzellikId;
                         int urunKategoriId = urunKategoriOzellik.Where(x => x.UrunOzellikId.Equals(urunOzellikId)).Select(x => x.UrunKategoriId).FirstOrDefault();
-
-
 
                         ds.Add(new UrunOzellikSuret
                         {
@@ -607,7 +602,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
 
                                          select urKatOz).Count(),
                             SeciliMi = false
-
                         });
                     }
 
@@ -648,15 +642,12 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     var ozellik = gorev.UrunOzellik.Bul(x => x.Ad == ad);
 
                     if (ozellik != null) ds = true;
                     else ds = false;
-
 
                     islemOnay = true;
                 }
@@ -695,15 +686,12 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     var kategori = gorev.UrunKategori.Bul(x => x.Ad == ad);
 
                     if (kategori != null) ds = true;
                     else ds = false;
-
 
                     islemOnay = true;
                 }
@@ -740,10 +728,8 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     gorev.UrunOzellik.Ekle(new UrunOzellikGercek { Ad = urunOzellikSuret.Ad, Durum = urunOzellikSuret.Durum });
 
                     gorev.Tamamla();
@@ -783,17 +769,14 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
 
                     if (ozellik.Durum) ozellik.Durum = false;
                     else ozellik.Durum = true;
 
                     gorev.UrunOzellik.Guncelle(ozellik, ozellik.UrunOzellikId);
-
 
                     islemOnay = true;
                 }
@@ -830,13 +813,11 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
                     var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
 
                     if (ozellik != null) gorev.UrunOzellik.Sil(ozellik);
-
 
                     islemOnay = true;
                 }
@@ -875,7 +856,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
                     var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
@@ -922,7 +902,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
                     var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikId));
@@ -976,7 +955,6 @@ namespace YPM.Depo.Veri.Urun.Kategori
                     var ozellik = gorev.UrunOzellik.Bul(x => x.UrunOzellikId.Equals(ozellikGrupDetayId));
                     var kategoriler = gorev.UrunKategoriOzellik.GetirTumKoleksiyon().Where(x => x.UrunOzellikId.Equals(ozellikGrupDetayId)).ToList();
 
-
                     for (int i = 0; i < kategoriler.Count(); i++)
                     {
                         ds.Add(kategoriler[i].UrunKategoriId);
@@ -1019,15 +997,12 @@ namespace YPM.Depo.Veri.Urun.Kategori
             using (IGorevli gorev = Gorevli.YeniGorev())
             using (IDbContextTransaction islem = gorev.TransactionBaslat())
             {
-
                 try
                 {
-
                     var eskiKategoriList = gorev
                         .UrunKategoriOzellik
                         .GetirTumKoleksiyon()
                         .Where(x => x.UrunOzellikId.Equals(uos.UrunOzellikId)).ToList();
-
 
                     var yeniListe = uos.TumKategoriPostedilen;
 
@@ -1035,16 +1010,12 @@ namespace YPM.Depo.Veri.Urun.Kategori
                     {
                         var suanKiKayit = yeniListe[i];
 
-
-
-
                         if (suanKiKayit.Durum)
                         {
                             {
                                 // kayıt yoksa aç
                                 // kayıt varsa dokunma
                                 // eski listeden sil
-
 
                                 var birDeger = eskiKategoriList.Where(x => x.UrunKategoriId.Equals(suanKiKayit.UrunOzellikId)).FirstOrDefault();
 
@@ -1068,13 +1039,7 @@ namespace YPM.Depo.Veri.Urun.Kategori
                                 // eski listeden sil
                             }
                         }
-
-
-
-
                     }
-
-
 
                     islemOnay = true;
                 }

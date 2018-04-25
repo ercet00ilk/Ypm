@@ -7,8 +7,5 @@
 window.Islem = {
     Deneme: function () {
         alert("basarili");
-        
     }
 };
-
-

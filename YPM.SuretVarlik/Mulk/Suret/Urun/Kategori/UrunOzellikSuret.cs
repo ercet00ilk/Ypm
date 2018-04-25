@@ -29,6 +29,7 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
         public List<UrunOzellikSuret> TumKategoriPostedilen { get; set; }
 
         #region IDisposable Support
+
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -37,13 +38,12 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
             {
                 if (disposing)
                 {
-
                 }
-
 
                 disposedValue = true;
             }
         }
+
         ~UrunOzellikSuret()
         {
             Dispose(false);
@@ -51,11 +51,11 @@ namespace YPM.SuretVarlik.Mulk.Suret.Urun.Kategori
 
         public void Dispose()
         {
-
             Dispose(true);
 
             GC.SuppressFinalize(this);
         }
-        #endregion
+
+        #endregion IDisposable Support
     }
 }

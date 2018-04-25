@@ -1,7 +1,5 @@
 var UITree = function () {
-
     var handleSample1 = function () {
-
         $('#tree_1').jstree({
             "core": {
                 "themes": {
@@ -65,21 +63,15 @@ var UITree = function () {
         });
     }
 
-
-
     return {
         //main function to initiate the module
         init: function () {
-
             handleSample1();
             handleSample2();
             contextualMenuSample();
             ajaxTreeSample();
-
         }
-
     };
-
 }();
 
 if (App.isAngularJsApp() === false) {

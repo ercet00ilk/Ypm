@@ -2,12 +2,11 @@
 Core script to handle the entire theme and core functions
 **/
 var QuickSidebar = function () {
-
     // Handles quick sidebar toggler
     var handleQuickSidebarToggler = function () {
         // quick sidebar toggler
         $('.dropdown-quick-sidebar-toggler a, .page-quick-sidebar-toggler, .quick-sidebar-toggler').click(function (e) {
-            $('body').toggleClass('page-quick-sidebar-open'); 
+            $('body').toggleClass('page-quick-sidebar-open');
         });
     };
 
@@ -22,7 +21,7 @@ var QuickSidebar = function () {
 
             chatUsersHeight = wrapper.height() - wrapper.find('.nav-tabs').outerHeight(true);
 
-            // chat user list 
+            // chat user list
             App.destroySlimScroll(chatUsers);
             chatUsers.attr("data-height", chatUsersHeight);
             App.initSlimScroll(chatUsers);
@@ -31,7 +30,7 @@ var QuickSidebar = function () {
             var chatMessagesHeight = chatUsersHeight - wrapperChat.find('.page-quick-sidebar-chat-user-form').outerHeight(true);
             chatMessagesHeight = chatMessagesHeight - wrapperChat.find('.page-quick-sidebar-nav').outerHeight(true);
 
-            // user chat messages 
+            // user chat messages
             App.destroySlimScroll(chatMessages);
             chatMessages.attr("data-height", chatMessagesHeight);
             App.initSlimScroll(chatMessages);
@@ -59,10 +58,10 @@ var QuickSidebar = function () {
                 return;
             }
 
-            var preparePost = function(dir, time, name, avatar, message) {
+            var preparePost = function (dir, time, name, avatar, message) {
                 var tpl = '';
-                tpl += '<div class="post '+ dir +'">';
-                tpl += '<img class="avatar" alt="" src="' + Layout.getLayoutImgPath() + avatar +'.jpg"/>';
+                tpl += '<div class="post ' + dir + '">';
+                tpl += '<img class="avatar" alt="" src="' + Layout.getLayoutImgPath() + avatar + '.jpg"/>';
                 tpl += '<div class="message">';
                 tpl += '<span class="arrow"></span>';
                 tpl += '<a href="#" class="name">Bob Nilson</a>&nbsp;';
@@ -89,7 +88,7 @@ var QuickSidebar = function () {
             input.val("");
 
             // simulate reply
-            setTimeout(function(){
+            setTimeout(function () {
                 var time = new Date();
                 var message = preparePost('in', (time.getHours() + ':' + time.getMinutes()), "Ella Wong", 'avatar2', 'Lorem ipsum doloriam nibh...');
                 message = $(message);
@@ -120,7 +119,7 @@ var QuickSidebar = function () {
 
             alertListHeight = wrapper.height() - 80 - wrapper.find('.nav-justified > .nav-tabs').outerHeight();
 
-            // alerts list 
+            // alerts list
             App.destroySlimScroll(alertList);
             alertList.attr("data-height", alertListHeight);
             App.initSlimScroll(alertList);
@@ -139,8 +138,8 @@ var QuickSidebar = function () {
             var settingsListHeight;
 
             settingsListHeight = wrapper.height() - 80 - wrapper.find('.nav-justified > .nav-tabs').outerHeight();
-           
-            // alerts list 
+
+            // alerts list
             App.destroySlimScroll(settingsList);
             settingsList.attr("data-height", settingsListHeight);
             App.initSlimScroll(settingsList);
@@ -151,7 +150,6 @@ var QuickSidebar = function () {
     };
 
     return {
-
         init: function () {
             //layout handlers
             handleQuickSidebarToggler(); // handles quick sidebar's toggler
@@ -160,11 +158,10 @@ var QuickSidebar = function () {
             handleQuickSidebarSettings(); // handles quick sidebar's setting
         }
     };
-
 }();
 
-if (App.isAngularJsApp() === false) { 
-    jQuery(document).ready(function() {    
-       QuickSidebar.init(); // init metronic core componets
+if (App.isAngularJsApp() === false) {
+    jQuery(document).ready(function () {
+        QuickSidebar.init(); // init metronic core componets
     });
 }

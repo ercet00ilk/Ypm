@@ -61,7 +61,6 @@
 	_node.appendChild(_temp1);
 	_temp1 = _temp2 = null;
 
-
 	/**
 	 * holds all jstree related functions and variables, including the actual class and methods to create, access and manipulate instances.
 	 * @name $.jstree
@@ -2433,7 +2432,6 @@
 				node.childNodes[1].innerHTML += obj.text;
 			}
 
-
 			if(deep && obj.children.length && (obj.state.opened || force_render) && obj.state.loaded) {
 				k = d.createElement('UL');
 				k.setAttribute('role', 'group');
@@ -4382,7 +4380,6 @@
 			h2.css(fn).width(Math.min(h1.text("pW" + h2[0].value).width(),w))[0].select();
 		},
 
-
 		/**
 		 * changes the theme
 		 * @name set_theme(theme_name [, theme_url])
@@ -4618,7 +4615,6 @@
 		var tmp = $.inArray(item, array);
 		return tmp !== -1 ? $.vakata.array_remove(array, tmp) : array;
 	};
-
 
 /**
  * ### Changed plugin
@@ -5525,7 +5521,6 @@
 		};
 	};
 
-
 /**
  * ### Contextmenu plugin
  *
@@ -6280,7 +6275,6 @@
 						.children().attr('class', 'jstree-' + ins.get_theme() + ' jstree-' + ins.get_theme() + '-' + ins.get_theme_variant() + ' ' + ( ins.settings.core.themes.responsive ? ' jstree-dnd-responsive' : '' ))
 						.find('.jstree-copy').first()[ data.data.origin && (data.data.origin.settings.dnd.always_copy || (data.data.origin.settings.dnd.copy && (data.event.metaKey || data.event.ctrlKey))) ? 'show' : 'hide' ]();
 
-
 					// if are hovering the container itself add a new root node
 					if( (data.event.target === ins.element[0] || data.event.target === ins.get_container_ul()[0]) && ins.get_container_ul().children().length === 0) {
 						ok = true;
@@ -6681,7 +6675,6 @@
 	// include the dnd plugin by default
 	// $.jstree.defaults.plugins.push("dnd");
 
-
 /**
  * ### Massload plugin
  *
@@ -6702,7 +6695,7 @@
 	 *		"id1" : [{ "text" : "Child of ID1", "id" : "c1" }, { "text" : "Another child of ID1", "id" : "c2" }],
 	 *		"id2" : [{ "text" : "Child of ID2", "id" : "c3" }]
 	 *	}
-	 * 
+	 *
 	 * @name $.jstree.defaults.massload
 	 * @plugin massload
 	 */
@@ -6779,10 +6772,10 @@
 	 */
 	$.jstree.defaults.search = {
 		/**
-		 * a jQuery-like AJAX config, which jstree uses if a server should be queried for results. 
-		 * 
+		 * a jQuery-like AJAX config, which jstree uses if a server should be queried for results.
+		 *
 		 * A `str` (which is the search string) parameter will be added with the request, an optional `inside` parameter will be added if the search is limited to a node id. The expected result is a JSON array with nodes that need to be opened so that matching nodes will be revealed.
-		 * Leave this setting as `false` to not query the server. You can also set this to a function, which will be invoked in the instance's scope and receive 3 parameters - the search string, the callback to call with the array of nodes to load, and the optional node ID to limit the search to 
+		 * Leave this setting as `false` to not query the server. You can also set this to a function, which will be invoked in the instance's scope and receive 3 parameters - the search string, the callback to call with the array of nodes to load, and the optional node ID to limit the search to
 		 * @name $.jstree.defaults.search.ajax
 		 * @plugin search
 		 */
@@ -6800,7 +6793,7 @@
 		 */
 		case_sensitive : false,
 		/**
-		 * Indicates if the tree should be filtered (by default) to show only matching nodes (keep in mind this can be a heavy on large trees in old browsers). 
+		 * Indicates if the tree should be filtered (by default) to show only matching nodes (keep in mind this can be a heavy on large trees in old browsers).
 		 * This setting can be changed at runtime when calling the search method. Default is `false`.
 		 * @name $.jstree.defaults.search.show_only_matches
 		 * @plugin search
@@ -7160,7 +7153,6 @@
 
 	// include the search plugin by default
 	// $.jstree.defaults.plugins.push("search");
-
 
 /**
  * ### Sort plugin
@@ -7654,7 +7646,6 @@
 	// include the unique plugin by default
 	// $.jstree.defaults.plugins.push("unique");
 
-
 /**
  * ### Wholerow plugin
  *
@@ -7777,5 +7768,4 @@
 			document.registerElement("vakata-jstree", { prototype: proto });
 		} catch(ignore) { }
 	}
-
 }));

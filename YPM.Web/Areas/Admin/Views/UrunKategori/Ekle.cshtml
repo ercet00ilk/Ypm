@@ -8,16 +8,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminGenelCerceve.cshtml";
 }
 
-
 @section scripts
     {
 <script type="text/javascript">
    @Html.Raw(ViewBag.Script)
 </script>
 }
-
-
-
 
 <h2>Admin/UrunKategori/Ekle</h2>
 
@@ -28,7 +24,6 @@
             @await Component.InvokeAsync("UrunKategoriListe")
         </div>
         <div class="col-md-8">
-
 
             <h2>UrunKategoriEkle </h2>
             <h3> <a asp-area="admin" asp-controller="urunkategori" asp-action="altekle" class="btn btn-info">Alt Kategori Ekle <i class="fa fa-home"></i></a></h3>
@@ -81,8 +76,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div class="modal fade bs-example-modal-lg" id="EkleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
