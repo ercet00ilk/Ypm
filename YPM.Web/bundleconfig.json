@@ -1,16 +1,12 @@
-﻿// Configure bundling and minification for the project.
-// More info at https://go.microsoft.com/fwlink/?LinkId=808241
 [
   {
     "outputFileName": "wwwroot/css/site.min.css",
-    // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
       "wwwroot/css/site.css"
     ]
   },
   {
     "outputFileName": "wwwroot/global/simple-line-icons.min.css",
-    // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
       "wwwroot/global/simple-line-icons.css"
     ]
@@ -20,13 +16,10 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ],
-    // Optionally specify minification options
     "minify": {
       "enabled": true,
       "renameLocals": true
-    },
-    // Optionally generate .map file
-    "sourceMap": false
+    }
   },
   {
     "outputFileName": "wwwroot/js/ortak.min.js",
@@ -37,5 +30,197 @@
       "enabled": true,
       "renameLocals": true
     }
+  },
+  {
+    "outputFileName": "wwwroot/lib/site/dist/css/yazi-tipi.min.min.css",
+    "inputFiles": [
+      "wwwroot/lib/site/dist/css/yazi-tipi.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/site/dist/css/yazi-tipi.min.css",
+    "inputFiles": [
+      "wwwroot/lib/site/dist/css/yazi-tipi.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/site/dist/css/font-awesome.min.css",
+    "inputFiles": [
+      "wwwroot/lib/site/dist/css/font-awesome.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/site/dist/css/css.min.css",
+    "inputFiles": [
+      "wwwroot/lib/site/dist/css/css.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/site/dist/css/all.min.css",
+    "inputFiles": [
+      "wwwroot/lib/site/dist/css/all.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/bootstrap-select/bootstrap-select.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/bootstrap-select/bootstrap-select.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/bootstrap-switch/bootstrap-switch.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/bootstrap-switch/bootstrap-switch.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/jstree/style.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/jstree/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/layout/custom.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/layout/custom.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/layout/default.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/layout/default.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/layout/layout.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/layout/layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/simple-line-icons/simple-line-icons.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/simple-line-icons/simple-line-icons.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/components.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/components.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/admin/plugins.min.css",
+    "inputFiles": [
+      "wwwroot/css/admin/plugins.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/global/layout.min.css",
+    "inputFiles": [
+      "wwwroot/global/layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/global/plugins.min.css",
+    "inputFiles": [
+      "wwwroot/global/plugins.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/global/plugins-md.min.css",
+    "inputFiles": [
+      "wwwroot/global/plugins-md.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/global/style.min.css",
+    "inputFiles": [
+      "wwwroot/global/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/bootstrap-select/bootstrap-select.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/bootstrap-select/bootstrap-select.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/bootstrap-select/components-bootstrap-select.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/bootstrap-select/components-bootstrap-select.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/bootstrap-switch/bootstrap-switch.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/bootstrap-switch/bootstrap-switch.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/site/dist/js/jquery.min.js",
+    "inputFiles": [
+      "wwwroot/lib/site/dist/js/jquery.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/js.cookie.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/js.cookie.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/slimscroll/jquery.slimscroll.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/slimscroll/jquery.slimscroll.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/jquery.blockui.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/jquery.blockui.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/jstree/jstree.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/jstree/jstree.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/app.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/app.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/uitree/ui-tree.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/uitree/ui-tree.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/layout/layout.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/layout/layout.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/layout/demo.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/layout/demo.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/layout/quick-sidebar.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/layout/quick-sidebar.js"
+    ]
   }
 ]

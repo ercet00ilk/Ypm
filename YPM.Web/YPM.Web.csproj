@@ -18,12 +18,10 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Models\" />
     <Folder Include="wwwroot\images\global\" />
-    <Folder Include="wwwroot\css\admin\" />
     <Folder Include="wwwroot\css\admin\simple-line-icons\" />
     <Folder Include="wwwroot\css\admin\simple-line-icons\fonts\" />
     <Folder Include="wwwroot\css\admin\bootstrap-switch\" />
     <Folder Include="wwwroot\css\admin\jstree\" />
-    <Folder Include="wwwroot\css\admin\layout\" />
     <Folder Include="wwwroot\css\admin\bootstrap-select\" />
     <Folder Include="wwwroot\js\admin\" />
     <Folder Include="wwwroot\js\admin\slimscroll\" />
@@ -37,12 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\YPM.Depo\YPM.Depo.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <None Remove="wwwroot\global\plugins-md.min.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="wwwroot\js\global\app.min.js" />
     <Content Remove="wwwroot\global\32px.png" />
     <Content Remove="wwwroot\global\32px_line.png" />
     <Content Remove="wwwroot\global\32px_original.png" />
@@ -50,10 +43,8 @@
     <Content Remove="wwwroot\global\bootstrap-switch.min.css" />
     <Content Remove="wwwroot\global\components.min.css" />
     <Content Remove="wwwroot\global\default.min.css" />
-    <Content Remove="wwwroot\js\global\bootstrap-select.min.js" />
     <Content Remove="wwwroot\global\font-awesome.min.css" />
     <Content Remove="wwwroot\global\fonts\FontAwesome.otf" />
-    <Content Remove="wwwroot\js\global\bootstrap-switch.min.js" />
     <Content Remove="wwwroot\global\fonts\fontawesome-webfont.eot" />
   </ItemGroup>
 </Project>
